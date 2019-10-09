@@ -202,11 +202,14 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Images\descarga.jpg" />
     <Content Include="Content\Images\images.png" />
     <Content Include="Content\Images\imas-hacienda.jpg" />
     <Content Include="Content\Images\imas-logo.ico" />
     <Content Include="Content\Images\imas-logo.png" />
     <Content Include="Content\Images\imas.gif" />
+    <Content Include="Content\Images\Logo-Universidad-Técnica-Nacional,-versiones-retiembre-BOLD_0.png" />
+    <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\unSADDSDnamed.jpg" />
     <Content Include="Fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
