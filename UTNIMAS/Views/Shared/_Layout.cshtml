@@ -4,41 +4,101 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - IDEAS PRODUCTIVAS</title>
-    <link rel="icon" href="~/favicon.ico" />
+    <link rel="icon" href="~/favicon.ico"
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <script src="https://kit.fontawesome.com/d6ce29f6c9.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>
+                    &copy; @DateTime.Now.Year - Andrés J. Jiménez Leandro, UTN Sede San Carlos
+                    Instituto Mixto de Ayuda Social, <b>Costa Rica</b>
+                </p>
+            </footer>
+        </div>*@
+    <div id="wrapper" style="display:flex">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div id="changeIMG" class="sidebar-header" style="border-bottom: 3px solid #D7D6D5;padding-left: 20px;padding-bottom: 20px;padding-right: 1px;padding-top: 15px;">
+                <img id="imgChange" class="forsyteLG" src="~/Content/Images/imas-logo.png" style="width:85%;" />
+            </div>
+            @*<label style="font-family: Segoe UI, Frutiger">@Html.Partial("_LoginPartial")</label>*@
+            <ul class="list-unstyled components" style="margin-top:1em;height:60%">
+                <li>
+                    <a href="/Empresas/Index">
+                        <i class="fas fa-building" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; EMPRESAS</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Empresas/Index">
+                        <i class="fas fa-shopping-cart aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; PRODUCTOS</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Empresas/Index">
+                        <i class="fas fa-list-alt" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Empresas/Index">
+                        <i class="fas fa-sign-in-alt" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; SALIR</span>
+                    </a>
+                </li>
+                <li>
+                    <img id="imgChange" class="forsyteLG" src="~/Content/Images/imas-logo.png" style="margin-top:240px;width:85%;" />
+                </li>
+            </ul>
+            <div class="container body-content">
+                <hr />
+                <footer>
+                    <p>
+                        &copy; @DateTime.Now.Year - Andrés J. Jiménez Leandro, UTN Sede San Carlos
+                        Instituto Mixto de Ayuda Social, <b>Costa Rica</b>
+                    </p>
+                </footer>
+            </div>
+        </nav>
+        <div id="content">
+            <button type="button" onclick="sidebarActive()" id="sidebarCollapse" class="btn btn-info" style="background:#efefef; border-color:#8db2d8; background-color:white;">
+                <i style="color:#8db2d8;" id="arrow" class="fas fa-chevron-left"></i>
+            </button>
+            <!-- <img align="right" style="text-align:right; align-content:stretch;width: 160px;height: 135px;background-color:transparent;" src="~/Content/Images/CLOUD CONNECT (blank).png" /> -->
+            <br />
+            @RenderBody()
+        </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>
-                &copy; @DateTime.Now.Year - Andrés J. Jiménez Leandro, UTN Sede San Carlos
-                Instituto Mixto de Ayuda Social, <b>Costa Rica</b>
-            </p>
-        </footer>
-    </div>
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

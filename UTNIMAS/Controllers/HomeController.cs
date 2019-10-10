@@ -10,7 +10,7 @@ namespace UTNIMAS.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return Redirect("/Empresas/Index");
         }
 
         public ActionResult About()
