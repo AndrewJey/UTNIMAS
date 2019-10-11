@@ -179,6 +179,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
+    <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Models\DataBase\ConexionBD.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -208,7 +209,7 @@
     <Content Include="Content\Images\imas-logo.ico" />
     <Content Include="Content\Images\imas-logo.png" />
     <Content Include="Content\Images\imas.gif" />
-    <Content Include="Content\Images\Logo-Universidad-Técnica-Nacional,-versiones-retiembre-BOLD_0.png" />
+    <Content Include="Content\Images\UTN.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\unSADDSDnamed.jpg" />
     <Content Include="Fonts\fontawesome-webfont.svg" />
@@ -314,12 +315,12 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Productos\Productos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Catalogo\" />
     <Folder Include="Views\Customer\" />
-    <Folder Include="Views\Productos\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
