@@ -864,6 +864,7 @@
     <Content Include="Scripts\Custom\datatables.min.js" />
     <Content Include="Scripts\Custom\Empresas.js" />
     <Content Include="Scripts\Custom\httpmethods.js" />
+    <Content Include="Scripts\Custom\Productos.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
