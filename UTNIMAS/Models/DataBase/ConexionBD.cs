@@ -5,13 +5,23 @@ namespace UTNIMAS
 {
     public class ConexionBD
     {
-        string conexion = "Data Source=DESKTOP-E38KCH7;Initial Catalog=UTNIMAS;Integrated Security=True";
-        public SqlConnection conectarBD = new SqlConnection();
+        /** CONEXION ANDRES **/
+        //string conexion = "Data Source=DESKTOP-E38KCH7;Initial Catalog=UTNIMAS;Integrated Security=True";
+        /** CONEXION GABRIEL**/
+        string conexion = "Data Source=MSI;Initial Catalog=UTNIMAS;Integrated Security=True";
+        public SqlConnection conectarBD = new SqlConnection("server=MSI; database=UTNIMAS; integrated security = true");
         //Constructor:
         public ConexionBD()
         {
             conectarBD.ConnectionString = conexion;
         }
+
+        public SqlConnection ConexDB()
+        {
+            SqlConnection coon = conectarBD;
+            return coon;
+        }
+
         //Abrir la Conexión de la DB:
         public void abrir()
         {

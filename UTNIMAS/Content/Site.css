@@ -9,6 +9,7 @@
 }
 
 
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -30,6 +31,24 @@ p {
     line-height: 1.7em;
     color: #999;
 }
+
+h1 {
+    font-family: Montserrat, sans-serif;
+}
+
+h2 {
+    font-family: Montserrat, sans-serif;
+}
+
+h3 {
+    font-family: Montserrat, sans-serif;
+}
+
+h4 {
+    font-family: Montserrat, sans-serif;
+}
+
+
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
