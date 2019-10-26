@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<UTNIMAS.Models.EmpresasModels>
+
+@{
     ViewBag.Title = "Empresas";
 }
 
@@ -7,26 +9,38 @@
     <table id="tableEmpresas" class="display" style="width:100%">
         <thead>
             <tr>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">ID Empresa</th>
                 <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Empresa</th>
-                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Nombre del Contacto</th>
-                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">E-mail</th>
-                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Teléfono</th>
                 <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Dirección</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Nombre del Contacto</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Teléfono</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">E-mail</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Sector</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">ID Cliente</th>
                 <th scope="col" align="center" style="text-align:left; vertical-align: middle; font-family: Montserrat, sans-serif;">Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td style="text-align:center;">Los Tres Patitos</td>
-                <td style="text-align:center;">Juan José Solís González</td>
-                <td style="text-align:center;"><a href="mail@mail.com" target="_blank">hola@mundo.com</a></td>
-                <td style="text-align:center;">+506 8642 5447</td>
-                <td style="text-align:center;">Katira, Upala, Alajuela, Costa Rica</td>
-                <th>
-                    <button style="text-align:center;margin-left:15px; vertical-align: middle; font-family: ottomat, sans-serif;" type="button" class="btn btn-danger float-left"><i class="fas fa-trash"></i></button>
-                    <button style="margin-left:15px;background:#8db2d8;color:white;" height:3em" type="button" data-toggle="modal" data-target="#exampleModal1" class="btn  btn-color-custom right"><i class="fas fa-edit"></i></button>
-                </th>
-            </tr>
+            @foreach (var Element in Model)
+            {
+
+                <tr>
+                    <td style="text-align:center;">@Element.EMPRESA_ID</td>
+                    <td style="text-align:center;">@Element.NOMBRE_EMPRESA</td>
+                    <td style="text-align:center;">@Element.DIRECCION_EMPRESA</td>
+                    <td style="text-align:center;">@Element.NOMBRE_CONTACTO</td>
+                    <td style="text-align:center;">@Element.TELEF_CONTACTO</td>
+                    <td style="text-align:center;">@Element.EMIAL_EMPRESA</td>
+                    <td style="text-align:center;">@Element.SECTOR_PRODUCCION</td>
+                    <td style="text-align:center;">@Element.ID_CLIENTE</td>
+                    <th>
+                        <button style="text-align:center;margin-left:15px; vertical-align: middle; font-family: ottomat, sans-serif;" type="button" class="btn btn-danger float-left"><i class="fas fa-trash"></i></button>
+                        <button style="margin-left:15px;background:#8db2d8;color:white;" height:3em" type="button" data-toggle="modal" data-target="#exampleModal1" class="btn  btn-color-custom right"><i class="fas fa-edit"></i></button>
+                    </th>
+
+                </tr>
+            }
+
         </tbody>
     </table>
 </div>

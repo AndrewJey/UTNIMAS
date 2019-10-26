@@ -123,6 +123,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -181,6 +183,9 @@
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\RegistroController.cs" />
+    <Compile Include="Models\CLIENT.cs">
+      <DependentUpon>EmpresasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataBase\ConexionBD.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -189,9 +194,45 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\EMPRESA.cs">
+      <DependentUpon>EmpresasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpresasModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmpresasModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpresasModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmpresasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UTNIMASModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UTNIMASModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\EmpresasModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PRECIO.cs">
+      <DependentUpon>EmpresasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRODUCT.cs">
+      <DependentUpon>EmpresasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>EmpresasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>EmpresasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>EmpresasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USER.cs">
+      <DependentUpon>EmpresasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -855,7 +896,24 @@
     <Content Include="Content\DataTables\Buttons-1.5.6\css\mixins.scss" />
     <Content Include="Content\DataTables\Buttons-1.6.0\css\common.scss" />
     <Content Include="Content\DataTables\Buttons-1.6.0\css\mixins.scss" />
+    <EntityDeploy Include="Models\UTNIMASModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UTNIMASModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\UTNIMASModel.edmx.diagram">
+      <DependentUpon>UTNIMASModel.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
+    <Content Include="Models\EmpresasModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UTNIMASModel.edmx</DependentUpon>
+      <LastGenOutput>EmpresasModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EmpresasModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UTNIMASModel.edmx</DependentUpon>
+      <LastGenOutput>EmpresasModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -953,6 +1011,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

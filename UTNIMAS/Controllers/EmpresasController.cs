@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UTNIMAS.Models;
 
 namespace UTNIMAS.Controllers
 {
@@ -11,7 +12,24 @@ namespace UTNIMAS.Controllers
         // GET: Empresas
         public ActionResult Index()
         {
-            return View();
+            List<EmpresasModels> lst;
+            using (UTNIMASEntities db = new UTNIMASEntities())
+            {
+                lst = (from d in db.EMPRESAS
+                       select new EmpresasModels
+                       {
+                           EMPRESA_ID = d.EMPRESA_ID,
+                           NOMBRE_EMPRESA = d.NOMBRE_EMPRESA,
+                           DIRECCION_EMPRESA = d.DIRECCIÓN_EMPRESA,
+                           NOMBRE_CONTACTO = d.NOMBRE_CONTACTO,
+                           TELEF_CONTACTO = d.TELEF_CONTACTO,
+                           EMIAL_EMPRESA = d.EMAIL_EMPRESA,
+                           SECTOR_PRODUCCION = d.SECTOR_PRODUCCION
+                           //ID_CLIENTE = d.ID_CLIENTE
+                       }).ToList();
+
+            }
+            return View(lst);
         }
 
         // GET: Empresas/Details/5
