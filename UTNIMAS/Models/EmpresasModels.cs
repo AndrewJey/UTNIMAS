@@ -16,5 +16,6 @@ namespace UTNIMAS.Models
         public string SECTOR_PRODUCCION { get; set; }
         public string ID_CLIENTE { get; set; }
 
+
     }
 }

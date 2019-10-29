@@ -207,6 +207,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EmpresasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductosModels.cs" />
     <Compile Include="Models\UTNIMASModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
