@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using UTNIMAS.Models;
 
@@ -22,7 +20,7 @@ namespace UTNIMAS.Controllers
                            NOMBRE_PRODUCTO = d.NOMBRE_PRODUCTO,
                            ID_PRECIO = d.ID_PRECIO,
                            DESCRIP_PRODUCTO = d.DESCRIP_PRODUCTO,
-                           FOTO_PRODUCTO = d.FOTO_PRODCUTO,  //Puede que en el modelo este mal inicializada porque en labase de datos es un tipo "image"
+                           FOTO_PRODUCTO = d.FOTO_PRODCUTO,  //Puede que en el modelo este mal inicializada porque en la base de datos es un tipo "image"
                            EMPRESA_ID = d.EMPRESA_ID
                        }).ToList();
                 return View(lst);
