@@ -881,7 +881,6 @@
     <Content Include="Fonts\Weiss\WEISS INITIALEN_0.TTF" />
     <Content Include="Fonts\Weiss\WEISS LAPIDAR_0.TTF" />
     <Content Include="Fonts\Weiss\WEISSRUNDGOTISCH_0.TTF" />
-    <Content Include="Models\DataBase\UTNIMAS.bak" />
     <Content Include="Fonts\FontAwesome.otf" />
     <Content Include="Fonts\fontawesome-webfont.woff2" />
     <Content Include="Fonts\fontawesome-webfont.woff" />
