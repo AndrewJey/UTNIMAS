@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "RegistroProductos";
+}
+<h2>Registro Productos</h2>
+<div style="padding:0em 3em">
+    <form style="margin-top:100px">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>PRECIO POR UNIDAD</label>
+                <input type="text" class="form-control" id="" placeholder="Ingrese el Precio por Unidad">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputEmail4">PRECIO POR PAQUETE</label>
+                <input type="email" class="form-control" id="inputEmail4" placeholder="Ingrese el Precio por Paquete">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputPassword4">PRECIO POR SERVICIO</label>
+                <input type="text" class="form-control" id="inputPassword4" placeholder="Ingrese el Precio por Servicio">
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">PRECIO POR MAYOREO</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Ingrese el Precio por Mayoreo">
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">PRECIO ESPECIAL/DESCUENTO</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Ingrese el Precio Especial/de Descuento">
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="createPrec()" style="font-size:20px"><i class="far fa-save"></i></button>
+    </form>
+</div>

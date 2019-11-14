@@ -19,7 +19,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div id="changeIMG" class="sidebar-header" style="border-bottom: 3px solid #D7D6D5;padding-left: 20px;padding-bottom: 20px;padding-right: 1px;padding-top: 15px;">
-                <img id="imgChange" class="forsyteLG" src="~/Content/Images/imas-logo.png" style="width:85%;" />
+                <a href="https://www.imas.go.cr/" target="_blank"><img id="imgChange" class="forsyteLG" src="~/Content/Images/imas-logo.png" style="width:85%;" /></a>
             </div>
             @*<label style="font-family: Segoe UI, Frutiger">@Html.Partial("_LoginPartial")</label>*@
             <ul class="list-unstyled components" style="margin-top:1em;height:60%">
@@ -59,6 +59,12 @@
                                 <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR EMPRESAS</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="/Registro/RegistroPrecios">
+                                <i class="far fa-money-bill-alt" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                                <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR PRECIOS</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -68,15 +74,15 @@
                     </a>
                 </li>
                 <li>
-                    <img id="imgChange" class="forsyteLG" src="~/Content/Images/UTN.png" style="margin-top:25px;margin-left:15px;width:85%;" />
+                    <a href="https://www.utn.ac.cr/" target="_blank"><img id="imgChange" class="forsyteLG" src="~/Content/Images/UTN.png" style="margin-top:25px;margin-left:15px;width:85%;" /></a>
                 </li>
             </ul>
             <div class="container body-content">
                 <hr />
                 <footer>
                     <p>
-                        &copy; @DateTime.Now.Year - Andrés J. Jiménez Leandro, UTN Sede San Carlos -
-                        Instituto Mixto de Ayuda Social, <b>Costa Rica</b>
+                        &copy; @DateTime.Now.Year - <a href="https://www.linkedin.com/in/andrés-j-jiménez-leandro-299087181" target="_blank">Andrés J. Jiménez Leandro</a>, <a href="https://www.utn.ac.cr/sedes/sede-regional-de-san-carlos" target="_blank">UTN Sede San Carlos</a> -
+                        <a href="https://www.imas.go.cr/" target="_blank">Instituto Mixto de Ayuda Social</a>, <a href="https://es.wikipedia.org/wiki/Costa_Rica" target="_blank"><b>Costa Rica</b></a>
                     </p>
                 </footer>
             </div>
