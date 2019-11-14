@@ -6,10 +6,8 @@ namespace UTNIMAS
     public class ConexionBD
     {
         /** CONEXION ANDRES **/
-        //string conexion = "Data Source=DESKTOP-E38KCH7;Initial Catalog=UTNIMAS;Integrated Security=True";
-        /** CONEXION GABRIEL**/
-        string conexion = "Data Source=MSI;Initial Catalog=UTNIMAS;Integrated Security=True";
-        public SqlConnection conectarBD = new SqlConnection("server=MSI; database=UTNIMAS; integrated security = true");
+        string conexion = "Data Source=DESKTOP-E38KCH7;Initial Catalog=UTNIMAS;Integrated Security=True";
+        public SqlConnection conectarBD = new SqlConnection("server=DESKTOP-E38KCH7; database=UTNIMAS; integrated security = true");
         //Constructor:
         public ConexionBD()
         {

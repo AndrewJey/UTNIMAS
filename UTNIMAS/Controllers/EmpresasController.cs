@@ -18,10 +18,10 @@ namespace UTNIMAS.Controllers
                        {
                            EMPRESA_ID = d.EMPRESA_ID,
                            NOMBRE_EMPRESA = d.NOMBRE_EMPRESA,
-                           DIRECCION_EMPRESA = d.DIRECCIÓN_EMPRESA,
+                           DIRECCION_EMPRESA = d.DIRECCION_EMPRESA,
                            NOMBRE_CONTACTO = d.NOMBRE_CONTACTO,
                            TELEF_CONTACTO = d.TELEF_CONTACTO,
-                           EMIAL_EMPRESA = d.EMAIL_EMPRESA,
+                           EMAIL_EMPRESA = d.EMAIL_EMPRESA,
                            SECTOR_PRODUCCION = d.SECTOR_PRODUCCION
                            //ID_CLIENTE = d.ID_CLIENTE
                        }).ToList();

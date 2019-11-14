@@ -24,6 +24,12 @@
             @*<label style="font-family: Segoe UI, Frutiger">@Html.Partial("_LoginPartial")</label>*@
             <ul class="list-unstyled components" style="margin-top:1em;height:60%">
                 <li>
+                    <a href="/Home/Index">
+                        <i class="fas fa-home" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; INICIO</span>
+                    </a>
+                </li>
+                <li>
                     <a href="/Empresas/Index">
                         <i class="fas fa-building" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
                         <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; EMPRESAS</span>
@@ -53,7 +59,6 @@
                                 <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR EMPRESAS</span>
                             </a>
                         </li>
-
                     </ul>
                 </li>
                 <li>
@@ -70,20 +75,17 @@
                 <hr />
                 <footer>
                     <p>
-                        &copy; @DateTime.Now.Year - Andrés J. Jiménez Leandro, UTN Sede San Carlos
+                        &copy; @DateTime.Now.Year - Andrés J. Jiménez Leandro, UTN Sede San Carlos -
                         Instituto Mixto de Ayuda Social, <b>Costa Rica</b>
                     </p>
                 </footer>
             </div>
         </nav>
         <div id="content">
-
             <br />
             @RenderBody()
         </div>
     </div>
-
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

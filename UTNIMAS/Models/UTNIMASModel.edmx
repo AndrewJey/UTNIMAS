@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UTNIMASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="UTNIMASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CLIENTS">
           <Key>
             <PropertyRef Name="ID_CLIENT" />
           </Key>
-          <Property Name="ID_CLIENT" Type="int" Nullable="false" />
+          <Property Name="ID_CLIENT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE1_CLIENT" Type="varchar(max)" Nullable="false" />
           <Property Name="NOMBRE2_CLIENT" Type="varchar(max)" />
           <Property Name="APELLIDO1_CLIENT" Type="varchar(max)" Nullable="false" />
@@ -27,9 +27,9 @@
           <Key>
             <PropertyRef Name="EMPRESA_ID" />
           </Key>
-          <Property Name="EMPRESA_ID" Type="int" Nullable="false" />
+          <Property Name="EMPRESA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE_EMPRESA" Type="varchar(max)" Nullable="false" />
-          <Property Name="DIRECCIÓN_EMPRESA" Type="varchar(max)" Nullable="false" />
+          <Property Name="DIRECCION_EMPRESA" Type="varchar(max)" Nullable="false" />
           <Property Name="NOMBRE_CONTACTO" Type="varchar(max)" Nullable="false" />
           <Property Name="TELEF_CONTACTO" Type="varchar(max)" Nullable="false" />
           <Property Name="EMAIL_EMPRESA" Type="varchar(max)" Nullable="false" />
@@ -40,7 +40,7 @@
           <Key>
             <PropertyRef Name="PRECIOS_ID" />
           </Key>
-          <Property Name="PRECIOS_ID" Type="int" Nullable="false" />
+          <Property Name="PRECIOS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PRECIO_UNIDAD" Type="float" Nullable="false" />
           <Property Name="PRECIO_PAQUETE" Type="float" />
           <Property Name="PRECIO_SERVICIO" Type="float" />
@@ -51,7 +51,7 @@
           <Key>
             <PropertyRef Name="PRODUCTO_ID" />
           </Key>
-          <Property Name="PRODUCTO_ID" Type="int" Nullable="false" />
+          <Property Name="PRODUCTO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE_PRODUCTO" Type="varchar(max)" Nullable="false" />
           <Property Name="ID_PRECIO" Type="int" Nullable="false" />
           <Property Name="DESCRIP_PRODUCTO" Type="varchar(max)" Nullable="false" />
@@ -72,7 +72,7 @@
           <Key>
             <PropertyRef Name="USER_ID" />
           </Key>
-          <Property Name="USER_ID" Type="int" Nullable="false" />
+          <Property Name="USER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="USER_NAME" Type="varchar(max)" Nullable="false" />
           <Property Name="USER_EMAIL" Type="varchar(max)" Nullable="false" />
           <Property Name="USER_PASSWORD" Type="varchar(max)" Nullable="false" />
@@ -164,8 +164,7 @@
             <End Role="PRODUCTS" EntitySet="PRODUCTS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UTNIMASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -194,7 +193,7 @@
           </Key>
           <Property Name="EMPRESA_ID" Type="Int32" Nullable="false" />
           <Property Name="NOMBRE_EMPRESA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DIRECCIÓN_EMPRESA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DIRECCION_EMPRESA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="NOMBRE_CONTACTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TELEF_CONTACTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EMAIL_EMPRESA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
@@ -374,7 +373,7 @@
               <MappingFragment StoreEntitySet="EMPRESAS">
                 <ScalarProperty Name="EMPRESA_ID" ColumnName="EMPRESA_ID" />
                 <ScalarProperty Name="NOMBRE_EMPRESA" ColumnName="NOMBRE_EMPRESA" />
-                <ScalarProperty Name="DIRECCIÓN_EMPRESA" ColumnName="DIRECCIÓN_EMPRESA" />
+                <ScalarProperty Name="DIRECCION_EMPRESA" ColumnName="DIRECCION_EMPRESA" />
                 <ScalarProperty Name="NOMBRE_CONTACTO" ColumnName="NOMBRE_CONTACTO" />
                 <ScalarProperty Name="TELEF_CONTACTO" ColumnName="TELEF_CONTACTO" />
                 <ScalarProperty Name="EMAIL_EMPRESA" ColumnName="EMAIL_EMPRESA" />

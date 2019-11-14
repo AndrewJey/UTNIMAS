@@ -12,7 +12,7 @@ namespace UTNIMAS.Models
         public string DIRECCION_EMPRESA { get; set; }
         public string NOMBRE_CONTACTO { get; set; }
         public string TELEF_CONTACTO { get; set; }
-        public string EMIAL_EMPRESA { get; set; }
+        public string EMAIL_EMPRESA { get; set; }
         public string SECTOR_PRODUCCION { get; set; }
         public string ID_CLIENTE { get; set; }
 
