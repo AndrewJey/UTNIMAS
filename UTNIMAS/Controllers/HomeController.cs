@@ -6,7 +6,8 @@ namespace UTNIMAS.Controllers
     {
         public ActionResult Index()
         {
-            return Redirect("/Home/Index");
+            //return Redirect("/Home/Index");
+            return View();
         }
 
         public ActionResult About()
