@@ -18,7 +18,7 @@ function createE() {
         DIRECCION_EMPRESA: direction,
         NOMBRE_CONTACTO: contactName,
         TELEF_CONTACTO: tel,
-        EMIAL_EMPRESA: email,
+        EMAIL_EMPRESA: email,
         SECTOR_PRODUCCION: production,
         ID_CLIENTE: cliente
     };

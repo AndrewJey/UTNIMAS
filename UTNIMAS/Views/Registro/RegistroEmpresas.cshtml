@@ -1,8 +1,6 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "RegistroEmpresas";
 }
-
 <h2>Registrar Empresas</h2>
 <div style="padding:0em 3em">
     <form style="margin-top:100px">
@@ -10,28 +8,28 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>Empresa</label>
-                <input type="text" class="form-control" id="name" placeholder="Digite el Nombre de la Empresa">
+                <input type="text" class="form-control" id="name" placeholder="Nombre de la Empresa">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Telefono</label>
+                <input type="text" class="form-control" id="tel" placeholder="Teléfono">
             </div>
             <div class="form-group col-md-4">
                 <label for="inputEmail4">Email</label>
                 <input type="email" class="form-control" id="email" placeholder="Email">
             </div>
-            <div class="form-group col-md-2">
-                <label for="inputPassword4">Direccion</label>
-                <input type="text" class="form-control" id="direction" placeholder="Direccion">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label>Nombre de Contacto</label>
-                <input type="text" class="form-control" id="contactName" placeholder="Nombre de Contacto">
-            </div>
-            <div class="form-group col-md-4">
-                <label>Telefono</label>
-                <input type="text" class="form-control" id="tel" placeholder="Telefono">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Nombre de Contacto</label>
+                    <input type="text" class="form-control" id="contactName" placeholder="Nombre de Contacto">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputPassword4">Direccion</label>
+                    <input type="text" class="form-control" id="direction" placeholder="Dirección">
+                </div>
             </div>
             <div class="form-group col-md-4">
-                <label for="inputState">Sector</label>
+                <label for="inputState">Sector Producción</label>
                 <select id="production" class="form-control">
                     <option selected>Sector1</option>
                     <option selected>Sector2</option>
@@ -42,7 +40,6 @@
         </div>
         <button type="button" class="btn btn-primary" onclick="createE()" style="font-size:20px"><i class="far fa-save"></i></button>
     </form>
-
 </div>
 @section scripts{
     <script type="text/javascript" src="~/Scripts/Custom/datatables.min.js"></script>

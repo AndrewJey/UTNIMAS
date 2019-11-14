@@ -47,7 +47,7 @@ namespace UTNIMAS.Controllers
             public string DIRECCION_EMPRESA { get; set; }
             public string NOMBRE_CONTACTO { get; set; }
             public string TELEF_CONTACTO { get; set; }
-            public string EMIAL_EMPRESA { get; set; }
+            public string EMAIL_EMPRESA { get; set; }
             public string SECTOR_PRODUCCION { get; set; }
             public string ID_CLIENTE { get; set; }
         }
@@ -67,8 +67,8 @@ namespace UTNIMAS.Controllers
                     }
                     Empresaz e3 = new Empresaz
                     {
-                        DIRECCION_EMPRESA = em.DIRECCIÓN_EMPRESA,
-                        EMIAL_EMPRESA = em.EMAIL_EMPRESA,
+                        DIRECCION_EMPRESA = em.DIRECCION_EMPRESA,
+                        EMAIL_EMPRESA = em.EMAIL_EMPRESA,
                         EMPRESA_ID = em.EMPRESA_ID,
                         ID_CLIENTE = em.ID_CLIENTE.ToString(),
                         NOMBRE_CONTACTO = em.NOMBRE_CONTACTO,
@@ -115,7 +115,7 @@ namespace UTNIMAS.Controllers
 
                 EMPRESA em = db.EMPRESAS.Find(Empresa.EMPRESA_ID);
 
-                em.DIRECCIÓN_EMPRESA = Empresa.DIRECCIÓN_EMPRESA;
+                em.DIRECCION_EMPRESA = Empresa.DIRECCION_EMPRESA;
                 em.EMAIL_EMPRESA = Empresa.EMAIL_EMPRESA;
                 em.ID_CLIENTE = Empresa.ID_CLIENTE;
                 em.NOMBRE_CONTACTO = Empresa.NOMBRE_CONTACTO;
@@ -146,8 +146,8 @@ namespace UTNIMAS.Controllers
             {
                 UTNIMASEntities db = new UTNIMASEntities();
                 // TODO: Add insert logic here
-                string query = "INSERT INTO EMPRESAS(DIRECCIÓN_EMPRESA,NOMBRE_EMPRESA,EMAIL_EMPRESA,ID_CLIENTE,NOMBRE_CONTACTO,TELEF_CONTACTO,SECTOR_PRODUCCION)" +
-                    "VALUES('" + empresa.DIRECCION_EMPRESA + "', '" + empresa.NOMBRE_EMPRESA + "', '" + empresa.EMIAL_EMPRESA + "', 1, '" + empresa.NOMBRE_CONTACTO + "', '" + empresa.TELEF_CONTACTO + "', '" + empresa.SECTOR_PRODUCCION + "')";
+                string query = "INSERT INTO EMPRESAS(DIRECCION_EMPRESA,NOMBRE_EMPRESA,EMAIL_EMPRESA,ID_CLIENTE,NOMBRE_CONTACTO,TELEF_CONTACTO,SECTOR_PRODUCCION)" +
+                    "VALUES('" + empresa.DIRECCION_EMPRESA + "', '" + empresa.NOMBRE_EMPRESA + "', '" + empresa.EMAIL_EMPRESA + "', 1, '" + empresa.NOMBRE_CONTACTO + "', '" + empresa.TELEF_CONTACTO + "', '" + empresa.SECTOR_PRODUCCION + "')";
                 db.Database.ExecuteSqlCommand(query);
                 return RedirectToAction("Index");
             }

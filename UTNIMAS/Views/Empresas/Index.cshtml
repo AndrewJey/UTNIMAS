@@ -9,15 +9,15 @@
     <table id="tableEmpresas" class="display" style="width:100%">
         <thead>
             <tr>
-                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">ID Empresa</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif; display:none;">ID Empresa</th>
                 <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Empresa</th>
                 <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Dirección</th>
                 <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Nombre del Contacto</th>
                 <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Teléfono</th>
                 <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">E-mail</th>
                 <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Sector</th>
-                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">ID Cliente</th>
-                <th scope="col" align="center" style="text-align:left; vertical-align: middle; font-family: Montserrat, sans-serif;">Actions</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Dueño</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -25,12 +25,12 @@
             {
 
                 <tr>
-                    <td id="empresa_ID" style="text-align:center;">@Element.EMPRESA_ID</td>
+                    <td id="empresa_ID" style="text-align:center; display:none;">@Element.EMPRESA_ID</td>
                     <td style="text-align:center;">@Element.NOMBRE_EMPRESA</td>
                     <td style="text-align:center;">@Element.DIRECCION_EMPRESA</td>
                     <td style="text-align:center;">@Element.NOMBRE_CONTACTO</td>
                     <td style="text-align:center;">@Element.TELEF_CONTACTO</td>
-                    <td style="text-align:center;">@Element.EMIAL_EMPRESA</td>
+                    <td style="text-align:center;">@Element.EMAIL_EMPRESA</td>
                     <td style="text-align:center;">@Element.SECTOR_PRODUCCION</td>
                     <td style="text-align:center;">@Element.ID_CLIENTE</td>
                     <th>
