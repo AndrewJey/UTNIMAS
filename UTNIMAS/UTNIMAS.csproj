@@ -920,6 +920,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Custom\datatables.js" />
     <Content Include="Scripts\Custom\datatables.min.js" />
+    <Content Include="Scripts\Custom\EditEmpresa.js" />
     <Content Include="Scripts\Custom\Empresas.js" />
     <Content Include="Scripts\Custom\httpmethods.js" />
     <Content Include="Scripts\Custom\Productos.js" />
@@ -1003,6 +1004,7 @@
     <Content Include="Views\Productos\Productos.cshtml" />
     <Content Include="Views\Registro\RegistroProductos.cshtml" />
     <Content Include="Views\Registro\RegistroEmpresas.cshtml" />
+    <Content Include="Views\Empresas\EditarEmpresa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

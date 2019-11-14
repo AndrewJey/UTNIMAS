@@ -25,7 +25,7 @@
             {
 
                 <tr>
-                    <td style="text-align:center;">@Element.EMPRESA_ID</td>
+                    <td id="empresa_ID" style="text-align:center;">@Element.EMPRESA_ID</td>
                     <td style="text-align:center;">@Element.NOMBRE_EMPRESA</td>
                     <td style="text-align:center;">@Element.DIRECCION_EMPRESA</td>
                     <td style="text-align:center;">@Element.NOMBRE_CONTACTO</td>
@@ -34,8 +34,8 @@
                     <td style="text-align:center;">@Element.SECTOR_PRODUCCION</td>
                     <td style="text-align:center;">@Element.ID_CLIENTE</td>
                     <th>
-                        <button style="text-align:center;margin-left:15px; vertical-align: middle; font-family: ottomat, sans-serif;" type="button" class="btn btn-danger float-left"><i class="fas fa-trash"></i></button>
-                        <button style="margin-left:15px;background:#8db2d8;color:white;" height:3em" type="button" data-toggle="modal" data-target="#exampleModal1" class="btn  btn-color-custom right"><i class="fas fa-edit"></i></button>
+                        <button onclick="Delete()" style="text-align:center;margin-left:15px; vertical-align: middle; font-family: ottomat, sans-serif;" type="button" class="btn btn-danger float-left"><i class="fas fa-trash"></i></button>
+                        <a href="/Empresas/EditarEmpresa?Id=@Element.EMPRESA_ID" style="margin-left:15px;background:#8db2d8;color:white;" height:3em" class="btn  btn-color-custom right"><i class="fas fa-edit"></i></a>
                     </th>
 
                 </tr>

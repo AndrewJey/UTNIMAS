@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using UTNIMAS.Models;
 
@@ -8,6 +10,7 @@ namespace UTNIMAS.Controllers
     public class EmpresasController : Controller
     {
         // GET: Empresas
+
         public ActionResult Index()
         {
             List<EmpresasModels> lst;
@@ -36,32 +39,122 @@ namespace UTNIMAS.Controllers
             return View();
         }
 
-        // GET: Empresas/Create
-        public ActionResult Create()
+
+        public class Empresaz
         {
+            public int EMPRESA_ID { get; set; }
+            public string NOMBRE_EMPRESA { get; set; }
+            public string DIRECCION_EMPRESA { get; set; }
+            public string NOMBRE_CONTACTO { get; set; }
+            public string TELEF_CONTACTO { get; set; }
+            public string EMIAL_EMPRESA { get; set; }
+            public string SECTOR_PRODUCCION { get; set; }
+            public string ID_CLIENTE { get; set; }
+        }
+
+        [HttpGet]
+        [ActionName("GetOnlyEmpresa")]
+        public ActionResult GetOnlyEmpresa(string Id)
+        {
+            try
+            {
+                EMPRESA em = new EMPRESA();
+                if (!string.IsNullOrEmpty(Id))
+                {
+                    using (UTNIMASEntities db = new UTNIMASEntities())
+                    {
+                        em = db.EMPRESAS.Find(int.Parse(Id));
+                    }
+                    Empresaz e3 = new Empresaz
+                    {
+                        DIRECCION_EMPRESA = em.DIRECCIÓN_EMPRESA,
+                        EMIAL_EMPRESA = em.EMAIL_EMPRESA,
+                        EMPRESA_ID = em.EMPRESA_ID,
+                        ID_CLIENTE = em.ID_CLIENTE.ToString(),
+                        NOMBRE_CONTACTO = em.NOMBRE_CONTACTO,
+                        NOMBRE_EMPRESA = em.NOMBRE_EMPRESA,
+                        SECTOR_PRODUCCION = em.SECTOR_PRODUCCION,
+                        TELEF_CONTACTO = em.TELEF_CONTACTO
+                    };
+                    return Json(new { Success = true, data = e3, status = 200 }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { Success = true, data = "Error", status = 200 }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        [HttpPost]
+        [ActionName("DeleteEmpresa")]
+        public ActionResult Delete(string ID)
+        {
+            using (UTNIMASEntities db = new UTNIMASEntities())
+            {
+                EMPRESA em = db.EMPRESAS.Find(int.Parse(ID));
+                if (em != null)
+                {
+                    db.EMPRESAS.Remove(em);
+                    db.SaveChanges();
+                }
+            }
+            return Json(new { Success = true, data = ID, status = 200 }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        [ActionName("EditarEm")]
+        public ActionResult EditarEm(EMPRESA Empresa)
+        {
+            using (UTNIMASEntities db = new UTNIMASEntities())
+            {
+
+                EMPRESA em = db.EMPRESAS.Find(Empresa.EMPRESA_ID);
+
+                em.DIRECCIÓN_EMPRESA = Empresa.DIRECCIÓN_EMPRESA;
+                em.EMAIL_EMPRESA = Empresa.EMAIL_EMPRESA;
+                em.ID_CLIENTE = Empresa.ID_CLIENTE;
+                em.NOMBRE_CONTACTO = Empresa.NOMBRE_CONTACTO;
+                em.NOMBRE_EMPRESA = Empresa.NOMBRE_EMPRESA;
+                em.SECTOR_PRODUCCION = Empresa.SECTOR_PRODUCCION;
+                em.TELEF_CONTACTO = Empresa.TELEF_CONTACTO;
+
+                db.SaveChanges();
+            }
+
+            return Json(new { Success = true, data = Empresa, status = 200 }, JsonRequestBehavior.AllowGet);
+        }
+
+
+        // GET: Empresas/Create
+        public ActionResult EditarEmpresa(string Id)
+        {
+            ViewBag.IdEmpresa = Id;
             return View();
         }
 
         // POST: Empresas/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ActionName("Create")]
+        public ActionResult Create(EmpresasModels empresa)
         {
             try
             {
+                UTNIMASEntities db = new UTNIMASEntities();
                 // TODO: Add insert logic here
-
+                string query = "INSERT INTO EMPRESAS(DIRECCIÓN_EMPRESA,NOMBRE_EMPRESA,EMAIL_EMPRESA,ID_CLIENTE,NOMBRE_CONTACTO,TELEF_CONTACTO,SECTOR_PRODUCCION)" +
+                    "VALUES('" + empresa.DIRECCION_EMPRESA + "', '" + empresa.NOMBRE_EMPRESA + "', '" + empresa.EMIAL_EMPRESA + "', 1, '" + empresa.NOMBRE_CONTACTO + "', '" + empresa.TELEF_CONTACTO + "', '" + empresa.SECTOR_PRODUCCION + "')";
+                db.Database.ExecuteSqlCommand(query);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
-        }
-
-        // GET: Empresas/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
         }
 
         // POST: Empresas/Edit/5

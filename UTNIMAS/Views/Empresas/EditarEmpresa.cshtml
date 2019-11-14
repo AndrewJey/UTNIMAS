@@ -1,12 +1,14 @@
 ﻿
 @{
-    ViewBag.Title = "RegistroEmpresas";
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Registrar Empresas</h2>
+<h2>Editar Empresas</h2>
 <div style="padding:0em 3em">
     <form style="margin-top:100px">
-
+        <div id="IdEmpresa" style="display:none" value="">@ViewBag.IdEmpresa</div>
+        <input type="hidden" name="name" id="cliente" value="1" />
+        <input type="hidden" name="name" id="Empresa_ID" value="" />
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>Empresa</label>
@@ -40,12 +42,12 @@
                 </select>
             </div>
         </div>
-        <button type="button" class="btn btn-primary" onclick="createE()" style="font-size:20px"><i class="far fa-save"></i></button>
+        <button type="button" class="btn btn-primary" onclick="Edit()" style="font-size:20px"><i class="far fa-save"></i></button>
     </form>
 
 </div>
 @section scripts{
     <script type="text/javascript" src="~/Scripts/Custom/datatables.min.js"></script>
     <script src="~/Scripts/Custom/httpmethods.js"></script>
-    <script src="~/Scripts/Custom/Empresas.js"></script>
+    <script src="~/Scripts/Custom/EditEmpresa.js"></script>
 }
