@@ -50,6 +50,25 @@
     <TypeScriptSourceMap>True</TypeScriptSourceMap>
     <TypeScriptMapRoot />
     <TypeScriptSourceRoot />
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="DefaultConnection-Deployment" Order="1">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=%28LocalDb%29\MSSQLLocalDB%3bAttachDbFilename=|DataDirectory|\aspnet-UTNIMAS-20190919124433.mdf%3bInitial Catalog=aspnet-UTNIMAS-20190919124433%3bIntegrated Security=True" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\DefaultConnection-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="UTNIMASEntities-Deployment" Order="2">
+          <Destination Path="Data Source=DESKTOP-E38KCH7%3bInitial Catalog=UTNIMAS%3bIntegrated Security=True" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=localhost%3bInitial Catalog=UTNIMAS%3bIntegrated Security=True%3bApplication Name=EntityFramework" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\UTNIMASEntities-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -115,7 +134,7 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -869,6 +888,11 @@
     <Content Include="Content\Images\imas-logo.ico" />
     <Content Include="Content\Images\imas-logo.png" />
     <Content Include="Content\Images\imas.gif" />
+    <Content Include="Content\Images\Markets\340436cf-5092-4e1a-aadc-e2e8c3034e85.jpg" />
+    <Content Include="Content\Images\Markets\Devaraja-Market.jpg" />
+    <Content Include="Content\Images\Markets\han-market-shops.jpg" />
+    <Content Include="Content\Images\Markets\pagePropertiesImage.jpg" />
+    <Content Include="Content\Images\Markets\Strasse-17-Juni-Flea-Market-3-800x400.jpg" />
     <Content Include="Content\Images\UTN.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\unSADDSDnamed.jpg" />
@@ -881,17 +905,6 @@
     <Content Include="Fonts\Weiss\WEISS INITIALEN_0.TTF" />
     <Content Include="Fonts\Weiss\WEISS LAPIDAR_0.TTF" />
     <Content Include="Fonts\Weiss\WEISSRUNDGOTISCH_0.TTF" />
-    <Content Include="Fonts\FontAwesome.otf" />
-    <Content Include="Fonts\fontawesome-webfont.woff2" />
-    <Content Include="Fonts\fontawesome-webfont.woff" />
-    <Content Include="Fonts\fontawesome-webfont.ttf" />
-    <Content Include="Fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Content\DataTables\Buttons-1.5.6\css\common.scss" />
     <Content Include="Content\DataTables\Buttons-1.5.6\css\mixins.scss" />
     <Content Include="Content\DataTables\Buttons-1.6.0\css\common.scss" />
@@ -903,7 +916,6 @@
     <Content Include="Models\UTNIMASModel.edmx.diagram">
       <DependentUpon>UTNIMASModel.edmx</DependentUpon>
     </Content>
-    <None Include="packages.config" />
     <Content Include="Models\EmpresasModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UTNIMASModel.edmx</DependentUpon>
@@ -920,10 +932,21 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Custom\datatables.js" />
     <Content Include="Scripts\Custom\datatables.min.js" />
-    <Content Include="Scripts\Custom\EditEmpresa.js" />
     <Content Include="Scripts\Custom\Empresas.js" />
     <Content Include="Scripts\Custom\httpmethods.js" />
     <Content Include="Scripts\Custom\Productos.js" />
+    <Content Include="Fonts\FontAwesome.otf" />
+    <Content Include="Fonts\fontawesome-webfont.woff2" />
+    <Content Include="Fonts\fontawesome-webfont.woff" />
+    <Content Include="Fonts\fontawesome-webfont.ttf" />
+    <Content Include="Fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="packages.config" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -990,6 +1013,9 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Empresas\Index.cshtml" />
+    <Content Include="Views\Productos\Productos.cshtml" />
+    <Content Include="Views\Registro\RegistroProductos.cshtml" />
+    <Content Include="Views\Registro\RegistroEmpresas.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -1001,10 +1027,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Productos\Productos.cshtml" />
-    <Content Include="Views\Registro\RegistroProductos.cshtml" />
-    <Content Include="Views\Registro\RegistroEmpresas.cshtml" />
-    <Content Include="Views\Empresas\EditarEmpresa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
