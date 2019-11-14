@@ -34,7 +34,7 @@ namespace UTNIMAS.Controllers
         }
         public class Productoz
         {
-            public int PRODUCTOS_ID { get; set; }
+            public int PRODUCTO_ID { get; set; }
             public string NOMBRE_PRODUCTO { get; set; }
             public string ID_PRECIO { get; set; }
             public string DESCRIP_PRODUCTO { get; set; }
@@ -56,12 +56,12 @@ namespace UTNIMAS.Controllers
                     }
                     Productoz e3 = new Productoz
                     {
-                        PRODUCTOS_ID = em.PRODUCTO_ID,
+                        PRODUCTO_ID = em.PRODUCTO_ID,
                         NOMBRE_PRODUCTO = em.NOMBRE_PRODUCTO,
                         ID_PRECIO = em.ID_PRECIO.ToString(),
                         DESCRIP_PRODUCTO = em.DESCRIP_PRODUCTO,
                         FOTO_PRODUCTO = em.FOTO_PRODCUTO.ToString(),
-                        EMPRESA_ID = em.EMPRESA_ID.ToString(),
+                        EMPRESA_ID = em.EMPRESA_ID.ToString()
                     };
                     return Json(new { Success = true, data = e3, status = 200 }, JsonRequestBehavior.AllowGet);
                 }
@@ -89,49 +89,45 @@ namespace UTNIMAS.Controllers
             }
             return Json(new { Success = true, data = ID, status = 200 }, JsonRequestBehavior.AllowGet);
         }
-        //HERE!
         [HttpPost]
         [ActionName("EditarPr")]
-        public ActionResult EditarEm(EMPRESA Empresa)
+        public ActionResult EditarPr(PRODUCT Producto)
         {
             using (UTNIMASEntities db = new UTNIMASEntities())
             {
 
-                EMPRESA em = db.EMPRESAS.Find(Empresa.EMPRESA_ID);
+                PRODUCT em = db.PRODUCTS.Find(Producto.PRODUCTO_ID);
 
-                em.DIRECCION_EMPRESA = Empresa.DIRECCION_EMPRESA;
-                em.EMAIL_EMPRESA = Empresa.EMAIL_EMPRESA;
-                em.ID_CLIENTE = Empresa.ID_CLIENTE;
-                em.NOMBRE_CONTACTO = Empresa.NOMBRE_CONTACTO;
-                em.NOMBRE_EMPRESA = Empresa.NOMBRE_EMPRESA;
-                em.SECTOR_PRODUCCION = Empresa.SECTOR_PRODUCCION;
-                em.TELEF_CONTACTO = Empresa.TELEF_CONTACTO;
-
+                em.PRODUCTO_ID = Producto.PRODUCTO_ID;
+                em.NOMBRE_PRODUCTO = Producto.NOMBRE_PRODUCTO;
+                em.ID_PRECIO = Producto.ID_PRECIO;
+                em.DESCRIP_PRODUCTO = Producto.DESCRIP_PRODUCTO;
+                em.FOTO_PRODCUTO = Producto.FOTO_PRODCUTO;
+                em.EMPRESA_ID = Producto.EMPRESA_ID;
                 db.SaveChanges();
             }
-
-            return Json(new { Success = true, data = Empresa, status = 200 }, JsonRequestBehavior.AllowGet);
+            return Json(new { Success = true, data = Producto, status = 200 }, JsonRequestBehavior.AllowGet);
         }
 
 
         // GET: Empresas/Create
-        public ActionResult EditarEmpresa(string Id)
+        public ActionResult EditarProducto(string Id)
         {
-            ViewBag.IdEmpresa = Id;
+            ViewBag.IdProducto = Id;
             return View();
         }
 
         // POST: Empresas/Create
         [HttpPost]
         [ActionName("Create")]
-        public ActionResult Create(EmpresasModels empresa)
+        public ActionResult Create(ProductosModels producto)
         {
             try
             {
                 UTNIMASEntities db = new UTNIMASEntities();
                 // TODO: Add insert logic here
-                string query = "INSERT INTO EMPRESAS(DIRECCION_EMPRESA,NOMBRE_EMPRESA,EMAIL_EMPRESA,ID_CLIENTE,NOMBRE_CONTACTO,TELEF_CONTACTO,SECTOR_PRODUCCION)" +
-                    "VALUES('" + empresa.DIRECCION_EMPRESA + "', '" + empresa.NOMBRE_EMPRESA + "', '" + empresa.EMAIL_EMPRESA + "', 1, '" + empresa.NOMBRE_CONTACTO + "', '" + empresa.TELEF_CONTACTO + "', '" + empresa.SECTOR_PRODUCCION + "')";
+                string query = "INSERT INTO EMPRESAS(NOMBRE_PRODUCTO,ID_PRECIO,DESCRIP_PRODUCTO,FOTO_PRODCUTO,EMPRESA_ID)" +
+                    "VALUES('" + producto.NOMBRE_PRODUCTO + "', '" + producto.ID_PRECIO + "', '" + producto.DESCRIP_PRODUCTO + "', 1, '" + producto.FOTO_PRODUCTO + "', '" + producto.EMPRESA_ID + "')";
                 db.Database.ExecuteSqlCommand(query);
                 return RedirectToAction("Index");
             }
@@ -141,7 +137,7 @@ namespace UTNIMAS.Controllers
             }
         }
 
-        // POST: Empresas/Edit/5
+        // POST: Productos/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -157,13 +153,13 @@ namespace UTNIMAS.Controllers
             }
         }
 
-        // GET: Empresas/Delete/5
+        // GET: Productos/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Empresas/Delete/5
+        // POST: Productos/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
