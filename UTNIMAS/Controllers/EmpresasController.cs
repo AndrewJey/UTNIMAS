@@ -25,8 +25,8 @@ namespace UTNIMAS.Controllers
                            NOMBRE_CONTACTO = d.NOMBRE_CONTACTO,
                            TELEF_CONTACTO = d.TELEF_CONTACTO,
                            EMAIL_EMPRESA = d.EMAIL_EMPRESA,
-                           SECTOR_PRODUCCION = d.SECTOR_PRODUCCION
-                           //ID_CLIENTE = d.ID_CLIENTE
+                           SECTOR_PRODUCCION = d.SECTOR_PRODUCCION,
+                           ID_CLIENTE = d.ID_CLIENTE.ToString()
                        }).ToList();
 
             }

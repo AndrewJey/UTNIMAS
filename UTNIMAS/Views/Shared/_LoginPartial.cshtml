@@ -1,22 +1,23 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-    {
-    @Html.AntiForgeryToken()
+    <text>
+        <div class="" style="display:flex; padding-left:3px;padding-top:4px;">
 
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
-    }
+            <div style="display:flex;padding:5px 3px">
+
+                <div id="nameUser" style="font-family:Segoe UI, Frutiger; color: #545454; font-size:15px;">
+                    <i style="margin-right:5px" class="fas fa-user"></i>
+                    <b>@User.Identity.GetUserName()</b>
+                </div>
+            </div>
+        </div>
+    </text>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <ul class="nav navbar-nav navbar-right" style="font-family: ottomat, sans-serif;text-align:center">
+        <li>@Html.ActionLink("Entrar", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @style = "text-align:center!important" })</li>
     </ul>
 }
+
