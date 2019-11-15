@@ -205,7 +205,7 @@ a, a:hover, a:focus {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    /*border-bottom: 1px solid #47748b;*/
 }
 
 #sidebar ul li a {
@@ -247,8 +247,12 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #efefef;
+    background: #FAF2E6 !important;
 }
+
+    ul ul a:hover {
+        background: white !important;
+    }
 
 ul.CTAs {
     padding: 20px;

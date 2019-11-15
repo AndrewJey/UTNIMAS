@@ -78,10 +78,10 @@
                     <a href="https://www.utn.ac.cr/" target="_blank"><img id="imgChange" class="forsyteLG" src="~/Content/Images/UTN.png" style="margin-top:25px;margin-left:15px;width:85%;" /></a>
                 </li>
             </ul>
-            <div class="container body-content">
+            <div class="container body-content" style="margin-top:2em">
                 <hr />
                 <footer>
-                    <p>
+                    <p style="font-size:11px">
                         &copy; @DateTime.Now.Year - <a href="https://www.linkedin.com/in/andrés-j-jiménez-leandro-299087181" target="_blank">Andrés J. Jiménez Leandro</a>, <a href="https://www.utn.ac.cr/sedes/sede-regional-de-san-carlos" target="_blank">UTN Sede San Carlos</a> -
                         <a href="https://www.imas.go.cr/" target="_blank">Instituto Mixto de Ayuda Social</a>, <a href="https://es.wikipedia.org/wiki/Costa_Rica" target="_blank"><b>Costa Rica</b></a>
                     </p>
@@ -89,6 +89,9 @@
             </div>
         </nav>
         <div id="content">
+            <button type="button" onclick="sidebarActive()" id="sidebarCollapse" class="btn btn-info" style="background:#efefef; border-color:#8db2d8; background-color:white;">
+                <i style="color:#8db2d8;" id="arrow" class="fas fa-chevron-left"></i>
+            </button>
             <br />
             @RenderBody()
         </div>
