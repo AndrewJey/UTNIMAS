@@ -1,0 +1,99 @@
+﻿@model IEnumerable<UTNIMAS.Models.CLIENT>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE1_CLIENT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE2_CLIENT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.APELLIDO1_CLIENT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.APELLIDO2_CLIENT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DIRECCION1_CLIENT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CIUDAD_CLIENT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DISTRITO_CLIENT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CANTON_CLIENT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PROVINCIA_CLIENT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TELEF_CASA_CLIENT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TELF_CELULAR_CLIENT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMAIL_CLIENT)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE1_CLIENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE2_CLIENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.APELLIDO1_CLIENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.APELLIDO2_CLIENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DIRECCION1_CLIENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CIUDAD_CLIENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DISTRITO_CLIENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CANTON_CLIENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PROVINCIA_CLIENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TELEF_CASA_CLIENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TELF_CELULAR_CLIENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMAIL_CLIENT)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_CLIENT }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_CLIENT }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_CLIENT })
+        </td>
+    </tr>
+}
+
+</table>

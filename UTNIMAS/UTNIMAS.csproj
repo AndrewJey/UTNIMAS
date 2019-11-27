@@ -199,6 +199,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\CLIENTsController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\RegistroController.cs" />
@@ -948,6 +949,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="packages.config" />
+    <Content Include="Scripts\Custom\Registrar.js" />
     <Content Include="Scripts\Custom\scripts.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
@@ -1035,6 +1037,11 @@
     <Content Include="Views\USERs\Details.cshtml" />
     <Content Include="Views\USERs\Edit.cshtml" />
     <Content Include="Views\USERs\Index.cshtml" />
+    <Content Include="Views\CLIENTs\Create.cshtml" />
+    <Content Include="Views\CLIENTs\Delete.cshtml" />
+    <Content Include="Views\CLIENTs\Details.cshtml" />
+    <Content Include="Views\CLIENTs\Edit.cshtml" />
+    <Content Include="Views\CLIENTs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

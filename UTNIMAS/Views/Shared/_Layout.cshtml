@@ -30,44 +30,53 @@
                         <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; INICIO</span>
                     </a>
                 </li>
-                <li>
-                    <a href="/Empresas/Index">
-                        <i class="fas fa-building" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
-                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; EMPRESAS</span>
-                    </a>
-                </li>
+                @if (Request.IsAuthenticated)
+                {
+                    <li>
+                        <a href="/Empresas/Index">
+                            <i class="fas fa-building" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                            <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; EMPRESAS</span>
+                        </a>
+                    </li>
+
+                }
+
                 <li>
                     <a href="/Productos/Productos">
                         <i class="fas fa-shopping-cart" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
                         <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; PRODUCTOS</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-list-alt" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
-                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR</span>
-                    </a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu1">
-                        <li>
-                            <a href="/Registro/RegistroProductos">
-                                <i class="fas fa-cart-plus" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
-                                <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR PRODUCTOS</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/Registro/RegistroEmpresas">
-                                <i class="far fa-hospital" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
-                                <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR EMPRESAS</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/Registro/RegistroPrecios">
-                                <i class="far fa-money-bill-alt" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
-                                <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR PRECIOS</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                @if (Request.IsAuthenticated)
+                {
+                    <li>
+                        <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-list-alt" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                            <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR</span>
+                        </a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu1">
+                            <li>
+                                <a href="/Registro/RegistroProductos">
+                                    <i class="fas fa-cart-plus" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                                    <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR PRODUCTOS</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Registro/RegistroEmpresas">
+                                    <i class="far fa-hospital" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                                    <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR EMPRESAS</span>
+                                </a>
+                            </li>
+                            @*<li>
+                                    <a href="/Registro/RegistroPrecios">
+                                        <i class="far fa-money-bill-alt" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR PRECIOS</span>
+                                    </a>
+                                </li>*@
+                        </ul>
+                    </li>
+                }
+
                 <li>
                     <a href="/Account/ExternalLoginFailure">
                         <i class="fas fa-sign-in-alt" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>

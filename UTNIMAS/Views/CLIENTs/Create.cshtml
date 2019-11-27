@@ -1,0 +1,136 @@
+﻿@model UTNIMAS.Models.CLIENT
+
+@{
+//ViewBag.Title = "Create";//ViewBag.Title = "Create";
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-6" style="margin:auto">
+            <div class="form-horizontal">
+                <h2>Informacion</h2>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div style="display:none"  class="form-group">
+                    @Html.LabelFor(model => model.ID_CLIENT, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ID_CLIENT, new { htmlAttributes = new { @class = "form-control", @Value="1" } })
+                        @Html.ValidationMessageFor(model => model.ID_CLIENT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Primer Nombre</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NOMBRE1_CLIENT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NOMBRE1_CLIENT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Segundo Nombre</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.NOMBRE2_CLIENT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NOMBRE2_CLIENT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Primer Apellido</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.APELLIDO1_CLIENT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.APELLIDO1_CLIENT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Segundo Apellido</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.APELLIDO2_CLIENT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.APELLIDO2_CLIENT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Direccion</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DIRECCION1_CLIENT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DIRECCION1_CLIENT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Ciudad</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CIUDAD_CLIENT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CIUDAD_CLIENT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Distrito</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.DISTRITO_CLIENT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DISTRITO_CLIENT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Canton</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CANTON_CLIENT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CANTON_CLIENT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Provincia</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PROVINCIA_CLIENT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PROVINCIA_CLIENT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Telefono de Casa</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TELEF_CASA_CLIENT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TELEF_CASA_CLIENT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Numero de Celular</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TELF_CELULAR_CLIENT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TELF_CELULAR_CLIENT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Correo</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.EMAIL_CLIENT, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EMAIL_CLIENT, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Continuar" class="btnLogin" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
