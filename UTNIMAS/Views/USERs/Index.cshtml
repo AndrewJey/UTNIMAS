@@ -1,0 +1,45 @@
+﻿@model IEnumerable<UTNIMAS.Models.USER>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.USER_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USER_EMAIL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.USER_PASSWORD)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.USER_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USER_EMAIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.USER_PASSWORD)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.USER_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.USER_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.USER_ID })
+        </td>
+    </tr>
+}
+
+</table>
