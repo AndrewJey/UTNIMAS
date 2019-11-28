@@ -1,15 +1,44 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model List<UTNIMAS.Models.ProductosModels>
+@{
+    ViewBag.Title = "INICIO";
+    int m = Model.Count() - 1;
 }
 <div>
     <center><h1><button type="button" class="btn btn-info btn-lg" href="#">INICIO</button></h1></center><br /><br />
     <center><h2 style="color:aliceblue;"><button type="button" class="btn btn-outline-light btn-lg">IDEAS CREATIVAS</button></h2></center><br /><br />
+    <div class="card-deck">
+        <div class="card">
+            <img class="card-img-top" src="@Model[m].FOTO_PRODUCTO" alt="@Model[m].NOMBRE_PRODUCTO">
+            <div class="card-body">
+                <h5 class="card-title" style="color:yellow;">@Model[m].NOMBRE_PRODUCTO</h5>
+                <p class="card-text" style="color:white;">@Model[m].DESCRIP_PRODUCTO</p>
+                <p class="card-text" style="color:chartreuse;">@Model[m].EMPRESA_ID</small></p>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="@Model[0].FOTO_PRODUCTO" alt="@Model[0].NOMBRE_PRODUCTO">
+            <div class="card-body">
+                <h5 class="card-title" style="color:yellow;">@Model[0].NOMBRE_PRODUCTO</h5>
+                <p class="card-text" style="color:white;">@Model[0].DESCRIP_PRODUCTO</p>
+                <p class="card-text" style="color:chartreuse;">@Model[0].EMPRESA_ID</small></p>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="@Model[m-1].FOTO_PRODUCTO" alt="@Model[m-1].NOMBRE_PRODUCTO">
+            <div class="card-body">
+                <h5 class="card-title" style="color:yellow;">@Model[m - 1].NOMBRE_PRODUCTO</h5>
+                <p class="card-text" style="color:white;">@Model[m - 1].DESCRIP_PRODUCTO</p>
+                <p class="card-text" style="color:chartreuse;">@Model[m - 1].EMPRESA_ID</small></p>
+            </div>
+        </div>
+    </div>
+    <br /><br />
     <!--<img src="~/Content/Images/logo.png" aling="bottom" height="10%" width="10%" style="margin-top:500px;" />-->
     <a href="https://www.utn.ac.cr/content/vicerrector%C3%ADa-de-extensi%C3%B3n-y-acci%C3%B3n-social-veas" target="_blank">
-        <img src="~/Content/Images/descarga.jpg" aling="bottom" height="15%" width="10%" style="position:absolute;bottom:-20%;left:20%;margin-left:1em" />
+        <img src="~/Content/Images/descarga.jpg" aling="bottom" height="15%" width="10%" style="position:absolute; bottom:1%;left:13%;margin-left:0em" />
     </a>
     <a href="https://www.imas.go.cr/" target="_blank">
-        <img src="~/Content/Images/imas-hacienda.jpg" aling="bottom" height="15%" width="10%" style="position:absolute;bottom:-20%;right:10px;" />
+        <img src="~/Content/Images/imas-hacienda.jpg" aling="bottom" height="15%" width="10%" style="position:absolute;bottom:1%;right:12px;" />
     </a>
 </div>
 <script type="text/javascript">

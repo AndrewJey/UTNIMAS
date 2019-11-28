@@ -15,6 +15,8 @@ namespace UTNIMAS.Controllers
             using (UTNIMASEntities db = new UTNIMASEntities())
             {
                 lst = (from d in db.PRODUCTS
+                       join c in db.EMPRESAS on d.EMPRESA_ID equals c.EMPRESA_ID
+                       where d.EMPRESA_ID == c.EMPRESA_ID
                        select new ProductosModels
                        {
                            PRODUCTOS_ID = d.PRODUCTO_ID,
@@ -22,7 +24,7 @@ namespace UTNIMAS.Controllers
                            ID_PRECIO = d.ID_PRECIO,
                            DESCRIP_PRODUCTO = d.DESCRIP_PRODUCTO,
                            FOTO_PRODUCTO = d.FOTO_PRODCUTO,  //Puede que en el modelo este mal inicializada porque en la base de datos es un tipo "image"
-                           EMPRESA_ID = d.EMPRESA_ID
+                           EMPRESA_ID = c.NOMBRE_EMPRESA
                        }).ToList();
                 return View(lst);
             }
