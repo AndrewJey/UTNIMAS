@@ -8,12 +8,12 @@ namespace UTNIMAS
         /** CONEXION ANDRES **/
         //string conexion = "Data Source=DESKTOP-E38KCH7;Initial Catalog=UTNIMAS;Integrated Security=True";
         /** CONEXION GABRIEL**/
-        //string conexion = "Data Source=MSI;Initial Catalog=UTNIMAS;Integrated Security=True";
+        string conexion = "Data Source=MSI;Initial Catalog=UTNIMAS;Integrated Security=True";
         /** CONEXION RONALD**/
         //string conexion = "Data Source=DESKTOP-LVSUABE;Initial Catalog=UTNIMAS;Integrated Security=True";
         /** CONEXION JEYCON**/
-        string conexion = "Data Source=JEYCONDK\\SQLEXPRESS01;Initial Catalog=UTNIMAS;Integrated Security=True";
-        public SqlConnection conectarBD = new SqlConnection("server=JEYCONDK\\SQLEXPRESS01; database=UTNIMAS; integrated security = true");
+        //string conexion = "Data Source=JEYCONDK\\SQLEXPRESS01;Initial Catalog=UTNIMAS;Integrated Security=True";
+        public SqlConnection conectarBD = new SqlConnection("server=MSI; database=UTNIMAS; integrated security = true");
         //Constructor:
         public ConexionBD()
         {
