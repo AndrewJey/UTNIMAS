@@ -1,11 +1,21 @@
 ﻿@model List<UTNIMAS.Models.ProductosModels>
-
 @{
     ViewBag.Title = "Productos";
 }
-
 <h2>Productos</h2>
-<div style="padding:0em 3em">
+@foreach (var Element in Model)
+{
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="@Element.FOTO_PRODUCTO" alt="@Element.EMPRESA_ID">
+        <div class="card-body">
+            <h5 class="card-title">@Element.NOMBRE_PRODUCTO</h5>
+            <p class="card-text">@Element.DESCRIP_PRODUCTO</p>
+            <a href="#" class="btn btn-primary">DETALLES</a>
+        </div>
+    </div>
+    <br />
+}
+<!--<div style="padding:0em 3em">
     <table id="tableProductos" class="display" style="width:100%">
         <thead>
             <tr>
@@ -19,7 +29,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var Element in Model)
+@*      @foreach (var Element in Model)
             {
                 <tr>
                     <td id="Producto_ID" style="text-align:center; display:none;">@Element.PRODUCTOS_ID</td>
@@ -35,10 +45,10 @@
 
                 </tr>
             }
-
+          *@
         </tbody>
     </table>
-</div>
+    </div>-->
 @section scripts{
     <script type="text/javascript" src="~/Scripts/Custom/datatables.min.js"></script>
     <script src="~/Scripts/Custom/httpmethods.js"></script>

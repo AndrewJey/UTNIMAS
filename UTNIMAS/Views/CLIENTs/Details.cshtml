@@ -1,0 +1,114 @@
+﻿@model UTNIMAS.Models.CLIENT
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CLIENT</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE1_CLIENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE1_CLIENT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE2_CLIENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE2_CLIENT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.APELLIDO1_CLIENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.APELLIDO1_CLIENT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.APELLIDO2_CLIENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.APELLIDO2_CLIENT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIRECCION1_CLIENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIRECCION1_CLIENT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CIUDAD_CLIENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CIUDAD_CLIENT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DISTRITO_CLIENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DISTRITO_CLIENT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CANTON_CLIENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CANTON_CLIENT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PROVINCIA_CLIENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PROVINCIA_CLIENT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TELEF_CASA_CLIENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TELEF_CASA_CLIENT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TELF_CELULAR_CLIENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TELF_CELULAR_CLIENT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EMAIL_CLIENT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMAIL_CLIENT)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_CLIENT }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
