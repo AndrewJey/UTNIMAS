@@ -1,0 +1,51 @@
+﻿@model List<UTNIMAS.Models.EmpresasModels>
+
+@{
+    ViewBag.Title = "Empresas";
+}
+
+<div style="padding:0em 3em">
+    <center> <h1>Empresas</h1></center><br /><br />
+    <table id="tableEmpresas" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif; display:none;">ID Empresa</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Empresa</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Dirección</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Nombre del Contacto</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Teléfono</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">E-mail</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Sector</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Dueño</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Element in Model)
+            {
+
+                <tr>
+                    <td id="empresa_ID" style="text-align:center; display:none;">@Element.EMPRESA_ID</td>
+                    <td style="text-align:center;">@Element.NOMBRE_EMPRESA</td>
+                    <td style="text-align:center;">@Element.DIRECCION_EMPRESA</td>
+                    <td style="text-align:center;">@Element.NOMBRE_CONTACTO</td>
+                    <td style="text-align:center;">@Element.TELEF_CONTACTO</td>
+                    <td style="text-align:center;">@Element.EMAIL_EMPRESA</td>
+                    <td style="text-align:center;">@Element.SECTOR_PRODUCCION</td>
+                    <td style="text-align:center;">@Element.ID_CLIENTE</td>
+                    <th>
+                        <button onclick="Delete()" style="text-align:center;margin-left:15px; vertical-align: middle; font-family: ottomat, sans-serif;" type="button" class="btn btn-danger float-left"><i class="fas fa-trash"></i></button>
+                        <a href="/Empresas/EditarEmpresa?Id=@Element.EMPRESA_ID" style="margin-left:15px;background:#8db2d8;color:white;" height:3em" class="btn  btn-color-custom right"><i class="fas fa-edit"></i></a>
+                    </th>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/Custom/datatables.min.js"></script>
+    <script src="~/Scripts/Custom/httpmethods.js"></script>
+    <script src="~/Scripts/Custom/Empresas.js"></script>
+}
