@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 //Conexión a la Base de Datos
-namespace UTNIMAS
+namespace UTNIMAS.Models
 {
     public class ConexionBD
     {

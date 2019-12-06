@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Mvc;
+using UTNIMAS.Models;
 
 namespace UTNIMAS.Controllers
 {
