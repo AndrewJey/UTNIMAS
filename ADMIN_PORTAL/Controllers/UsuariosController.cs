@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
-namespace UTNIMAS.Controllers
+namespace ADMIN_PORTAL.Controllers
 {
-    public class USERsController : Controller
+    public class UsuariosController : Controller
     {
         private ADMIN_PORTAL.Models.UTNIMASEntities db = new ADMIN_PORTAL.Models.UTNIMASEntities();
 

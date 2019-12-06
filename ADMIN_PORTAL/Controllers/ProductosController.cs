@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 //
-namespace UTNIMAS.Controllers
+namespace ADMIN_PORTAL.Controllers
 {
     public class ProductosController : Controller
     {
