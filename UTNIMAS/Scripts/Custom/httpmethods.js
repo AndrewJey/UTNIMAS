@@ -116,9 +116,9 @@ function HTTP_GET(url, div_html, callback, data) {
 
 function showError(response, callback) {
     console.log(response);
-
-    $("#errorMessage").text(response == undefined ? "There was a error processing the request" : (response.Message == undefined ? response : response.Message));
-    $('#toast2').toast('show');
+    alert(response.Mensaje)
+    //$("#errorMessage").text(response == undefined ? "There was a error processing the request" : (response.Message == undefined ? response : response.Message));
+    //$('#toast2').toast('show');
     if (callback != undefined) {
         $("#btn_ModalError").click(function () { callback() });
     }
@@ -127,18 +127,18 @@ function showError(response, callback) {
 function showSuccess(response, callback) {
 
     if (response.Success) {
-
-        $('#toastMessager').text(response.Message);
-        $('#toast1').toast('show');
+        alert(response.Mensaje);
+        //$('#toastMessager').text(response.Message);
+        //$('#toast1').toast('show');
         if (callback != undefined) {
             callback();
         }
     }
-    else {
-        $("#errorMessage").text(response == undefined ? "There was a error processing the request" : (response.Message == undefined ? response : response.Message));
-        $('#toast2').toast('show');
-        if (callback != undefined) {
-            callback();
-        }
-    }
+    //else {
+    //    $("#errorMessage").text(response == undefined ? "There was a error processing the request" : (response.Message == undefined ? response : response.Message));
+    //    $('#toast2').toast('show');
+    //    if (callback != undefined) {
+    //        callback();
+    //    }
+    //}
 }

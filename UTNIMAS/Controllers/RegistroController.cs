@@ -11,7 +11,7 @@ namespace UTNIMAS.Controllers
         // GET: Registro
         public ActionResult RegistroEmpresas()
         {
-            ConexionBD con = new ConexionBD(); //Crea la instancia de la conexion
+            Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
             con.ConexDB(); //Conecta la BD
             con.abrir(); //Abre la BD                
             //CREAR COMANDO DE SQL
@@ -28,7 +28,7 @@ namespace UTNIMAS.Controllers
         }
         public ActionResult RegistroProductos()
         {
-            ConexionBD con = new ConexionBD(); //Crea la instancia de la conexion
+            Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
             con.ConexDB(); //Conecta la BD
             con.abrir(); //Abre la BD                
             //CREAR COMANDO DE SQL
@@ -45,7 +45,8 @@ namespace UTNIMAS.Controllers
         }
         public ActionResult RegistroPrecios()
         {
-            ConexionBD con = new ConexionBD(); //Crea la instancia de la conexion
+
+            Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
             con.ConexDB(); //Conecta la BD
             con.abrir(); //Abre la BD                
             //CREAR COMANDO DE SQL
@@ -56,6 +57,14 @@ namespace UTNIMAS.Controllers
             //EJECUTA LOS COMANDOS SQL
             //cmd.ExecuteNonQuery();
             //Cerrar la Conexon con la DB
+            string userId = System.Web.HttpContext.Current.User.Identity.Name;
+
+            if (userId != "")
+            {
+                SqlCommand cmd2 = new SqlCommand("SELECT ID_CLIENT FROM dbo.CLIENTS WHERE EMAIL_CLIENT = @userId ", con.ConexDB());
+                cmd2.Parameters.AddWithValue("@userId", userId);
+                ViewBag.EMPRESA = (cmd2.ExecuteScalar().ToString());
+            }
             con.cerrar();
             //Mostrar Vista
             return View();

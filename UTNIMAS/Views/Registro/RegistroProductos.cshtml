@@ -3,9 +3,10 @@
 }
 <h2>Registro Productos</h2>
 <div style="padding:0em 3em">
-    <form>
+    <form style="margin-top:100px">
+
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label>Producto</label>
                 <input type="text" class="form-control" id="" placeholder="Nombre del Producto">
             </div>
@@ -35,3 +36,9 @@
         </div>
         <button type="button" class="btn btn-primary" onclick="createP()" style="font-size:20px"><i class="far fa-save"></i></button>
     </form>
+</div>
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/Custom/datatables.min.js"></script>
+    <script src="~/Scripts/Custom/httpmethods.js"></script>
+    <script src="~/Scripts/Custom/Productos.js"></script>
+}

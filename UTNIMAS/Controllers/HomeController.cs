@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Web.Mvc;
 using UTNIMAS.Models;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace UTNIMAS.Controllers
 {
@@ -9,6 +11,7 @@ namespace UTNIMAS.Controllers
     {
         public ActionResult Index()
         {
+          
             //return Redirect("/Home/Index");
             //return View();
             List<ProductosModels> lst;
