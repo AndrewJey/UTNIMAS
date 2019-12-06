@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -142,18 +143,50 @@ namespace UTNIMAS.Controllers
         [ActionName("Create")]
         public ActionResult Create(EmpresasModels empresa)
         {
+            string Iduser = null;
+            int Empresa = 0;
+            string userEmail = System.Web.HttpContext.Current.User.Identity.Name;
             try
-            {
-                UTNIMASEntities db = new UTNIMASEntities();
-                // TODO: Add insert logic here
-                string query = "INSERT INTO EMPRESAS(DIRECCION_EMPRESA,NOMBRE_EMPRESA,EMAIL_EMPRESA,ID_CLIENTE,NOMBRE_CONTACTO,TELEF_CONTACTO,SECTOR_PRODUCCION)" +
-                    "VALUES('" + empresa.DIRECCION_EMPRESA + "', '" + empresa.NOMBRE_EMPRESA + "', '" + empresa.EMAIL_EMPRESA + "', 1, '" + empresa.NOMBRE_CONTACTO + "', '" + empresa.TELEF_CONTACTO + "', '" + empresa.SECTOR_PRODUCCION + "')";
-                db.Database.ExecuteSqlCommand(query);
-                return RedirectToAction("Index");
+            {             
+                    if (userEmail != "")
+                    {
+                        //UTNIMASEntities db1 = new UTNIMASEntities();
+                        Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
+                        con.ConexDB(); //Conecta la BD
+                        con.abrir(); //Abre la BD   
+                        SqlCommand cmd = new SqlCommand("SELECT ID_CLIENT FROM dbo.CLIENTS WHERE EMAIL_CLIENT = @userEmail ", con.ConexDB());
+                        cmd.Parameters.AddWithValue("@userEmail", userEmail);
+                        Iduser = (cmd.ExecuteScalar().ToString());
+                        if (Iduser != null)
+                        {
+
+                            SqlCommand cmd2 = new SqlCommand("SELECT COUNT(*) FROM dbo.EMPRESAS WHERE ID_CLIENTE = @userId ", con.ConexDB());
+                            cmd2.Parameters.AddWithValue("@userId", Iduser);
+                            Empresa = Convert.ToInt32(cmd2.ExecuteScalar());
+                                                    
+                        }
+
+                    }
+                if (Empresa == 0)
+                {
+                    UTNIMASEntities db = new UTNIMASEntities();
+                    string query = "INSERT INTO EMPRESAS(DIRECCION_EMPRESA,NOMBRE_EMPRESA,EMAIL_EMPRESA,ID_CLIENTE,NOMBRE_CONTACTO,TELEF_CONTACTO,SECTOR_PRODUCCION)" +
+                        "VALUES('" + empresa.DIRECCION_EMPRESA + "', '" + empresa.NOMBRE_EMPRESA + "', '" + empresa.EMAIL_EMPRESA + "','" + Iduser + "','" + empresa.NOMBRE_CONTACTO + "', '" + empresa.TELEF_CONTACTO + "', '" + empresa.SECTOR_PRODUCCION + "')";
+                    db.Database.ExecuteSqlCommand(query);
+                    string Mensaje = "Registro de Empresa Completo";
+                    return Json(new { Success = true, Mensaje }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    string Mensaje = "Solamente Puede Crear una Empresa";
+                    return Json(new { Success = false, Mensaje }, JsonRequestBehavior.AllowGet);
+                }
+               
             }
             catch (Exception ex)
             {
-                return View();
+                string Mensaje = "Error con la Solicitud";
+                return Json(new { Success = false, Mensaje }, JsonRequestBehavior.AllowGet);
             }
         }
 

@@ -3,40 +3,47 @@
 }
 <h2>Registro Productos</h2>
 <div style="padding:0em 3em">
-    <form>
+    <form style="margin-top:100px">
+
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label>Producto</label>
                 <input type="text" class="form-control" id="" placeholder="Nombre del Producto">
             </div>
             <div class="form-group col-md-4">
-                <label for="inputState">Empresa</label>
+                <label for="inputState">Tipo de Precio</label>
                 <select id="inputState" class="form-control">
-                    <option selected>Escoger Empresa</option>
+                    <option selected>Sistema de Precios</option>
                     <option>...</option>
                 </select>
             </div>
-            @*<div class="form-group col-md-2">
-                <label for="inputAddress">Foto del Producto</label>
-                <input type="file" name="pic" accept="image/*" style="margin-left:1em;">
-            </div>*@
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-
+            @*<div class="form-group col-md-4">
+                    <label for="inputEmail4">Precio</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Digite el Precio">
+                </div>*@
+            <div class="form-group col-md-2">
                 <label for="inputPassword4">Descripción del Producto</label>
                 <input type="text" class="form-control" id="inputPassword4" placeholder="Descripción">
             </div>
+            <div class="form-group">
+                <label for="inputAddress">Foto del Producto</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="Foto del Producto">
+            </div>
+        </div>
+        <div class="form-row">
             <div class="form-group col-md-4">
-                @*<label for="inputState">Tipo de Precio</label>
-        <select id="inputState" class="form-control">
-               <option selected>Sistema de Precios</option>
-               <option>...</option>
-        </select>*@
-
-                <label for="inputAddress">Foto del Producto</label><br/>
-                <input type="file" name="pic" accept="image/*" style="margin-left:1em;">
+                <label for="inputState">Empresa</label>
+                <select id="inputState" class="form-control">
+                    <option selected>Escoger Empresa</option>
+                    <option>@ViewBag.EMPRESA</option>
+                </select>
             </div>
         </div>
         <button type="button" class="btn btn-primary" onclick="createP()" style="font-size:20px"><i class="far fa-save"></i></button>
-</form>
+    </form>
+</div>
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/Custom/datatables.min.js"></script>
+    <script src="~/Scripts/Custom/httpmethods.js"></script>
+    <script src="~/Scripts/Custom/Productos.js"></script>
+}

@@ -48,14 +48,17 @@ namespace UTNIMAS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_CLIENT,NOMBRE1_CLIENT,NOMBRE2_CLIENT,APELLIDO1_CLIENT,APELLIDO2_CLIENT,DIRECCION1_CLIENT,CIUDAD_CLIENT,DISTRITO_CLIENT,CANTON_CLIENT,PROVINCIA_CLIENT,TELEF_CASA_CLIENT,TELF_CELULAR_CLIENT,EMAIL_CLIENT")] CLIENT cLIENT)
         {
-            if (ModelState.IsValid)
-            {
+
+            //if (ModelState.IsValid)
+            //{
+                //int idcliente = db.CLIENTS.Last().ID_CLIENT;
+                //cLIENT.ID_CLIENT = idcliente + 1;
                 db.CLIENTS.Add(cLIENT);
                 db.SaveChanges();
                 return RedirectToAction("Register", "Account");
-            }
+            //}
 
-            return View(cLIENT);
+            //return View(cLIENT);
         }
 
         // GET: CLIENTs/Edit/5

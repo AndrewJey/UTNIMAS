@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
 using UTNIMAS.Models;
@@ -124,18 +125,36 @@ namespace UTNIMAS.Controllers
         [ActionName("Create")]
         public ActionResult Create(ProductosModels producto)
         {
+            string Iduser = null;
+            string Empresa = null;
             try
             {
-                UTNIMASEntities db = new UTNIMASEntities();
-                // TODO: Add insert logic here
-                string query = "INSERT INTO EMPRESAS(NOMBRE_PRODUCTO,ID_PRECIO,DESCRIP_PRODUCTO,FOTO_PRODCUTO,EMPRESA_ID)" +
-                    "VALUES('" + producto.NOMBRE_PRODUCTO + "', '" + producto.ID_PRECIO + "', '" + producto.DESCRIP_PRODUCTO + "', 1, '" + producto.FOTO_PRODUCTO + "', '" + producto.EMPRESA_ID + "')";
-                db.Database.ExecuteSqlCommand(query);
-                return RedirectToAction("Index");
+                string userId = System.Web.HttpContext.Current.User.Identity.Name;
+                if (userId != "")
+                {
+                    //UTNIMASEntities db1 = new UTNIMASEntities();
+                    Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
+                    con.ConexDB(); //Conecta la BD
+                    con.abrir(); //Abre la BD   
+                    SqlCommand cmd = new SqlCommand("SELECT ID_CLIENT FROM dbo.CLIENTS WHERE EMAIL_CLIENT = @userId ", con.ConexDB());
+                    cmd.Parameters.AddWithValue("@userId", userId);
+
+                    Iduser = (cmd.ExecuteScalar().ToString());
+ 
+                    UTNIMASEntities db = new UTNIMASEntities();
+                    // TODO: Add insert logic here
+                    string query = "INSERT INTO EMPRESAS(NOMBRE_PRODUCTO,ID_PRECIO,DESCRIP_PRODUCTO,FOTO_PRODCUTO,EMPRESA_ID)" +
+                        "VALUES('" + producto.NOMBRE_PRODUCTO + "', '" + producto.ID_PRECIO + "', '" + producto.DESCRIP_PRODUCTO + "','" + Iduser + "','" + producto.FOTO_PRODUCTO + "', '" + producto.EMPRESA_ID + "')";
+                    db.Database.ExecuteSqlCommand(query);
+                    con.cerrar();
+                }
+                string Mensaje = "Registro de Producto Completo";
+                return Json(new { Success = true, Mensaje }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                return View();
+                string Mensaje = "Error con la Solicitud";
+                return Json(new { Success = false, Mensaje }, JsonRequestBehavior.AllowGet);
             }
         }
 

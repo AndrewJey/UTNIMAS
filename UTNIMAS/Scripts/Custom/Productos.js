@@ -20,7 +20,7 @@ function createP() {
     };
     console.log(Producto);
     HTTP_POST("/Productos/Create", Empresa, function (response) {
-        window.location.href = "/Productos/Index";
+        console.log(response);
     })
 }
 

@@ -15,12 +15,13 @@
         NumeroCelula: $("#NumeroCelula").val(),
         Email: $("#CORREO").val(),
     }
-    if (Client.Email != "", Client.primerNombre != "" ) {
-        alert("dd");
-    }
-    //HTTP_POST('/CLIENTs/Create', Client, function (data) {
+    HTTP_POST('/CLIENTs/Create', Client, function (data) {
 
-    //});
+    });
+    if (Client.Email != "", Client.primerNombre != "" ) {
+    
+    }
+
 
 
 }
