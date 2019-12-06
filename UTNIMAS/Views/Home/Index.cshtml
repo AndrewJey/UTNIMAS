@@ -1,12 +1,12 @@
 ﻿@model List<UTNIMAS.Models.ProductosModels>
 @{
     ViewBag.Title = "INICIO";
-    int m = Model.Count() - 1;
+    //int m = Model.Count() - 1;
 }
 <div>
     <center><h1><button type="button" class="btn btn-info btn-lg" href="#">INICIO</button></h1></center><br /><br />
     <center><h2 style="color:aliceblue;"><button type="button" class="btn btn-outline-light btn-lg">IDEAS CREATIVAS</button></h2></center><br /><br />
-    <div class="card-deck">
+    @*<div class="card-deck">
         <div class="card">
             <img class="card-img-top" src="@Model[m].FOTO_PRODUCTO" alt="@Model[m].NOMBRE_PRODUCTO">
             <div class="card-body">
@@ -31,7 +31,7 @@
                 <p class="card-text" style="color:chartreuse;">@Model[m - 1].EMPRESA_ID</small></p>
             </div>
         </div>
-    </div>
+    </div>*@
     <br /><br />
     <!--<img src="~/Content/Images/logo.png" aling="bottom" height="10%" width="10%" style="margin-top:500px;" />-->
     <a href="https://www.utn.ac.cr/content/vicerrector%C3%ADa-de-extensi%C3%B3n-y-acci%C3%B3n-social-veas" target="_blank">
