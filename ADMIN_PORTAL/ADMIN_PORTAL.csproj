@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -163,9 +163,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
+    <!--Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
+    </Reference-->
     <Reference Include="Microsoft.Owin.Security.Cookies">
       <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
     </Reference>
@@ -178,14 +178,68 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CLIENT.cs">
+      <DependentUpon>UTNIMASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataBase\ConexionBD.cs" />
+    <Compile Include="Models\EMPRESA.cs">
+      <DependentUpon>UTNIMASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpresasModel.Context.cs">
+      <DependentUpon>EmpresasModel.Context.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\EmpresasModel.cs">
+      <DependentUpon>EmpresasModel.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Models\EmpresasModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PRECIO.cs">
+      <DependentUpon>UTNIMASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRODUCT.cs">
+      <DependentUpon>UTNIMASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductosModels.cs" />
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>UTNIMASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>UTNIMASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>UTNIMASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USER.cs">
+      <DependentUpon>UTNIMASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UTNIMASModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UTNIMASModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UTNIMASModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UTNIMASModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UTNIMASAdmin.Designer.cs">
+      <DependentUpon>UTNIMASAdmin.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -196,13 +250,62 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\descarga.jpg" />
+    <Content Include="Content\Images\images.png" />
+    <Content Include="Content\Images\imas-hacienda.jpg" />
+    <Content Include="Content\Images\imas-logo.ico" />
+    <Content Include="Content\Images\imas-logo.png" />
+    <Content Include="Content\Images\imas.gif" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\Markets\340436cf-5092-4e1a-aadc-e2e8c3034e85.jpg" />
+    <Content Include="Content\Images\Markets\Devaraja-Market.jpg" />
+    <Content Include="Content\Images\Markets\han-market-shops.jpg" />
+    <Content Include="Content\Images\Markets\pagePropertiesImage.jpg" />
+    <Content Include="Content\Images\Markets\Strasse-17-Juni-Flea-Market-3-800x400.jpg" />
+    <Content Include="Content\Images\unSADDSDnamed.jpg" />
+    <Content Include="Content\Images\UTN.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\DataBase\UTNIMAS.sql" />
+    <Content Include="Models\EmpresasModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UTNIMASAdmin.edmx</DependentUpon>
+      <LastGenOutput>EmpresasModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EmpresasModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UTNIMASAdmin.edmx</DependentUpon>
+      <LastGenOutput>EmpresasModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\UTNIMASModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UTNIMASModel.Context.cs</LastGenOutput>
+      <DependentUpon>UTNIMASAdmin.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\UTNIMASModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UTNIMASModel.cs</LastGenOutput>
+      <DependentUpon>UTNIMASAdmin.edmx</DependentUpon>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Custom\datatables.js" />
+    <Content Include="Scripts\Custom\datatables.min.js" />
+    <Content Include="Scripts\Custom\Empresas.js" />
+    <Content Include="Scripts\Custom\httpmethods.js" />
+    <Content Include="Scripts\Custom\Productos.js" />
+    <Content Include="Scripts\Custom\Registrar.js" />
+    <Content Include="Scripts\Custom\scripts.js" />
+    <EntityDeploy Include="Models\UTNIMASAdmin.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UTNIMASAdmin.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\UTNIMASAdmin.edmx.diagram">
+      <DependentUpon>UTNIMASAdmin.edmx</DependentUpon>
+    </Content>
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -314,7 +417,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\X_LayoutX.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -338,6 +441,9 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Empresas\Index.cshtml" />
+    <Content Include="Views\Productos\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -351,6 +457,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Usuarios\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -359,9 +470,6 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

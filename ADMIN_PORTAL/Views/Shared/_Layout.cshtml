@@ -1,42 +1,107 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <script src="~/Scripts/Custom/scripts.js"></script>
+    <title>@ViewBag.Title - PORTAL ADMINISTRATIVO</title>
+    <link rel="icon" href="~/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="~/Content/DataTables/datatables.css" />
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <script src="https://kit.fontawesome.com/d6ce29f6c9.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div id="wrapper" style="display:flex">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div id="changeIMG" class="sidebar-header" style="border-bottom: 3px solid #D7D6D5;padding-left: 20px;padding-bottom: 20px;padding-right: 1px;padding-top: 15px;">
+                <a href="https://www.imas.go.cr/" target="_blank"><img id="imgChange" class="forsyteLG" src="~/Content/Images/imas-logo.png" style="width:85%;" /></a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+            <!--<label style="font-family: Segoe UI, Frutiger;width:100%;">@Html.Partial("_LoginPartial")</label>-->
+            <ul class="list-unstyled components" style="height:55%">
+                @*<li>
+                        <a href="/Home/Index">
+                            <i class="fas fa-home" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                            <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; INICIO</span>
+                        </a>
+                    </li>*@
+                @*@if (Request.IsAuthenticated)
+                    {*@
+                <li>
+                    <a href="/Empresas/Index">
+                        <i class="fas fa-building" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; EMPRESAS</span>
+                    </a>
+                </li>
+                @*}*@
+                <li>
+                    <a href="/Productos/Productos">
+                        <i class="fas fa-shopping-cart" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; PRODUCTOS</span>
+                    </a>
+                </li>
+                @*@if (Request.IsAuthenticated)
+                    {
+                        <li>
+                            <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                                <i class="fas fa-list-alt" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                                <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR</span>
+                            </a>
+                            <ul class="collapse list-unstyled" id="pageSubmenu1">
+                                <li>
+                                    <a href="/Registro/RegistroProductos">
+                                        <i class="fas fa-cart-plus" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR PRODUCTOS</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Registro/RegistroEmpresas">
+                                        <i class="far fa-hospital" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR EMPRESAS</span>
+                                    </a>
+                                </li>*@
+                @*<li>
+                        <a href="/Registro/RegistroPrecios">
+                            <i class="far fa-money-bill-alt" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                            <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; REGISTRAR PRECIOS</span>
+                        </a>
+                    </li>*@
+                @*</ul>
+                        </li>
+                    }*@
+                <li>
+                    <a href="/Account/ExternalLoginFailure">
+                        <i class="fas fa-sign-in-alt" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; SALIR</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.utn.ac.cr/" target="_blank"><img id="imgChange" class="forsyteLG" src="~/Content/Images/UTN.png" style="margin-top:25px;margin-left:15px;width:85%;" /></a>
+                </li>
+            </ul>
+            <div class="container body-content" style="margin-top:2em">
+                <hr />
+                <footer>
+                    <p style="font-size:11px">
+                        &copy; @DateTime.Now.Year - <a href="https://www.linkedin.com/in/andrés-j-jiménez-leandro-299087181" target="_blank">Andrés J. Jiménez Leandro</a>, <a href="https://www.utn.ac.cr/sedes/sede-regional-de-san-carlos" target="_blank">UTN Sede San Carlos</a> -
+                        <a href="https://www.imas.go.cr/" target="_blank">Instituto Mixto de Ayuda Social</a>, <a href="https://es.wikipedia.org/wiki/Costa_Rica" target="_blank"><b>Costa Rica</b></a>
+                    </p>
+                </footer>
             </div>
+        </nav>
+        <div id="content">
+            <button type="button" onclick="sidebarActive()" id="sidebarCollapse" class="btn btn-info" style="background:#efefef; border-color:#8db2d8; background-color:white;">
+                <i style="color:#8db2d8;" id="arrow" class="fas fa-chevron-left"></i>
+            </button>
+            <br />
+            @RenderBody()
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

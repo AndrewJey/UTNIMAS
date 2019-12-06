@@ -1,0 +1,46 @@
+﻿@model List<UTNIMAS.Models.ProductosModels>
+
+@{
+    ViewBag.Title = "Productos";
+}
+
+<h2>Productos</h2>
+<div style="padding:0em 3em">
+    <table id="tableProductos" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif; display:none;">PRODUCTOS_ID</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">PRODUCTO </th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">PRECIO</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">DESCRIPCIÓN</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">FOTO DEL PRODUCTO</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">EMPRESA</th>
+                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Element in Model)
+            {
+                <tr>
+                    <td id="Producto_ID" style="text-align:center; display:none;">@Element.PRODUCTOS_ID</td>
+                    <td style="text-align:center;">@Element.NOMBRE_PRODUCTO</td>
+                    <td style="text-align:center;">@Element.ID_PRECIO</td>
+                    <td style="text-align:center;">@Element.DESCRIP_PRODUCTO</td>
+                    <td style="text-align:center;">@Element.FOTO_PRODUCTO</td>
+                    <td style="text-align:center;">@Element.EMPRESA_ID</td>
+                    <th>
+                        <button onclick="Delete()" style="text-align:center;margin-left:15px; vertical-align: middle; font-family: ottomat, sans-serif;" type="button" class="btn btn-danger float-left"><i class="fas fa-trash"></i></button>
+                        <a href="/Productos/EditarProductos?Id=@Element.PRODUCTOS_ID" style="margin-left:15px;background:#8db2d8;color:white;" height:3em" class="btn  btn-color-custom right"><i class="fas fa-edit"></i></a>
+                    </th>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/Custom/datatables.min.js"></script>
+    <script src="~/Scripts/Custom/httpmethods.js"></script>
+    <script src="~/Scripts/Custom/Productos.js"></script>
+}

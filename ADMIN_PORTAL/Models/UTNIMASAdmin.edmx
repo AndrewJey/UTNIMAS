@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UTNIMASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLIENTS">
+          <Key>
+            <PropertyRef Name="ID_CLIENT" />
+          </Key>
+          <Property Name="ID_CLIENT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE1_CLIENT" Type="varchar(max)" Nullable="false" />
+          <Property Name="NOMBRE2_CLIENT" Type="varchar(max)" />
+          <Property Name="APELLIDO1_CLIENT" Type="varchar(max)" Nullable="false" />
+          <Property Name="APELLIDO2_CLIENT" Type="varchar(max)" />
+          <Property Name="DIRECCION1_CLIENT" Type="varchar(max)" Nullable="false" />
+          <Property Name="CIUDAD_CLIENT" Type="varchar(max)" Nullable="false" />
+          <Property Name="DISTRITO_CLIENT" Type="varchar(max)" />
+          <Property Name="CANTON_CLIENT" Type="varchar(max)" Nullable="false" />
+          <Property Name="PROVINCIA_CLIENT" Type="varchar(max)" Nullable="false" />
+          <Property Name="TELEF_CASA_CLIENT" Type="varchar(max)" />
+          <Property Name="TELF_CELULAR_CLIENT" Type="varchar(max)" Nullable="false" />
+          <Property Name="EMAIL_CLIENT" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="EMPRESAS">
+          <Key>
+            <PropertyRef Name="EMPRESA_ID" />
+          </Key>
+          <Property Name="EMPRESA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE_EMPRESA" Type="varchar(max)" Nullable="false" />
+          <Property Name="DIRECCION_EMPRESA" Type="varchar(max)" Nullable="false" />
+          <Property Name="NOMBRE_CONTACTO" Type="varchar(max)" Nullable="false" />
+          <Property Name="TELEF_CONTACTO" Type="varchar(max)" Nullable="false" />
+          <Property Name="EMAIL_EMPRESA" Type="varchar(max)" Nullable="false" />
+          <Property Name="SECTOR_PRODUCCION" Type="varchar(max)" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="int" />
+        </EntityType>
+        <EntityType Name="PRECIOS">
+          <Key>
+            <PropertyRef Name="PRECIOS_ID" />
+          </Key>
+          <Property Name="PRECIOS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRECIO_UNIDAD" Type="float" Nullable="false" />
+          <Property Name="PRECIO_PAQUETE" Type="float" />
+          <Property Name="PRECIO_SERVICIO" Type="float" />
+          <Property Name="PRECIO_MAYOREO" Type="float" />
+          <Property Name="PRECIO_ESPECIAL" Type="float" />
+        </EntityType>
+        <EntityType Name="PRODUCTS">
+          <Key>
+            <PropertyRef Name="PRODUCTO_ID" />
+          </Key>
+          <Property Name="PRODUCTO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE_PRODUCTO" Type="varchar(max)" Nullable="false" />
+          <Property Name="ID_PRECIO" Type="int" Nullable="false" />
+          <Property Name="DESCRIP_PRODUCTO" Type="varchar(max)" Nullable="false" />
+          <Property Name="FOTO_PRODCUTO" Type="image" />
+          <Property Name="EMPRESA_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USER_NAME" Type="varchar(max)" Nullable="false" />
+          <Property Name="USER_EMAIL" Type="varchar(max)" Nullable="false" />
+          <Property Name="USER_PASSWORD" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="EMPRESA_ID">
+          <End Role="EMPRESAS" Type="Self.EMPRESAS" Multiplicity="1" />
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESAS">
+              <PropertyRef Name="EMPRESA_ID" />
+            </Principal>
+            <Dependent Role="PRODUCTS">
+              <PropertyRef Name="EMPRESA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_CLIENT">
+          <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="0..1" />
+          <End Role="EMPRESAS" Type="Self.EMPRESAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTS">
+              <PropertyRef Name="ID_CLIENT" />
+            </Principal>
+            <Dependent Role="EMPRESAS">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRECIOS_ID">
+          <End Role="PRECIOS" Type="Self.PRECIOS" Multiplicity="1" />
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRECIOS">
+              <PropertyRef Name="PRECIOS_ID" />
+            </Principal>
+            <Dependent Role="PRODUCTS">
+              <PropertyRef Name="ID_PRECIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="UTNIMASModelStoreContainer">
+          <EntitySet Name="CLIENTS" EntityType="Self.CLIENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPRESAS" EntityType="Self.EMPRESAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRECIOS" EntityType="Self.PRECIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="EMPRESA_ID" Association="Self.EMPRESA_ID">
+            <End Role="EMPRESAS" EntitySet="EMPRESAS" />
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+          </AssociationSet>
+          <AssociationSet Name="ID_CLIENT" Association="Self.ID_CLIENT">
+            <End Role="CLIENTS" EntitySet="CLIENTS" />
+            <End Role="EMPRESAS" EntitySet="EMPRESAS" />
+          </AssociationSet>
+          <AssociationSet Name="PRECIOS_ID" Association="Self.PRECIOS_ID">
+            <End Role="PRECIOS" EntitySet="PRECIOS" />
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UTNIMASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CLIENT">
+          <Key>
+            <PropertyRef Name="ID_CLIENT" />
+          </Key>
+          <Property Name="ID_CLIENT" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE1_CLIENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE2_CLIENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO1_CLIENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDO2_CLIENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCION1_CLIENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CIUDAD_CLIENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DISTRITO_CLIENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CANTON_CLIENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PROVINCIA_CLIENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEF_CASA_CLIENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TELF_CELULAR_CLIENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL_CLIENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EMPRESAS" Relationship="Self.ID_CLIENT" FromRole="CLIENTS" ToRole="EMPRESAS" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="EMPRESA_ID" />
+          </Key>
+          <Property Name="EMPRESA_ID" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE_EMPRESA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DIRECCION_EMPRESA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE_CONTACTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEF_CONTACTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL_EMPRESA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SECTOR_PRODUCCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="Int32" />
+          <NavigationProperty Name="CLIENT" Relationship="Self.ID_CLIENT" FromRole="EMPRESAS" ToRole="CLIENTS" />
+          <NavigationProperty Name="PRODUCTS" Relationship="Self.EMPRESA_ID" FromRole="EMPRESAS" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="PRECIO">
+          <Key>
+            <PropertyRef Name="PRECIOS_ID" />
+          </Key>
+          <Property Name="PRECIOS_ID" Type="Int32" Nullable="false" />
+          <Property Name="PRECIO_UNIDAD" Type="Double" Nullable="false" />
+          <Property Name="PRECIO_PAQUETE" Type="Double" />
+          <Property Name="PRECIO_SERVICIO" Type="Double" />
+          <Property Name="PRECIO_MAYOREO" Type="Double" />
+          <Property Name="PRECIO_ESPECIAL" Type="Double" />
+          <NavigationProperty Name="PRODUCTS" Relationship="Self.PRECIOS_ID" FromRole="PRECIOS" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="PRODUCT">
+          <Key>
+            <PropertyRef Name="PRODUCTO_ID" />
+          </Key>
+          <Property Name="PRODUCTO_ID" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE_PRODUCTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_PRECIO" Type="Int32" Nullable="false" />
+          <Property Name="DESCRIP_PRODUCTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FOTO_PRODCUTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="EMPRESA_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EMPRESA" Relationship="Self.EMPRESA_ID" FromRole="PRODUCTS" ToRole="EMPRESAS" />
+          <NavigationProperty Name="PRECIO" Relationship="Self.PRECIOS_ID" FromRole="PRODUCTS" ToRole="PRECIOS" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="Int32" Nullable="false" />
+          <Property Name="USER_NAME" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_EMAIL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USER_PASSWORD" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="ID_CLIENT">
+          <End Role="CLIENTS" Type="Self.CLIENT" Multiplicity="0..1" />
+          <End Role="EMPRESAS" Type="Self.EMPRESA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTS">
+              <PropertyRef Name="ID_CLIENT" />
+            </Principal>
+            <Dependent Role="EMPRESAS">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EMPRESA_ID">
+          <End Role="EMPRESAS" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESAS">
+              <PropertyRef Name="EMPRESA_ID" />
+            </Principal>
+            <Dependent Role="PRODUCTS">
+              <PropertyRef Name="EMPRESA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PRECIOS_ID">
+          <End Role="PRECIOS" Type="Self.PRECIO" Multiplicity="1" />
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRECIOS">
+              <PropertyRef Name="PRECIOS_ID" />
+            </Principal>
+            <Dependent Role="PRODUCTS">
+              <PropertyRef Name="ID_PRECIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UTNIMASEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLIENTS" EntityType="Self.CLIENT" />
+          <EntitySet Name="EMPRESAS" EntityType="Self.EMPRESA" />
+          <EntitySet Name="PRECIOS" EntityType="Self.PRECIO" />
+          <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCT" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="USERS" EntityType="Self.USER" />
+          <AssociationSet Name="ID_CLIENT" Association="Self.ID_CLIENT">
+            <End Role="CLIENTS" EntitySet="CLIENTS" />
+            <End Role="EMPRESAS" EntitySet="EMPRESAS" />
+          </AssociationSet>
+          <AssociationSet Name="EMPRESA_ID" Association="Self.EMPRESA_ID">
+            <End Role="EMPRESAS" EntitySet="EMPRESAS" />
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+          </AssociationSet>
+          <AssociationSet Name="PRECIOS_ID" Association="Self.PRECIOS_ID">
+            <End Role="PRECIOS" EntitySet="PRECIOS" />
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(UTNIMASModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(UTNIMASModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UTNIMASModelStoreContainer" CdmEntityContainer="UTNIMASEntities">
+          <EntitySetMapping Name="CLIENTS">
+            <EntityTypeMapping TypeName="UTNIMASModel.CLIENT">
+              <MappingFragment StoreEntitySet="CLIENTS">
+                <ScalarProperty Name="ID_CLIENT" ColumnName="ID_CLIENT" />
+                <ScalarProperty Name="NOMBRE1_CLIENT" ColumnName="NOMBRE1_CLIENT" />
+                <ScalarProperty Name="NOMBRE2_CLIENT" ColumnName="NOMBRE2_CLIENT" />
+                <ScalarProperty Name="APELLIDO1_CLIENT" ColumnName="APELLIDO1_CLIENT" />
+                <ScalarProperty Name="APELLIDO2_CLIENT" ColumnName="APELLIDO2_CLIENT" />
+                <ScalarProperty Name="DIRECCION1_CLIENT" ColumnName="DIRECCION1_CLIENT" />
+                <ScalarProperty Name="CIUDAD_CLIENT" ColumnName="CIUDAD_CLIENT" />
+                <ScalarProperty Name="DISTRITO_CLIENT" ColumnName="DISTRITO_CLIENT" />
+                <ScalarProperty Name="CANTON_CLIENT" ColumnName="CANTON_CLIENT" />
+                <ScalarProperty Name="PROVINCIA_CLIENT" ColumnName="PROVINCIA_CLIENT" />
+                <ScalarProperty Name="TELEF_CASA_CLIENT" ColumnName="TELEF_CASA_CLIENT" />
+                <ScalarProperty Name="TELF_CELULAR_CLIENT" ColumnName="TELF_CELULAR_CLIENT" />
+                <ScalarProperty Name="EMAIL_CLIENT" ColumnName="EMAIL_CLIENT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPRESAS">
+            <EntityTypeMapping TypeName="UTNIMASModel.EMPRESA">
+              <MappingFragment StoreEntitySet="EMPRESAS">
+                <ScalarProperty Name="EMPRESA_ID" ColumnName="EMPRESA_ID" />
+                <ScalarProperty Name="NOMBRE_EMPRESA" ColumnName="NOMBRE_EMPRESA" />
+                <ScalarProperty Name="DIRECCION_EMPRESA" ColumnName="DIRECCION_EMPRESA" />
+                <ScalarProperty Name="NOMBRE_CONTACTO" ColumnName="NOMBRE_CONTACTO" />
+                <ScalarProperty Name="TELEF_CONTACTO" ColumnName="TELEF_CONTACTO" />
+                <ScalarProperty Name="EMAIL_EMPRESA" ColumnName="EMAIL_EMPRESA" />
+                <ScalarProperty Name="SECTOR_PRODUCCION" ColumnName="SECTOR_PRODUCCION" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRECIOS">
+            <EntityTypeMapping TypeName="UTNIMASModel.PRECIO">
+              <MappingFragment StoreEntitySet="PRECIOS">
+                <ScalarProperty Name="PRECIOS_ID" ColumnName="PRECIOS_ID" />
+                <ScalarProperty Name="PRECIO_UNIDAD" ColumnName="PRECIO_UNIDAD" />
+                <ScalarProperty Name="PRECIO_PAQUETE" ColumnName="PRECIO_PAQUETE" />
+                <ScalarProperty Name="PRECIO_SERVICIO" ColumnName="PRECIO_SERVICIO" />
+                <ScalarProperty Name="PRECIO_MAYOREO" ColumnName="PRECIO_MAYOREO" />
+                <ScalarProperty Name="PRECIO_ESPECIAL" ColumnName="PRECIO_ESPECIAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTS">
+            <EntityTypeMapping TypeName="UTNIMASModel.PRODUCT">
+              <MappingFragment StoreEntitySet="PRODUCTS">
+                <ScalarProperty Name="PRODUCTO_ID" ColumnName="PRODUCTO_ID" />
+                <ScalarProperty Name="NOMBRE_PRODUCTO" ColumnName="NOMBRE_PRODUCTO" />
+                <ScalarProperty Name="ID_PRECIO" ColumnName="ID_PRECIO" />
+                <ScalarProperty Name="DESCRIP_PRODUCTO" ColumnName="DESCRIP_PRODUCTO" />
+                <ScalarProperty Name="FOTO_PRODCUTO" ColumnName="FOTO_PRODCUTO" />
+                <ScalarProperty Name="EMPRESA_ID" ColumnName="EMPRESA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="UTNIMASModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="UTNIMASModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+                <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+                <ScalarProperty Name="USER_EMAIL" ColumnName="USER_EMAIL" />
+                <ScalarProperty Name="USER_PASSWORD" ColumnName="USER_PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="UTNIMASModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="UTNIMASModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="UTNIMASModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="UTNIMASModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UTNIMASModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="UTNIMASModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UTNIMASModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="UTNIMASModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="UTNIMASModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
