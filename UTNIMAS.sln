@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTNIMAS", "UTNIMAS\UTNIMAS.csproj", "{8F080FF7-6F26-40C0-8E57-9716000B6AAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADMIN_PORTAL", "ADMIN_PORTAL\ADMIN_PORTAL.csproj", "{820FBF3B-61D7-4CEE-AB70-E4DBF1CDD6E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8F080FF7-6F26-40C0-8E57-9716000B6AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F080FF7-6F26-40C0-8E57-9716000B6AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F080FF7-6F26-40C0-8E57-9716000B6AAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{820FBF3B-61D7-4CEE-AB70-E4DBF1CDD6E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{820FBF3B-61D7-4CEE-AB70-E4DBF1CDD6E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{820FBF3B-61D7-4CEE-AB70-E4DBF1CDD6E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{820FBF3B-61D7-4CEE-AB70-E4DBF1CDD6E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
