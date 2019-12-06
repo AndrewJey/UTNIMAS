@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ADMIN_PORTAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using UTNIMAS.Models;
 //
 namespace UTNIMAS.Controllers
 {
@@ -12,7 +12,7 @@ namespace UTNIMAS.Controllers
         public ActionResult Productos()
         {
             List<ProductosModels> lst;
-            using (UTNIMASEntities db = new UTNIMASEntities())
+            using (ADMIN_PORTAL.Models.UTNIMASEntities db = new ADMIN_PORTAL.Models.UTNIMASEntities())
             {
                 lst = (from d in db.PRODUCTS
                        join c in db.EMPRESAS on d.EMPRESA_ID equals c.EMPRESA_ID
@@ -52,7 +52,7 @@ namespace UTNIMAS.Controllers
                 PRODUCT em = new PRODUCT();
                 if (!string.IsNullOrEmpty(Id))
                 {
-                    using (UTNIMASEntities db = new UTNIMASEntities())
+                    using (ADMIN_PORTAL.Models.UTNIMASEntities db = new ADMIN_PORTAL.Models.UTNIMASEntities())
                     {
                         em = db.PRODUCTS.Find(int.Parse(Id));
                     }
@@ -80,7 +80,7 @@ namespace UTNIMAS.Controllers
         [ActionName("DeleteProducto")]
         public ActionResult Delete(string ID)
         {
-            using (UTNIMASEntities db = new UTNIMASEntities())
+            using (ADMIN_PORTAL.Models.UTNIMASEntities db = new ADMIN_PORTAL.Models.UTNIMASEntities())
             {
                 PRODUCT em = db.PRODUCTS.Find(int.Parse(ID));
                 if (em != null)
@@ -95,7 +95,7 @@ namespace UTNIMAS.Controllers
         [ActionName("EditarPr")]
         public ActionResult EditarPr(PRODUCT Producto)
         {
-            using (UTNIMASEntities db = new UTNIMASEntities())
+            using (ADMIN_PORTAL.Models.UTNIMASEntities db = new ADMIN_PORTAL.Models.UTNIMASEntities())
             {
 
                 PRODUCT em = db.PRODUCTS.Find(Producto.PRODUCTO_ID);
@@ -126,7 +126,7 @@ namespace UTNIMAS.Controllers
         {
             try
             {
-                UTNIMASEntities db = new UTNIMASEntities();
+                ADMIN_PORTAL.Models.UTNIMASEntities db = new ADMIN_PORTAL.Models.UTNIMASEntities();
                 // TODO: Add insert logic here
                 string query = "INSERT INTO EMPRESAS(NOMBRE_PRODUCTO,ID_PRECIO,DESCRIP_PRODUCTO,FOTO_PRODCUTO,EMPRESA_ID)" +
                     "VALUES('" + producto.NOMBRE_PRODUCTO + "', '" + producto.ID_PRECIO + "', '" + producto.DESCRIP_PRODUCTO + "', 1, '" + producto.FOTO_PRODUCTO + "', '" + producto.EMPRESA_ID + "')";

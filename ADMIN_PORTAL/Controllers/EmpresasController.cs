@@ -1,9 +1,8 @@
-﻿using System;
+﻿using ADMIN_PORTAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using UTNIMAS.Models;
 
 namespace UTNIMAS.Controllers
 {
@@ -14,7 +13,7 @@ namespace UTNIMAS.Controllers
         public ActionResult Index()
         {
             List<EmpresasModels> lst;
-            using (UTNIMASEntities db = new UTNIMASEntities())
+            using (ADMIN_PORTAL.Models.UTNIMASEntities db = new ADMIN_PORTAL.Models.UTNIMASEntities())
             {
                 lst = (from d in db.EMPRESAS
                        select new EmpresasModels
@@ -61,7 +60,7 @@ namespace UTNIMAS.Controllers
                 EMPRESA em = new EMPRESA();
                 if (!string.IsNullOrEmpty(Id))
                 {
-                    using (UTNIMASEntities db = new UTNIMASEntities())
+                    using (ADMIN_PORTAL.Models.UTNIMASEntities db = new ADMIN_PORTAL.Models.UTNIMASEntities())
                     {
                         em = db.EMPRESAS.Find(int.Parse(Id));
                     }
@@ -93,7 +92,7 @@ namespace UTNIMAS.Controllers
         [ActionName("DeleteEmpresa")]
         public ActionResult Delete(string ID)
         {
-            using (UTNIMASEntities db = new UTNIMASEntities())
+            using (ADMIN_PORTAL.Models.UTNIMASEntities db = new ADMIN_PORTAL.Models.UTNIMASEntities())
             {
                 EMPRESA em = db.EMPRESAS.Find(int.Parse(ID));
                 if (em != null)
@@ -110,7 +109,7 @@ namespace UTNIMAS.Controllers
         [ActionName("EditarEm")]
         public ActionResult EditarEm(EMPRESA Empresa)
         {
-            using (UTNIMASEntities db = new UTNIMASEntities())
+            using (ADMIN_PORTAL.Models.UTNIMASEntities db = new ADMIN_PORTAL.Models.UTNIMASEntities())
             {
 
                 EMPRESA em = db.EMPRESAS.Find(Empresa.EMPRESA_ID);
@@ -144,7 +143,7 @@ namespace UTNIMAS.Controllers
         {
             try
             {
-                UTNIMASEntities db = new UTNIMASEntities();
+                ADMIN_PORTAL.Models.UTNIMASEntities db = new ADMIN_PORTAL.Models.UTNIMASEntities();
                 // TODO: Add insert logic here
                 string query = "INSERT INTO EMPRESAS(DIRECCION_EMPRESA,NOMBRE_EMPRESA,EMAIL_EMPRESA,ID_CLIENTE,NOMBRE_CONTACTO,TELEF_CONTACTO,SECTOR_PRODUCCION)" +
                     "VALUES('" + empresa.DIRECCION_EMPRESA + "', '" + empresa.NOMBRE_EMPRESA + "', '" + empresa.EMAIL_EMPRESA + "', 1, '" + empresa.NOMBRE_CONTACTO + "', '" + empresa.TELEF_CONTACTO + "', '" + empresa.SECTOR_PRODUCCION + "')";

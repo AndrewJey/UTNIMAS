@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -235,8 +235,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UTNIMASModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UTNIMASModel.Designer.cs">
-      <DependentUpon>UTNIMASModel.edmx</DependentUpon>
+    <Compile Include="Models\UTNIMASAdmin.Designer.cs">
+      <DependentUpon>UTNIMASAdmin.edmx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -270,23 +270,23 @@
     <Content Include="Models\DataBase\UTNIMAS.sql" />
     <Content Include="Models\EmpresasModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UTNIMASModel.edmx</DependentUpon>
+      <DependentUpon>UTNIMASAdmin.edmx</DependentUpon>
       <LastGenOutput>EmpresasModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\EmpresasModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UTNIMASModel.edmx</DependentUpon>
+      <DependentUpon>UTNIMASAdmin.edmx</DependentUpon>
       <LastGenOutput>EmpresasModel.cs</LastGenOutput>
     </Content>
     <Content Include="Models\UTNIMASModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>UTNIMASModel.Context.cs</LastGenOutput>
-      <DependentUpon>UTNIMASModel.edmx</DependentUpon>
+      <DependentUpon>UTNIMASAdmin.edmx</DependentUpon>
     </Content>
     <Content Include="Models\UTNIMASModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>UTNIMASModel.cs</LastGenOutput>
-      <DependentUpon>UTNIMASModel.edmx</DependentUpon>
+      <DependentUpon>UTNIMASAdmin.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -299,6 +299,13 @@
     <Content Include="Scripts\Custom\Productos.js" />
     <Content Include="Scripts\Custom\Registrar.js" />
     <Content Include="Scripts\Custom\scripts.js" />
+    <EntityDeploy Include="Models\UTNIMASAdmin.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UTNIMASAdmin.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\UTNIMASAdmin.edmx.diagram">
+      <DependentUpon>UTNIMASAdmin.edmx</DependentUpon>
+    </Content>
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -318,13 +325,6 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <EntityDeploy Include="Models\UTNIMASModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UTNIMASModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\UTNIMASModel.edmx.diagram">
-      <DependentUpon>UTNIMASModel.edmx</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -441,6 +441,9 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Empresas\Index.cshtml" />
+    <Content Include="Views\Productos\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -451,13 +454,14 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Empresas\Index.cshtml" />
-    <Content Include="Views\Productos\Index.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Usuarios\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -466,10 +470,6 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
