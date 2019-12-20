@@ -6,13 +6,13 @@ namespace UTNIMAS.Models
     public class ConexionBD
     {
         /** CONEXION ANDRES **/
-        //string conexion = "Data Source=DESKTOP-E38KCH7;Initial Catalog=UTNIMAS;Integrated Security=True";
+        string conexion = "Data Source=DESKTOP-E38KCH7;Initial Catalog=UTNIMAS;Integrated Security=True";
         /** CONEXION GABRIEL**/
         //string conexion = "Data Source=MSI;Initial Catalog=UTNIMAS;Integrated Security=True";
         /** CONEXION RONALD**/
         //string conexion = "Data Source=DESKTOP-LVSUABE;Initial Catalog=UTNIMAS;Integrated Security=True";
         /** CONEXION JEYCON**/
-        string conexion = "Data Source=DESKTOP-7CJ91HC;Initial Catalog=UTNIMAS;Integrated Security=True";
+        //string conexion = "Data Source=DESKTOP-7CJ91HC;Initial Catalog=UTNIMAS;Integrated Security=True";
         public SqlConnection conectarBD = new SqlConnection("server=DESKTOP-E38KCH7; database=UTNIMAS; integrated security = true");
         //Constructor:
         public ConexionBD()
