@@ -20,33 +20,31 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div id="changeIMG" class="sidebar-header" style="border-bottom: 3px solid #D7D6D5;padding-left: 20px;padding-bottom: 20px;padding-right: 1px;padding-top: 15px;">
-                <a href="https://www.imas.go.cr/" target="_blank"><img id="imgChange" class="forsyteLG" src="~/Content/Images/imas-logo.png" style="width:85%;" /></a>
+                <a href="https://www.imas.go.cr/" target="_blank"><img id="imgChange" class="forsyteLG" src="~/Content/Images/imas-logo.png" style="width:75%; height:75%" /></a>
             </div>
             <!--<label style="font-family: Segoe UI, Frutiger;width:100%;">@Html.Partial("_LoginPartial")</label>-->
+            <br />
             <ul class="list-unstyled components" style="height:55%">
-                @*<li>
-                        <a href="/Home/Index">
-                            <i class="fas fa-home" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
-                            <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; INICIO</span>
-                        </a>
-                    </li>*@
-                @*@if (Request.IsAuthenticated)
-                    {*@
                 <li>
-                    <a href="/Empresas/Index">
+                    <a href="/Home/Index" style="margin-left: 10px; width:75%; height:75%">
+                        <i class="fas fa-home" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
+                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; INICIO</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/Empresas/Index" style="margin-left: 10px; width:75%; height:75%">
                         <i class="fas fa-building" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
                         <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; EMPRESAS</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/Usuarios/Index">
+                    <a href="/Usuarios/Index" style="margin-left: 10px; width:75%; height:75%">
                         <i class="fas fa-building" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
                         <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; USUARIOS</span>
                     </a>
                 </li>
-                @*}*@
                 <li>
-                    <a href="/Productos/Index">
+                    <a href="/Productos/Index" style="margin-left: 10px; width:75%; height:75%">
                         <i class="fas fa-shopping-cart" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
                         <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; PRODUCTOS</span>
                     </a>
@@ -81,13 +79,13 @@
                         </li>
                     }*@
                 <li>
-                    <a href="/Account/ExternalLoginFailure">
+                    <a href="#" onclick="closeCurrentWindow();" style="margin-left: 10px; width:75%; height:75%">
                         <i class="fas fa-sign-in-alt" aria-hidden="true" style="color:#bdbdbd;margin-top:0.1em;color:#8db2d8;"></i>
                         <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; SALIR</span>
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.utn.ac.cr/" target="_blank"><img id="imgChange" class="forsyteLG" src="~/Content/Images/UTN.png" style="margin-top:25px;margin-left:15px;width:85%;" /></a>
+                    <a href="https://www.utn.ac.cr/" target="_blank"><img id="imgChange" class="forsyteLG" src="~/Content/Images/UTN.png" style="margin-top:25px;margin-left:15px; width:75%; height:75%" /></a>
                 </li>
             </ul>
             <div class="container body-content" style="margin-top:2em">
@@ -108,6 +106,17 @@
             @RenderBody()
         </div>
     </div>
+    <script type="text/javascript">
+        function closeCurrentWindow() {
+            window.close();
+        }
+    </script>
+    <script language="javascript" type="text/javascript">
+        function cerrar() {
+            window.open('', '_parent', '');
+            window.close();
+        }
+    </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

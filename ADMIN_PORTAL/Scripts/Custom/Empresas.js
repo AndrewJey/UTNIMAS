@@ -1,5 +1,8 @@
 ﻿$(document).ready(function () {
     $('#tableEmpresas').DataTable();
+    if (document.getElementById("mensaje").innerHTML != "") {
+        alert(document.getElementById("mensaje").innerHTML);
+    }
 });
 
 /*Here Starts the Magic*/
@@ -24,7 +27,7 @@ function createE() {
     };
     console.log(Empresa);
     HTTP_POST("/Empresas/Create", Empresa, function (response) {
-        window.location.href = "/Empresas/Index";
+        window.location.href = "/Home/Index";
     })
 }
 
