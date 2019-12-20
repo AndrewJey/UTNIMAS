@@ -56,6 +56,7 @@ function loadinfimg(nombreProductos,Descripcion,IdEmpresa ) {
         document.getElementById("NombreEmpresa").innerHTML = response.NOMBRE_EMPRESA;
         document.getElementById("Direccion").innerHTML = response.DIRECCION_EMPRESA;
         document.getElementById("Sector").innerHTML = response.SECTOR_PRODUCCION;
+
     }, { Id: IdEmpresa })
 }
 
