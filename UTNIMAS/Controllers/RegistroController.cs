@@ -86,14 +86,19 @@ namespace UTNIMAS.Controllers
                     if (Iduser != null)
                     {
 
-                        SqlCommand cmd2 = new SqlCommand("SELECT NOMBRE_EMPRESA FROM dbo.EMPRESAS WHERE ID_CLIENTE = @userId ", con.ConexDB());
+                        SqlCommand cmd2 = new SqlCommand("SELECT NOMBRE_EMPRESA,EMPRESA_ID FROM dbo.EMPRESAS WHERE ID_CLIENTE = @userId ", con.ConexDB());
                         cmd2.Parameters.AddWithValue("@userId", Iduser);
-                        Empresa = cmd2.ExecuteScalar().ToString();
+                        //Empresa = cmd2.ExecuteScalar().ToString();
+                        SqlDataReader registros = cmd2.ExecuteReader();
+                        while (registros.Read())
+                        {
+                            ViewBag.Empresa = registros["NOMBRE_EMPRESA"].ToString();
+                            ViewBag.IdEmpresa = registros["EMPRESA_ID"].ToString();
+                        }
 
                     }
 
                 }
-                ViewBag.Empresa = Empresa;
                 return View();
             }
             catch (Exception ex)
