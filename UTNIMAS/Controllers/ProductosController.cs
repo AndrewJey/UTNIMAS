@@ -77,6 +77,7 @@ namespace UTNIMAS.Controllers
             }
 
         }
+
         [HttpPost]
         [ActionName("DeleteProducto")]
         public ActionResult Delete(string ID)
@@ -140,7 +141,7 @@ namespace UTNIMAS.Controllers
                     cmd.Parameters.AddWithValue("@userId", userId);
 
                     Iduser = (cmd.ExecuteScalar().ToString());
- 
+
                     UTNIMASEntities db = new UTNIMASEntities();
                     // TODO: Add insert logic here
                     string query = "INSERT INTO EMPRESAS(NOMBRE_PRODUCTO,ID_PRECIO,DESCRIP_PRODUCTO,FOTO_PRODCUTO,EMPRESA_ID)" +
@@ -195,5 +196,41 @@ namespace UTNIMAS.Controllers
                 return View();
             }
         }
+        public ActionResult obtenerInfo(string Id)
+        {
+            string NOMBRE_EMPRESA = "";
+            string DIRECCION_EMPRESA = "";
+            string NOMBRE_CONTACTO = "";
+            string SECTOR_PRODUCCION = "";
+            try
+            {
+                    //UTNIMASEntities db1 = new UTNIMASEntities();
+                    Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
+                    con.ConexDB(); //Conecta la BD
+                    con.abrir(); //Abre la BD   
+                    if (Id != null)
+                    {
+
+                        SqlCommand cmd2 = new SqlCommand("SELECT NOMBRE_EMPRESA,DIRECCION_EMPRESA,NOMBRE_CONTACTO,SECTOR_PRODUCCION FROM dbo.EMPRESAS WHERE EMPRESA_ID = @userId ", con.ConexDB());
+                        cmd2.Parameters.AddWithValue("@userId", Id);
+                        //Empresa = cmd2.ExecuteScalar().ToString();
+                    SqlDataReader registros = cmd2.ExecuteReader();
+                    while (registros.Read())
+                    {
+                        NOMBRE_EMPRESA = registros["NOMBRE_EMPRESA"].ToString();
+                        DIRECCION_EMPRESA = registros["DIRECCION_EMPRESA"].ToString();
+                        NOMBRE_CONTACTO = registros["NOMBRE_CONTACTO"].ToString();
+                        SECTOR_PRODUCCION = registros["SECTOR_PRODUCCION"].ToString();
+                    }
+                    }
+                return Json(new { Success = true, NOMBRE_EMPRESA, DIRECCION_EMPRESA, NOMBRE_CONTACTO, SECTOR_PRODUCCION }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                string Mensaje = "Error con la Solicitud";
+                return Json(new { Success = false, Mensaje }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }

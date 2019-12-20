@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 //
-namespace UTNIMAS.Controllers
+namespace ADMIN_PORTAL.Controllers
 {
     public class ProductosController : Controller
     {
         // GET: Productos
-        public ActionResult Productos()
+        public ActionResult Index()
         {
             List<ProductosModels> lst;
             using (ADMIN_PORTAL.Models.UTNIMASEntities db = new ADMIN_PORTAL.Models.UTNIMASEntities())

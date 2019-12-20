@@ -5,49 +5,58 @@
 <h2>Productos</h2>
 @foreach (var Element in Model)
 {
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="@Element.FOTO_PRODUCTO" alt="@Element.EMPRESA_ID">
-        <div class="card-body">
-            <h5 class="card-title">@Element.NOMBRE_PRODUCTO</h5>
-            <p class="card-text">@Element.DESCRIP_PRODUCTO</p>
-            <a href="#" class="btn btn-primary">DETALLES</a>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="#" onclick="loadinfimg(@("'"+Element.NOMBRE_PRODUCTO+"'"),@("'"+Element.DESCRIP_PRODUCTO+"'"),@("'"+Element.EMPRESA_ID+"'"))" data-target="#modalIMG" data-toggle="modal" class="color-gray-darker c6 td-hover-none">
+                    <div class="ba-0 ds-1">
+                        <img alt="Card image cap" class="card-img-top" src="@Element.FOTO_PRODUCTO" alt="@Element.EMPRESA_ID" />
+                        <div class="card-body">
+                            <h4 class="card-title color-gray-darker">@Element.NOMBRE_PRODUCTO</h4>
+                            <p class="card-text color-gray-darker">@Element.DESCRIP_PRODUCTO</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
-    <br />}
-<!--<div style="padding:0em 3em">
-    <table id="tableProductos" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif; display:none;">PRODUCTOS_ID</th>
-                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">PRODUCTO </th>
-                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">PRECIO</th>
-                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">DESCRIPCIÓN</th>
-                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">FOTO DEL PRODUCTO</th>
-                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">EMPRESA</th>
-                <th scope="col" align="center" style="text-align:center; vertical-align: middle; font-family: Montserrat, sans-serif;">ACCIONES</th>
-            </tr>
-        </thead>
-        <tbody>
-@*      @foreach (var Element in Model)
-            {
-                <tr>
-                    <td id="Producto_ID" style="text-align:center; display:none;">@Element.PRODUCTOS_ID</td>
-                    <td style="text-align:center;">@Element.NOMBRE_PRODUCTO</td>
-                    <td style="text-align:center;">@Element.ID_PRECIO</td>
-                    <td style="text-align:center;">@Element.DESCRIP_PRODUCTO</td>
-                    <td style="text-align:center;">@Element.FOTO_PRODUCTO</td>
-                    <td style="text-align:center;">@Element.EMPRESA_ID</td>
-                    <th>
-                        <button onclick="Delete()" style="text-align:center;margin-left:15px; vertical-align: middle; font-family: ottomat, sans-serif;" type="button" class="btn btn-danger float-left"><i class="fas fa-trash"></i></button>
-                        <a href="/Productos/EditarProductos?Id=@Element.PRODUCTOS_ID" style="margin-left:15px;background:#8db2d8;color:white;" height:3em" class="btn  btn-color-custom right"><i class="fas fa-edit"></i></a>
-                    </th>
 
-                </tr>
-            }
-          *@
-        </tbody>
-    </table>
-    </div>-->
+    <br />
+}
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-footer">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre del Producto</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Nombre de Contacto</th>
+                            <th scope="col">Nombre de la Empresa</th>
+                            <th scope="col">Direccion</th>
+                            <th scope="col">Sector</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th id="NombreProducto"></th>
+                            <td id="Descripcion"></td>
+                            <td id="Contacto"></td>
+                            <td id="NombreEmpresa"></td>
+                            <td id="Direccion"></td>
+                            <td id="Sector"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-body mb-0 p-0">
+                <img src="" alt="" style="width:100%">
+            </div>
+        </div>
+    </div>
+</div>
 @section scripts{
     <script type="text/javascript" src="~/Scripts/Custom/datatables.min.js"></script>
     <script src="~/Scripts/Custom/httpmethods.js"></script>
