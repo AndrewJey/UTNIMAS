@@ -160,7 +160,7 @@ namespace UTNIMAS.Controllers
                         if (Iduser != null)
                         {
 
-                            SqlCommand cmd2 = new SqlCommand("SELECT COUNT(*) FROM dbo.EMPRESAS WHERE ID_CLIENTE = @userId ", con.ConexDB());
+                        SqlCommand cmd2 = new SqlCommand("SELECT COUNT(*) FROM dbo.EMPRESAS WHERE ID_CLIENTE = @userId ", con.ConexDB());
                             cmd2.Parameters.AddWithValue("@userId", Iduser);
                             Empresa = Convert.ToInt32(cmd2.ExecuteScalar());
                                                     

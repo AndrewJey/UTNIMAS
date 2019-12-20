@@ -2,7 +2,7 @@
     $('#tableProductos').DataTable();
 
     $(function () {
-        $('#file-input').change(function (e) {
+        $('#foto').change(function (e) {
             addImage(e);
         });
 
@@ -32,7 +32,7 @@ function createP() {
     var nameP = document.getElementById("nameP").value;
     //var tipoPrecio = document.getElementById("tipoPrecio").value;
     var descript = document.getElementById("descript").value;
-    var tel = document.getElementById("foto").value;
+    var foto = document.getElementById("foto").value;
     var empresa = document.getElementById("empresa").value;
     var Empresa =
     {
@@ -41,7 +41,7 @@ function createP() {
         FOTO_PRODUCTO: foto,
         EMPRESA_ID: empresa,
     };
-    console.log(Producto);
+    console.log(Empresa);
     HTTP_POST("/Productos/Create", Empresa, function (response) {
         console.log(response);
     })

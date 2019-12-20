@@ -6,7 +6,6 @@
 });
 
 /*Here Starts the Magic*/
-
 function createE() {
     var name = document.getElementById("name").value;
     var direction = document.getElementById("direction").value;
@@ -27,6 +26,11 @@ function createE() {
     };
     console.log(Empresa);
     HTTP_POST("/Empresas/Create", Empresa, function (response) {
+        if (response.Success) {
+            alert(response.Mensaje);
+        } else {
+            alert(response.Mensaje);
+        }
         window.location.href = "/Home/Index";
     })
 }
