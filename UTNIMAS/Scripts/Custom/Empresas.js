@@ -27,7 +27,7 @@ function createE() {
     };
     console.log(Empresa);
     HTTP_POST("/Empresas/Create", Empresa, function (response) {
-        console.log(response);
+        window.location.href = "/Home/Index";
     })
 }
 
