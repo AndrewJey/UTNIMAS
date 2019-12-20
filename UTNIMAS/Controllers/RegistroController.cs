@@ -56,7 +56,7 @@ namespace UTNIMAS.Controllers
         }
         public ActionResult RegistroProductos()
         {
-            Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
+            Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexionn
             con.ConexDB(); //Conecta la BD
             con.abrir(); //Abre la BD                
             //CREAR COMANDO DE SQL
