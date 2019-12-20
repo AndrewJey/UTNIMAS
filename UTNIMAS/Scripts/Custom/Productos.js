@@ -30,14 +30,13 @@
 
 function createP() {
     var nameP = document.getElementById("nameP").value;
-    var tipoPrecio = document.getElementById("tipoPrecio").value;
+    //var tipoPrecio = document.getElementById("tipoPrecio").value;
     var descript = document.getElementById("descript").value;
     var tel = document.getElementById("foto").value;
     var empresa = document.getElementById("empresa").value;
     var Empresa =
     {
         NOMBRE_PRODUCTO: nameP,
-        ID_PRECIO: tipoPrecio,
         DESCRIP_PRODUCTO: descript,
         FOTO_PRODUCTO: foto,
         EMPRESA_ID: empresa,
