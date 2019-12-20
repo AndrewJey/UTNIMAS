@@ -2,7 +2,7 @@
     $('#tableProductos').DataTable();
 
     $(function () {
-        $('#file-input').change(function (e) {
+        $('#foto').change(function (e) {
             addImage(e);
         });
 
