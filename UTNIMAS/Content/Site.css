@@ -32,11 +32,13 @@
         -o-transform: scale(1.1);
         transform: scale(1.1);
     }
-.btnIdeasCreativas{
-    color: black;
-    border-color:white;
-    background-color:white;
+
+.btnIdeasCreativas {
+    color: white;
+    border-color: white;
+    background-color: white;
 }
+
     .btnIdeasCreativas:hover {
         color: white;
         border-color: white;
