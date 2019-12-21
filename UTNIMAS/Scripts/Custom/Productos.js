@@ -3,7 +3,7 @@ var pathimage;
 var fileByteArray = [];
 $(document).ready(function () {
     $('#tableProductos').DataTable();
-  
+    askForProducts();
     $(function () {
         $('#foto').change(function (e) {
             fotobase64 = "";
@@ -29,6 +29,18 @@ $(document).ready(function () {
         }
     });
 });
+
+
+function askForProducts()
+{
+    HTTP_GET("/Productos/GetProducts", null, function (response) {
+        if (reponse.data == "false")
+        {
+            /*Ruta a redirigir*/
+            window.location.href = "/Resgistro/Productos";
+        }
+    }, { Id: IdEmpresa })
+}
 
 function encodeImageFileAsURL(element) {
     var file = element.files[0];

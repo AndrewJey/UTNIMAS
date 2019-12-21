@@ -106,6 +106,48 @@ namespace UTNIMAS.Controllers
 
         }
 
+        [HttpGet]
+        [ActionName("GetProducts")]
+        public ActionResult GetOnlyProducto()
+        {
+            try
+            {
+                List<ProductosModels> lst = new List<ProductosModels>();
+                Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
+                con.ConexDB(); //Conecta la BD
+                con.abrir(); //Abre la BD   
+                SqlCommand cmd2 = new SqlCommand("SELECT * FROM dbo.PRODUCTS", con.ConexDB());
+                SqlDataReader myReader = cmd2.ExecuteReader();
+                while (myReader.Read())
+                {
+                    ProductosModels p = new ProductosModels
+                    {
+                        PRODUCTOS_ID = 1,
+                        NOMBRE_PRODUCTO = myReader["NOMBRE_PRODUCTO"].ToString(),
+                        ID_PRECIO = 1,
+                        DESCRIP_PRODUCTO = myReader["DESCRIP_PRODUCTO"].ToString(),
+                        FOTO_PRODUCTO = myReader["FOTO_PRODUCTO"].ToString(),
+                        EMPRESA_ID = myReader["EMPRESA_ID"].ToString()
+                    };
+                    lst.Add(p);
+                }
+
+                if (lst.Count > 0) 
+                {
+                    return Json(new { Success = true, data = "true", status = 200 }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { Success = true, data = "false", status = 200 }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
         [HttpPost]
         [ActionName("DeleteProducto")]
         public ActionResult Delete(string ID)
