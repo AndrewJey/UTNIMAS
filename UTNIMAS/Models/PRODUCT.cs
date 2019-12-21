@@ -9,18 +9,16 @@
 
 namespace UTNIMAS.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
+
     public partial class PRODUCT
     {
         public int PRODUCTO_ID { get; set; }
         public string NOMBRE_PRODUCTO { get; set; }
         public int ID_PRECIO { get; set; }
         public string DESCRIP_PRODUCTO { get; set; }
-        public byte[] FOTO_PRODCUTO { get; set; }
+        public byte[] FOTO_PRODUCTO { get; set; }
         public int EMPRESA_ID { get; set; }
-    
+
         public virtual EMPRESA EMPRESA { get; set; }
         public virtual PRECIO PRECIO { get; set; }
     }
