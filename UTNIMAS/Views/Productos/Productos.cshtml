@@ -8,9 +8,9 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-4">
-                <a href="#" onclick="loadinfimg(@("'"+Element.NOMBRE_PRODUCTO+"'"),@("'"+Element.DESCRIP_PRODUCTO+"'"),@("'"+Element.EMPRESA_ID+"'"))" data-target="#modalIMG" data-toggle="modal" class="color-gray-darker c6 td-hover-none">
+                <a href="#" onclick="loadinfimg(@("'"+Element.FOTO_PRODUCTO+"'"),@("'"+Element.NOMBRE_PRODUCTO+"'"),@("'"+Element.DESCRIP_PRODUCTO+"'"),@("'"+Element.EMPRESA_ID+"'"))" data-target="#modalIMG" data-toggle="modal" class="color-gray-darker c6 td-hover-none">
                     <div class="ba-0 ds-1">
-                        <img alt="Card image cap" class="card-img-top" src="@Element.FOTO_PRODUCTO" alt="@Element.EMPRESA_ID" />
+                        <img id="ImgVista" alt="Card image cap" class="card-img-top" src="@Element.FOTO_PRODUCTO" alt="@Element.EMPRESA_ID" />
                         <div class="card-body">
                             <h4 class="card-title color-gray-darker">@Element.NOMBRE_PRODUCTO</h4>
                             <p class="card-text color-gray-darker">@Element.DESCRIP_PRODUCTO</p>
@@ -25,7 +25,10 @@
 <div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="modalIMG" role="dialog" tabindex="-1">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-
+            <center>
+                <img id="ImgModal"  style="width:80%;height:50%" src="" />
+            </center>
+           
             <div class="modal-footer">
                 <table class="table table-bordered">
                     <thead>

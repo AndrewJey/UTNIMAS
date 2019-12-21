@@ -72,13 +72,13 @@ function createP() {
     console.log(Empresa);
     HTTP_POST("/Productos/Create", Empresa  , function (response) {
         console.log(response);
-        if (!response) {
-           
-        }
+        showSuccess(response, function () {
+            window.location.href = "/Home/Index";
+        });
     })
 }
 
-function loadinfimg(nombreProductos,Descripcion,IdEmpresa ) {
+function loadinfimg(foto,nombreProductos,Descripcion,IdEmpresa ) {
     HTTP_GET("/Productos/obtenerInfo", null, function (response) {
         document.getElementById("NombreProducto").innerHTML = nombreProductos;
         document.getElementById("Descripcion").innerHTML = Descripcion;
@@ -86,7 +86,7 @@ function loadinfimg(nombreProductos,Descripcion,IdEmpresa ) {
         document.getElementById("NombreEmpresa").innerHTML = response.NOMBRE_EMPRESA;
         document.getElementById("Direccion").innerHTML = response.DIRECCION_EMPRESA;
         document.getElementById("Sector").innerHTML = response.SECTOR_PRODUCCION;
-
+        $('#ImgModal').attr("src", foto);
     }, { Id: IdEmpresa })
 }
 

@@ -13,24 +13,51 @@ namespace UTNIMAS.Controllers
         // GET: Productos
         public ActionResult Productos()
         {
-            List<ProductosModels> lst;
-            using (UTNIMASEntities db = new UTNIMASEntities())
+            try
             {
-                //lst = (from d in db.PRODUCTS
-                //       join c in db.EMPRESAS on d.EMPRESA_ID equals c.EMPRESA_ID
-                //       where d.EMPRESA_ID == c.EMPRESA_ID
-                //       select new ProductosModels
-                //       {
-                //           PRODUCTOS_ID = d.PRODUCTO_ID,
-                //           NOMBRE_PRODUCTO = d.NOMBRE_PRODUCTO,
-                //           ID_PRECIO = d.ID_PRECIO,
-                //           DESCRIP_PRODUCTO = d.DESCRIP_PRODUCTO,
-                //           FOTO_PRODUCTO = d.FOTO_PRODCUTO,  //Puede que en el modelo este mal inicializada porque en la base de datos es un tipo "image"
-                //           EMPRESA_ID = c.NOMBRE_EMPRESA
-                //       }).ToList();
-                return View(/*lst*/);
+                List<ProductosModels> lst = new List<ProductosModels>();
+                Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
+                con.ConexDB(); //Conecta la BD
+                con.abrir(); //Abre la BD   
+                SqlCommand cmd2 = new SqlCommand("SELECT * FROM dbo.PRODUCTS", con.ConexDB());
+                SqlDataReader myReader =  cmd2.ExecuteReader();
+                while (myReader.Read()) 
+                {
+                    ProductosModels p = new ProductosModels();
+                    p.PRODUCTOS_ID = 1;
+                    p.NOMBRE_PRODUCTO = myReader["NOMBRE_PRODUCTO"].ToString();
+                    p.ID_PRECIO = 1;
+                    p.DESCRIP_PRODUCTO = myReader["DESCRIP_PRODUCTO"].ToString();
+                    p.FOTO_PRODUCTO = myReader["FOTO_PRODUCTO"].ToString();
+                    p.EMPRESA_ID = myReader["EMPRESA_ID"].ToString(); 
+                    lst.Add(p);
+                }
+
+                return View(lst);
             }
-        }
+            catch (Exception ex)
+            {
+                string Mensaje = "Error con la Solicitud";
+                return Json(new { Success = false, Mensaje }, JsonRequestBehavior.AllowGet);
+            }
+            //List<ProductosModels> lst;
+            //using (UTNIMASEntities db = new UTNIMASEntities())
+            //{
+            //    lst = (from d in db.PRODUCTS
+            //           join c in db.EMPRESAS on d.EMPRESA_ID equals c.EMPRESA_ID
+            //           where d.EMPRESA_ID == c.EMPRESA_ID
+            //           select new ProductosModels
+            //           {
+            //               PRODUCTOS_ID = d.PRODUCTO_ID,
+            //               NOMBRE_PRODUCTO = d.NOMBRE_PRODUCTO,
+            //               ID_PRECIO = d.ID_PRECIO,
+            //               DESCRIP_PRODUCTO = d.DESCRIP_PRODUCTO,
+            //               FOTO_PRODUCTO = d.FOTO_PRODCUTO.ToString(),  //Puede que en el modelo este mal inicializada porque en la base de datos es un tipo "image"
+            //               EMPRESA_ID = c.NOMBRE_EMPRESA
+            //           }).ToList();
+            //return View(lst);
+            }
+    
         // GET: Productos/Details/5
         public ActionResult Details(int id)
         {
@@ -137,7 +164,7 @@ namespace UTNIMAS.Controllers
                     UTNIMASEntities db = new UTNIMASEntities();
                     // TODO: Add insert logic here
 
-                    string query = "INSERT INTO PRODUCT(NOMBRE_PRODUCTO,ID_PRECIO,DESCRIP_PRODUCTO,FOTO_PRODUCTO,EMPRESA_ID)" +
+                    string query = "INSERT INTO PRODUCTS(NOMBRE_PRODUCTO,ID_PRECIO,DESCRIP_PRODUCTO,FOTO_PRODUCTO,EMPRESA_ID)" +
                         "VALUES('" + producto.NOMBRE_PRODUCTO + "', '" + producto.ID_PRECIO + "', '" + producto.DESCRIP_PRODUCTO + "','"
                         + producto.FOTO_PRODUCTO + "', '" + producto.EMPRESA_ID + "')";
                     db.Database.ExecuteSqlCommand(query);
@@ -149,7 +176,7 @@ namespace UTNIMAS.Controllers
             }
             catch (Exception ex)
             {
-                string Mensaje = "Error"
+                string Mensaje = "Error";
                 return Json(new { Success = false, Mensaje }, JsonRequestBehavior.AllowGet);
             }
         }
