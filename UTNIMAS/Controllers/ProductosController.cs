@@ -21,13 +21,15 @@ namespace UTNIMAS.Controllers
                 SqlDataReader myReader = cmd2.ExecuteReader();
                 while (myReader.Read())
                 {
-                    ProductosModels p = new ProductosModels();
-                    p.PRODUCTOS_ID = 1;
-                    p.NOMBRE_PRODUCTO = myReader["NOMBRE_PRODUCTO"].ToString();
-                    p.ID_PRECIO = 1;
-                    p.DESCRIP_PRODUCTO = myReader["DESCRIP_PRODUCTO"].ToString();
-                    p.FOTO_PRODUCTO = myReader["FOTO_PRODUCTO"].ToString();
-                    p.EMPRESA_ID = myReader["EMPRESA_ID"].ToString();
+                    ProductosModels p = new ProductosModels
+                    {
+                        PRODUCTOS_ID = 1,
+                        NOMBRE_PRODUCTO = myReader["NOMBRE_PRODUCTO"].ToString(),
+                        ID_PRECIO = 1,
+                        DESCRIP_PRODUCTO = myReader["DESCRIP_PRODUCTO"].ToString(),
+                        FOTO_PRODUCTO = myReader["FOTO_PRODUCTO"].ToString(),
+                        EMPRESA_ID = myReader["EMPRESA_ID"].ToString()
+                    };
                     lst.Add(p);
                 }
 
