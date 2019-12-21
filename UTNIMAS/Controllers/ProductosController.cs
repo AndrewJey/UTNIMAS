@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
 using System.Web.Mvc;
 using UTNIMAS.Models;
 //
@@ -20,8 +18,8 @@ namespace UTNIMAS.Controllers
                 con.ConexDB(); //Conecta la BD
                 con.abrir(); //Abre la BD   
                 SqlCommand cmd2 = new SqlCommand("SELECT * FROM dbo.PRODUCTS", con.ConexDB());
-                SqlDataReader myReader =  cmd2.ExecuteReader();
-                while (myReader.Read()) 
+                SqlDataReader myReader = cmd2.ExecuteReader();
+                while (myReader.Read())
                 {
                     ProductosModels p = new ProductosModels();
                     p.PRODUCTOS_ID = 1;
@@ -29,7 +27,7 @@ namespace UTNIMAS.Controllers
                     p.ID_PRECIO = 1;
                     p.DESCRIP_PRODUCTO = myReader["DESCRIP_PRODUCTO"].ToString();
                     p.FOTO_PRODUCTO = myReader["FOTO_PRODUCTO"].ToString();
-                    p.EMPRESA_ID = myReader["EMPRESA_ID"].ToString(); 
+                    p.EMPRESA_ID = myReader["EMPRESA_ID"].ToString();
                     lst.Add(p);
                 }
 
@@ -56,8 +54,8 @@ namespace UTNIMAS.Controllers
             //               EMPRESA_ID = c.NOMBRE_EMPRESA
             //           }).ToList();
             //return View(lst);
-            }
-    
+        }
+
         // GET: Productos/Details/5
         public ActionResult Details(int id)
         {
@@ -91,7 +89,7 @@ namespace UTNIMAS.Controllers
                         NOMBRE_PRODUCTO = em.NOMBRE_PRODUCTO,
                         ID_PRECIO = em.ID_PRECIO.ToString(),
                         DESCRIP_PRODUCTO = em.DESCRIP_PRODUCTO,
-                        FOTO_PRODUCTO = em.FOTO_PRODCUTO.ToString(),
+                        FOTO_PRODUCTO = em.FOTO_PRODUCTO.ToString(),
                         EMPRESA_ID = em.EMPRESA_ID.ToString()
                     };
                     return Json(new { Success = true, data = e3, status = 200 }, JsonRequestBehavior.AllowGet);
@@ -134,7 +132,7 @@ namespace UTNIMAS.Controllers
                 em.NOMBRE_PRODUCTO = Producto.NOMBRE_PRODUCTO;
                 em.ID_PRECIO = Producto.ID_PRECIO;
                 em.DESCRIP_PRODUCTO = Producto.DESCRIP_PRODUCTO;
-                em.FOTO_PRODCUTO = Producto.FOTO_PRODCUTO;
+                em.FOTO_PRODUCTO = Producto.FOTO_PRODUCTO;
                 em.EMPRESA_ID = Producto.EMPRESA_ID;
                 db.SaveChanges();
             }
@@ -168,9 +166,9 @@ namespace UTNIMAS.Controllers
                         "VALUES('" + producto.NOMBRE_PRODUCTO + "', '" + producto.ID_PRECIO + "', '" + producto.DESCRIP_PRODUCTO + "','"
                         + producto.FOTO_PRODUCTO + "', '" + producto.EMPRESA_ID + "')";
                     db.Database.ExecuteSqlCommand(query);
-                 
+
                 }
-             
+
                 string Mensaje = "Registro de Producto Completo";
                 return Json(new { Success = true, Mensaje }, JsonRequestBehavior.AllowGet);
             }
@@ -218,7 +216,7 @@ namespace UTNIMAS.Controllers
                 return View();
             }
         }
-        public ActionResult obtenerInfo(string Id)
+        public ActionResult ObtenerInfo(string Id)
         {
             string NOMBRE_EMPRESA = "";
             string DIRECCION_EMPRESA = "";
@@ -226,16 +224,16 @@ namespace UTNIMAS.Controllers
             string SECTOR_PRODUCCION = "";
             try
             {
-                    //UTNIMASEntities db1 = new UTNIMASEntities();
-                    Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
-                    con.ConexDB(); //Conecta la BD
-                    con.abrir(); //Abre la BD   
-                    if (Id != null)
-                    {
+                //UTNIMASEntities db1 = new UTNIMASEntities();
+                Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
+                con.ConexDB(); //Conecta la BD
+                con.abrir(); //Abre la BD   
+                if (Id != null)
+                {
 
-                        SqlCommand cmd2 = new SqlCommand("SELECT NOMBRE_EMPRESA,DIRECCION_EMPRESA,NOMBRE_CONTACTO,SECTOR_PRODUCCION FROM dbo.EMPRESAS WHERE EMPRESA_ID = @userId ", con.ConexDB());
-                        cmd2.Parameters.AddWithValue("@userId", Id);
-                        //Empresa = cmd2.ExecuteScalar().ToString();
+                    SqlCommand cmd2 = new SqlCommand("SELECT NOMBRE_EMPRESA,DIRECCION_EMPRESA,NOMBRE_CONTACTO,SECTOR_PRODUCCION FROM dbo.EMPRESAS WHERE EMPRESA_ID = @userId ", con.ConexDB());
+                    cmd2.Parameters.AddWithValue("@userId", Id);
+                    //Empresa = cmd2.ExecuteScalar().ToString();
                     SqlDataReader registros = cmd2.ExecuteReader();
                     while (registros.Read())
                     {
@@ -244,7 +242,7 @@ namespace UTNIMAS.Controllers
                         NOMBRE_CONTACTO = registros["NOMBRE_CONTACTO"].ToString();
                         SECTOR_PRODUCCION = registros["SECTOR_PRODUCCION"].ToString();
                     }
-                    }
+                }
                 return Json(new { Success = true, NOMBRE_EMPRESA, DIRECCION_EMPRESA, NOMBRE_CONTACTO, SECTOR_PRODUCCION }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
