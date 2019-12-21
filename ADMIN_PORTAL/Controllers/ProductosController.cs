@@ -23,7 +23,7 @@ namespace ADMIN_PORTAL.Controllers
                            NOMBRE_PRODUCTO = d.NOMBRE_PRODUCTO,
                            ID_PRECIO = d.ID_PRECIO,
                            DESCRIP_PRODUCTO = d.DESCRIP_PRODUCTO,
-                           FOTO_PRODUCTO = d.FOTO_PRODCUTO,  //Puede que en el modelo este mal inicializada porque en la base de datos es un tipo "image"
+                           FOTO_PRODUCTO = d.FOTO_PRODUCTO,  //Puede que en el modelo este mal inicializada porque en la base de datos es un tipo "image"
                            EMPRESA_ID = c.NOMBRE_EMPRESA
                        }).ToList();
                 return View(lst);
@@ -62,7 +62,7 @@ namespace ADMIN_PORTAL.Controllers
                         NOMBRE_PRODUCTO = em.NOMBRE_PRODUCTO,
                         ID_PRECIO = em.ID_PRECIO.ToString(),
                         DESCRIP_PRODUCTO = em.DESCRIP_PRODUCTO,
-                        FOTO_PRODUCTO = em.FOTO_PRODCUTO.ToString(),
+                        FOTO_PRODUCTO = em.FOTO_PRODUCTO.ToString(),
                         EMPRESA_ID = em.EMPRESA_ID.ToString()
                     };
                     return Json(new { Success = true, data = e3, status = 200 }, JsonRequestBehavior.AllowGet);
@@ -104,7 +104,7 @@ namespace ADMIN_PORTAL.Controllers
                 em.NOMBRE_PRODUCTO = Producto.NOMBRE_PRODUCTO;
                 em.ID_PRECIO = Producto.ID_PRECIO;
                 em.DESCRIP_PRODUCTO = Producto.DESCRIP_PRODUCTO;
-                em.FOTO_PRODCUTO = Producto.FOTO_PRODCUTO;
+                em.FOTO_PRODUCTO = Producto.FOTO_PRODUCTO;
                 em.EMPRESA_ID = Producto.EMPRESA_ID;
                 db.SaveChanges();
             }
@@ -128,7 +128,7 @@ namespace ADMIN_PORTAL.Controllers
             {
                 ADMIN_PORTAL.Models.UTNIMASEntities db = new ADMIN_PORTAL.Models.UTNIMASEntities();
                 // TODO: Add insert logic here
-                string query = "INSERT INTO EMPRESAS(NOMBRE_PRODUCTO,ID_PRECIO,DESCRIP_PRODUCTO,FOTO_PRODCUTO,EMPRESA_ID)" +
+                string query = "INSERT INTO EMPRESAS(NOMBRE_PRODUCTO,ID_PRECIO,DESCRIP_PRODUCTO,FOTO_PRODUCTO,EMPRESA_ID)" +
                     "VALUES('" + producto.NOMBRE_PRODUCTO + "', '" + producto.ID_PRECIO + "', '" + producto.DESCRIP_PRODUCTO + "', 1, '" + producto.FOTO_PRODUCTO + "', '" + producto.EMPRESA_ID + "')";
                 db.Database.ExecuteSqlCommand(query);
                 return RedirectToAction("Index");

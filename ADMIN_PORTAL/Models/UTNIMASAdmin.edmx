@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="UTNIMASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="UTNIMASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CLIENTS">
           <Key>
             <PropertyRef Name="ID_CLIENT" />
@@ -55,7 +55,7 @@
           <Property Name="NOMBRE_PRODUCTO" Type="varchar(max)" Nullable="false" />
           <Property Name="ID_PRECIO" Type="int" Nullable="false" />
           <Property Name="DESCRIP_PRODUCTO" Type="varchar(max)" Nullable="false" />
-          <Property Name="FOTO_PRODCUTO" Type="image" />
+          <Property Name="FOTO_PRODUCTO" Type="image" />
           <Property Name="EMPRESA_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -164,7 +164,8 @@
             <End Role="PRODUCTS" EntitySet="PRODUCTS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UTNIMASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -222,7 +223,7 @@
           <Property Name="NOMBRE_PRODUCTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ID_PRECIO" Type="Int32" Nullable="false" />
           <Property Name="DESCRIP_PRODUCTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FOTO_PRODCUTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FOTO_PRODUCTO" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="EMPRESA_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EMPRESA" Relationship="Self.EMPRESA_ID" FromRole="PRODUCTS" ToRole="EMPRESAS" />
           <NavigationProperty Name="PRECIO" Relationship="Self.PRECIOS_ID" FromRole="PRODUCTS" ToRole="PRECIOS" />
@@ -401,7 +402,7 @@
                 <ScalarProperty Name="NOMBRE_PRODUCTO" ColumnName="NOMBRE_PRODUCTO" />
                 <ScalarProperty Name="ID_PRECIO" ColumnName="ID_PRECIO" />
                 <ScalarProperty Name="DESCRIP_PRODUCTO" ColumnName="DESCRIP_PRODUCTO" />
-                <ScalarProperty Name="FOTO_PRODCUTO" ColumnName="FOTO_PRODCUTO" />
+                <ScalarProperty Name="FOTO_PRODUCTO" ColumnName="FOTO_PRODUCTO" />
                 <ScalarProperty Name="EMPRESA_ID" ColumnName="EMPRESA_ID" />
               </MappingFragment>
             </EntityTypeMapping>

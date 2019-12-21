@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using UTNIMAS.Models;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace UTNIMAS.Controllers
 {
@@ -11,7 +8,7 @@ namespace UTNIMAS.Controllers
     {
         public ActionResult Index()
         {
-          
+
             //return Redirect("/Home/Index");
             //return View();
             List<ProductosModels> lst;
@@ -26,7 +23,7 @@ namespace UTNIMAS.Controllers
                 //           NOMBRE_PRODUCTO = d.NOMBRE_PRODUCTO,
                 //           ID_PRECIO = d.ID_PRECIO,
                 //           DESCRIP_PRODUCTO = d.DESCRIP_PRODUCTO,
-                //           FOTO_PRODUCTO = d.FOTO_PRODCUTO,  //Puede que en el modelo este mal inicializada porque en la base de datos es un tipo "image"
+                //           FOTO_PRODUCTO = d.FOTO_PRODUCTO,  //Puede que en el modelo este mal inicializada porque en la base de datos es un tipo "image"
                 //           EMPRESA_ID = c.NOMBRE_EMPRESA
                 //       }).ToList();
                 return View(/*lst*/);
