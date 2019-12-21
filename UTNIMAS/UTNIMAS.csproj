@@ -912,6 +912,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Models\DataBase\Modelo Base de Datos.png" />
     <Content Include="Models\DataBase\UTNIMAS.sql" />
     <Content Include="Fonts\Weiss\WEISS INITIALEN ALTERNATES_0.TTF" />
     <Content Include="Fonts\Weiss\WEISS INITIALEN_0.TTF" />
