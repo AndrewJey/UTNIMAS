@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -163,10 +164,42 @@ namespace UTNIMAS.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
+
+                    string Iduser = null;
+                    int Precios = 0;
+                    string userEmail = model.Email;
+
+                    if (userEmail != "")
+                    {
+                        //UTNIMASEntities db1 = new UTNIMASEntities();
+                        Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
+                        con.ConexDB(); //Conecta la BD
+                        con.abrir(); //Abre la BD   
+                        SqlCommand cmd = new SqlCommand("SELECT ID_CLIENT FROM dbo.CLIENTS WHERE EMAIL_CLIENT = @userEmail ", con.ConexDB());
+                        cmd.Parameters.AddWithValue("@userEmail", userEmail);
+                        Iduser = (cmd.ExecuteScalar().ToString());
+                        if (Iduser != null)
+                        {
+
+                            SqlCommand cmd2 = new SqlCommand("SELECT COUNT(*) FROM dbo.PRECIOS WHERE PRECIOS_ID IS NOT NULL", con.ConexDB());
+
+                            Precios = Convert.ToInt32(cmd2.ExecuteScalar());                         
+
+                        }
+
+                    }
+                    if (Precios == 0)
+                    {
+                        UTNIMASEntities db = new UTNIMASEntities();
+                        string query = "INSERT INTO PRECIOS(PRECIO_UNIDAD,PRECIO_PAQUETE,PRECIO_SERVICIO,PRECIO_MAYOREO,PRECIO_ESPECIAL)" +
+                            "VALUES('" + 10 + "', '" + 100 + "', '" + 300 + "','" + 500 + "','" + 5 + "')";
+                        db.Database.ExecuteSqlCommand(query);
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
-            }
+
+                }
 
             // If we got this far, something failed, redisplay form
             return View(model);

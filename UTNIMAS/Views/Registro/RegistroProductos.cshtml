@@ -1,7 +1,9 @@
 ﻿@{
     ViewBag.Title = "RegistroProductos";
+    
 }
-<h2>Registro Productos</h2>
+
+<h2>@ViewBag.imagenb64</h2>
 <div style="padding:0em 3em">
     <form style="margin-top:100px">
         <div style="display:flex">
@@ -15,18 +17,18 @@
                     <select id="empresa" class="form-control">
                         @if (@ViewBag.Empresa != null)
                         {
-                            <option  value="@ViewBag.IdEmpresa" selected>@ViewBag.Empresa</option>
+                            <option value="@ViewBag.IdEmpresa" selected>@ViewBag.Empresa</option>
                         }
                     </select>
                 </div>
             </div>
             <div>
                 <label for="inputAddress">Foto del Producto</label><br />
-                <input name="file-input" id="foto" type="file" />
+                <input onchange="encodeImageFileAsURL(this)" name="file-input" id="foto" type="file" />
                 <br />
                 <img id="imgSalida" width="148em" height="148em" src="~/Content/Images/NoDisponible.jpg" />
             </div>
-
+            <img id="testima" width="148em" height="148em" src="" />
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">

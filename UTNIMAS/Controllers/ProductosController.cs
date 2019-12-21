@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using UTNIMAS.Models;
@@ -15,19 +16,19 @@ namespace UTNIMAS.Controllers
             List<ProductosModels> lst;
             using (UTNIMASEntities db = new UTNIMASEntities())
             {
-                lst = (from d in db.PRODUCTS
-                       join c in db.EMPRESAS on d.EMPRESA_ID equals c.EMPRESA_ID
-                       where d.EMPRESA_ID == c.EMPRESA_ID
-                       select new ProductosModels
-                       {
-                           PRODUCTOS_ID = d.PRODUCTO_ID,
-                           NOMBRE_PRODUCTO = d.NOMBRE_PRODUCTO,
-                           ID_PRECIO = d.ID_PRECIO,
-                           DESCRIP_PRODUCTO = d.DESCRIP_PRODUCTO,
-                           FOTO_PRODUCTO = d.FOTO_PRODCUTO,  //Puede que en el modelo este mal inicializada porque en la base de datos es un tipo "image"
-                           EMPRESA_ID = c.NOMBRE_EMPRESA
-                       }).ToList();
-                return View(lst);
+                //lst = (from d in db.PRODUCTS
+                //       join c in db.EMPRESAS on d.EMPRESA_ID equals c.EMPRESA_ID
+                //       where d.EMPRESA_ID == c.EMPRESA_ID
+                //       select new ProductosModels
+                //       {
+                //           PRODUCTOS_ID = d.PRODUCTO_ID,
+                //           NOMBRE_PRODUCTO = d.NOMBRE_PRODUCTO,
+                //           ID_PRECIO = d.ID_PRECIO,
+                //           DESCRIP_PRODUCTO = d.DESCRIP_PRODUCTO,
+                //           FOTO_PRODUCTO = d.FOTO_PRODCUTO,  //Puede que en el modelo este mal inicializada porque en la base de datos es un tipo "image"
+                //           EMPRESA_ID = c.NOMBRE_EMPRESA
+                //       }).ToList();
+                return View(/*lst*/);
             }
         }
         // GET: Productos/Details/5
@@ -133,28 +134,22 @@ namespace UTNIMAS.Controllers
                 string userId = System.Web.HttpContext.Current.User.Identity.Name;
                 if (userId != "")
                 {
-                    //UTNIMASEntities db1 = new UTNIMASEntities();
-                    Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
-                    con.ConexDB(); //Conecta la BD
-                    con.abrir(); //Abre la BD   
-                    SqlCommand cmd = new SqlCommand("SELECT ID_CLIENT FROM dbo.CLIENTS WHERE EMAIL_CLIENT = @userId ", con.ConexDB());
-                    cmd.Parameters.AddWithValue("@userId", userId);
-
-                    Iduser = (cmd.ExecuteScalar().ToString());
-
                     UTNIMASEntities db = new UTNIMASEntities();
                     // TODO: Add insert logic here
-                    string query = "INSERT INTO EMPRESAS(NOMBRE_PRODUCTO,ID_PRECIO,DESCRIP_PRODUCTO,FOTO_PRODCUTO,EMPRESA_ID)" +
-                        "VALUES('" + producto.NOMBRE_PRODUCTO + "', '" + producto.ID_PRECIO + "', '" + producto.DESCRIP_PRODUCTO + "','" + Iduser + "','" + producto.FOTO_PRODUCTO + "', '" + producto.EMPRESA_ID + "')";
+
+                    string query = "INSERT INTO PRODUCT(NOMBRE_PRODUCTO,ID_PRECIO,DESCRIP_PRODUCTO,FOTO_PRODUCTO,EMPRESA_ID)" +
+                        "VALUES('" + producto.NOMBRE_PRODUCTO + "', '" + producto.ID_PRECIO + "', '" + producto.DESCRIP_PRODUCTO + "','"
+                        + producto.FOTO_PRODUCTO + "', '" + producto.EMPRESA_ID + "')";
                     db.Database.ExecuteSqlCommand(query);
-                    con.cerrar();
+                 
                 }
+             
                 string Mensaje = "Registro de Producto Completo";
                 return Json(new { Success = true, Mensaje }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                string Mensaje = "Error con la Solicitud";
+                string Mensaje = "Error"
                 return Json(new { Success = false, Mensaje }, JsonRequestBehavior.AllowGet);
             }
         }
