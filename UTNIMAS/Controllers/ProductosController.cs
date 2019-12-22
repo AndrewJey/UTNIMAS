@@ -52,7 +52,7 @@ namespace UTNIMAS.Controllers
             //               NOMBRE_PRODUCTO = d.NOMBRE_PRODUCTO,
             //               ID_PRECIO = d.ID_PRECIO,
             //               DESCRIP_PRODUCTO = d.DESCRIP_PRODUCTO,
-            //               FOTO_PRODUCTO = d.FOTO_PRODCUTO.ToString(),  //Puede que en el modelo este mal inicializada porque en la base de datos es un tipo "image"
+            //               FOTO_PRODUCTO = d.FOTO_PRODUCTO.ToString(),  //Puede que en el modelo este mal inicializada porque en la base de datos es un tipo "image"
             //               EMPRESA_ID = c.NOMBRE_EMPRESA
             //           }).ToList();
             //return View(lst);
@@ -132,7 +132,7 @@ namespace UTNIMAS.Controllers
                     lst.Add(p);
                 }
 
-                if (lst.Count > 0) 
+                if (lst.Count > 0)
                 {
                     return Json(new { Success = true, data = "true", status = 200 }, JsonRequestBehavior.AllowGet);
                 }

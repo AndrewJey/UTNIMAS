@@ -55,7 +55,7 @@
           <Property Name="NOMBRE_PRODUCTO" Type="varchar(max)" Nullable="false" />
           <Property Name="ID_PRECIO" Type="int" Nullable="false" />
           <Property Name="DESCRIP_PRODUCTO" Type="varchar(max)" Nullable="false" />
-          <Property Name="FOTO_PRODUCTO" Type="image" />
+          <Property Name="FOTO_PRODUCTO" Type="varchar(max)" />
           <Property Name="EMPRESA_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -223,7 +223,7 @@
           <Property Name="NOMBRE_PRODUCTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ID_PRECIO" Type="Int32" Nullable="false" />
           <Property Name="DESCRIP_PRODUCTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FOTO_PRODUCTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FOTO_PRODUCTO" Type="String" MaxLength="Max" FixedLength="false" />
           <Property Name="EMPRESA_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EMPRESA" Relationship="Self.EMPRESA_ID" FromRole="PRODUCTS" ToRole="EMPRESAS" />
           <NavigationProperty Name="PRECIO" Relationship="Self.PRECIOS_ID" FromRole="PRODUCTS" ToRole="PRECIOS" />
