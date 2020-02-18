@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Web.Mvc;
 using UTNIMAS.Models;
@@ -9,26 +10,48 @@ namespace UTNIMAS.Controllers
     {
         public ActionResult Index()
         {
-            List<ProductosModels> lst = new List<ProductosModels>();
-            Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
-            con.ConexDB(); //Conecta la BD
-            con.abrir(); //Abre la BD   
-            SqlCommand cmd2 = new SqlCommand("SELECT * FROM dbo.PRODUCTS", con.ConexDB());
-            SqlDataReader myReader = cmd2.ExecuteReader();
-            while (myReader.Read())
+            try
             {
-                ProductosModels p = new ProductosModels
+                List<ProductosModels> lst = new List<ProductosModels>();
+                List<ProductosModels> lstrandom = new List<ProductosModels>();
+                Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
+                con.ConexDB(); //Conecta la BD
+                con.abrir(); //Abre la BD   
+                SqlCommand cmd2 = new SqlCommand("SELECT * FROM dbo.PRODUCTS", con.ConexDB());
+                SqlDataReader myReader = cmd2.ExecuteReader();
+                while (myReader.Read())
                 {
-                    PRODUCTOS_ID = 1,
-                    NOMBRE_PRODUCTO = myReader["NOMBRE_PRODUCTO"].ToString(),
-                    ID_PRECIO = 1,
-                    DESCRIP_PRODUCTO = myReader["DESCRIP_PRODUCTO"].ToString(),
-                    FOTO_PRODUCTO = myReader["FOTO_PRODUCTO"].ToString(),
-                    EMPRESA_ID = myReader["EMPRESA_ID"].ToString()
-                };
-                lst.Add(p);
+                    ProductosModels p = new ProductosModels
+                    {
+                        PRODUCTOS_ID = 1,
+                        NOMBRE_PRODUCTO = myReader["NOMBRE_PRODUCTO"].ToString(),
+                        ID_PRECIO = 1,
+                        DESCRIP_PRODUCTO = myReader["DESCRIP_PRODUCTO"].ToString(),
+                        FOTO_PRODUCTO = myReader["FOTO_PRODUCTO"].ToString(),
+                        EMPRESA_ID = myReader["EMPRESA_ID"].ToString()
+                    };
+                    lst.Add(p);
+                }
+
+                    Random _r = new Random();
+                    int n1 = _r.Next(0, lst.Count);
+                    int n2 = _r.Next(0, lst.Count);
+                    int n3 = _r.Next(0, lst.Count);
+                    ProductosModels pn = new ProductosModels();
+                    pn = lst[n1];
+                    lstrandom.Add(pn);
+                    pn = lst[n2];
+                    lstrandom.Add(pn);
+                    pn = lst[n3];
+                    lstrandom.Add(pn);
+
+                return View(lstrandom);
             }
-            return View(lst);
+            catch (Exception ex)
+            {
+                string Mensaje = "Error con la Solicitud";
+                return Json(new { Success = false, Mensaje }, JsonRequestBehavior.AllowGet);
+            }
             //return Redirect("/Home/Index");
             //return View();
             //List<ProductosModels> lst;
