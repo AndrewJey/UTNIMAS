@@ -152,7 +152,7 @@ namespace ADMIN_PORTAL.Controllers
             }
             catch (Exception ex)
             {
-                return View();
+                return View(ex);
             }
         }
 
