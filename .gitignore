@@ -328,3 +328,46 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+# local-development:start
+# Local editor state and temporary files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sublime-workspace
+.idea/
+*~
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+Desktop.ini
+# Local credentials; keep sanitized example configuration in Git
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+!.env.*.example
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.publishsettings
+*.pubxml.user
+local.settings.json
+id_rsa
+id_ed25519
+# .NET build and restore output
+[Bb]in/
+[Oo]bj/
+[Pp]ackages/
+TestResults/
+*.nupkg
+*.snupkg
+*.mdf
+*.ldf
+*.jfm
+# local-development:end
