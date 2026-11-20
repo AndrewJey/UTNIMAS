@@ -35,9 +35,36 @@ Inventario y compilaciones locales del 2026-11-15. Una compilación correcta no 
 <!-- local-development:end -->
 
 <!-- improvements-20261119:start -->
-## Mejoras y verificación — 2026-11-19 (Eliminación de SQLi en EmpresasController y conexión configurable)
+## Mejoras y verificación — 2026-11-19 (Compra/Venta, Carrusel, Tema Claro/Oscuro, Portal Admin y Persistencia)
 
-- Reemplazado el servidor fijo `DESKTOP-E38KCH7` en `ConexionBD.cs` por resolución configurable (`UTNIMAS_CONNECTION_STRING` -> `Web.config` -> `.\SQLEXPRESS`) e implementado `IDisposable`.
-- Eliminada la inyección SQL en `EmpresasController.Create` (ahora usa Entity Framework `db.EMPRESAS.Add`), añadidas validaciones (`TryValidateEmpresa`) y respuestas seguras `400`/`404` ante IDs inválidos o registros inexistentes.
-- Validación: compilación MSBuild (.NET Framework 4.8.1) y 8 aserciones automatizadas sobre `ConexionBD` y `EmpresasController`.
+### 1. Portal web interactivo instantáneo (`web-app/index.html`)
+Se añadió una aplicación web standalone sin dependencias externas en [`web-app/index.html`](web-app/index.html) que reutiliza los logotipos e imágenes reales del proyecto (`UTNIMAS/Content/Images/`):
+- **Carrusel de imágenes fluido:** autoplay con pausa al pasar el cursor/foco, navegación por flechas, teclado (`←`/`→`), gestos táctiles (*swipe*) e indicadores.
+- **Tema Claro / Oscuro persistente:** botón en la barra superior sincronizado con `localStorage` (`utnimas_theme`), preferencia del sistema (`prefers-color-scheme`) y sincronización entre pestañas.
+- **Catálogo de Compra / Venta:** búsqueda instantánea, filtros por sector IMAS y empresa registrada, ordenamiento por destacados/recientes/precio, lista de interés persistente y *lightbox* ampliable.
+- **Contacto directo:** botones de WhatsApp, correo (`mailto:`), llamada (`tel:`), copia rápida de teléfono, barra flotante y formularios directos que alimentan la bandeja de consultas.
+- **Área Administrativa para Empresas Registradas:** CRUD completo y persistente (`localStorage` + exportar/importar JSON + restaurar demo) para empresas, productos (con carga de imágenes *drag & drop*, compresión cliente en Canvas, vista previa inmediata, URL y opción *Destacar en carrusel*) y bandeja de mensajes.
+- **Responsividad:** diseño adaptable de escritorio (`1280px+`) a móvil (`390px`) sin desbordamiento horizontal.
+
+Para abrirlo de inmediato:
+- Abrir directamente [`web-app/index.html`](web-app/index.html) en el navegador, o servir el repositorio localmente:
+  ```powershell
+  python -m http.server 8080 --directory .
+  # Abrir http://127.0.0.1:8080/web-app/index.html
+  ```
+- Pruebas automatizadas de la capa de persistencia:
+  ```powershell
+  node --test web-app/tests/store.test.mjs
+  ```
+
+### 2. Mejoras en ASP.NET MVC 5 (`UTNIMAS/` y `ADMIN_PORTAL/`)
+- **Conexión y respaldo sin BD:** `ConexionBD.cs` resuelve `UTNIMAS_CONNECTION_STRING` -> `Web.config` -> `.\SQLEXPRESS`, implementa `IDisposable` y añade `LocalCatalogFallback` para evitar pantallas vacías o caídas cuando SQL Server no está activo.
+- **Seguridad y robustez:** eliminadas inyecciones SQL en `EmpresasController.Create` y `ProductosController.InsertarProducto` (consultas parametrizadas), validaciones seguras (`int.TryParse` / nulos) y respuestas controladas `400`/`404`.
+- **UI/UX MVC:** botón de tema claro/oscuro persistente en `_Layout.cshtml` (`UTNIMAS` y `ADMIN_PORTAL`), carrusel hero en `Home/Index.cshtml`, modal con vista previa y botones de contacto (WhatsApp/Correo/Teléfono) en `Productos.cshtml`, zona *drag & drop* con preview de imagen en `RegistroProductos.cshtml`, corrección de `selected` duplicados en `RegistroEmpresas.cshtml` y vista de contacto institucional en `Home/Contact.cshtml`.
+
+### 3. Validación ejecutada
+- `MSBuild.exe` (.NET Framework 4.8.1): compilación limpia de `UTNIMAS.csproj` y `ADMIN_PORTAL.csproj`.
+- Aserciones C# en tiempo de ejecución (9/9): resolución de conexión, fallback local de productos/empresas, `HomeController.Index`, `ProductosController.GetOnlyProducto` y `ObtenerInfo`.
+- `node --check` (6/6 scripts JS) y `node --test web-app/tests/store.test.mjs` (4/4 pruebas de CRUD, filtros, links de contacto, validación segura de imágenes, exportación/importación JSON y persistencia).
+- Verificación visual e interactiva en navegador real (escritorio `1280×800` y móvil `390×844`): 0 errores de consola/red, carrusel, persistencia de tema tras recarga, modal + lightbox, alta persistente de empresa y producto con vista previa de imagen y cero desbordamiento horizontal móvil.
 <!-- improvements-20261119:end -->

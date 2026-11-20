@@ -1,17 +1,34 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Contacto";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<section class="container-fluid px-0">
+    <h2 class="mb-2">Contacto — UTN / IMAS Ideas Productivas</h2>
+    <p style="color:var(--utn-muted);">@ViewBag.Message</p>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <div class="utn-grid mt-4">
+        <div class="utn-card">
+            <div class="utn-card-body">
+                <h4><i class="fas fa-university"></i> UTN — Extensión y Acción Social (VEAS)</h4>
+                <p>Asesoría académica y vinculación para emprendimientos y microempresas regionales.</p>
+                <div class="utn-contact-bar">
+                    <a class="btn btn-primary btn-sm" href="mailto:veas@utn.ac.cr?subject=Consulta%20UTN-IMAS"><i class="fas fa-envelope"></i> Correo</a>
+                    <a class="btn btn-outline-secondary btn-sm" href="tel:+50624355000"><i class="fas fa-phone"></i> +506 2435-5000</a>
+                    <a class="btn btn-outline-info btn-sm" href="https://www.utn.ac.cr/" target="_blank" rel="noopener noreferrer">Sitio UTN</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="utn-card">
+            <div class="utn-card-body">
+                <h4><i class="fas fa-hands-helping"></i> IMAS — Ideas Productivas</h4>
+                <p>Información sobre registro de empresas beneficiarias y participación en el catálogo.</p>
+                <div class="utn-contact-bar">
+                    <a class="btn btn-success btn-sm" href="https://wa.me/506800004627?text=Hola%2C%20consulto%20sobre%20UTN-IMAS%20Ideas%20Productivas" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a class="btn btn-primary btn-sm" href="mailto:info@imas.go.cr?subject=Consulta%20Ideas%20Productivas"><i class="fas fa-envelope"></i> Correo</a>
+                    <a class="btn btn-outline-info btn-sm" href="https://www.imas.go.cr/" target="_blank" rel="noopener noreferrer">Sitio IMAS</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

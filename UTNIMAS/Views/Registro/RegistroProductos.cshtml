@@ -1,53 +1,59 @@
 ﻿@{
-    ViewBag.Title = "RegistroProductos";
-    
+    ViewBag.Title = "Registrar Productos";
 }
 
-<h2>@ViewBag.imagenb64</h2>
-<div style="padding:0em 3em">
-    <form style="margin-top:100px">
-        <div style="display:flex">
-            <div class="form">
-                <div class="form-group col-md-12">
-                    <label>Producto</label>
-                    <input type="text" class="form-control" id="nameP" placeholder="Nombre del Producto">
+<section class="container-fluid px-0">
+    <h2 class="mb-3">Registrar Producto</h2>
+    <div class="utn-card">
+        <div class="utn-card-body">
+            <form onsubmit="createP(); return false;">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nameP">Nombre del Producto</label>
+                        <input type="text" class="form-control" id="nameP" placeholder="Ej. Café Artesanal 500g" required />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="precioP">Precio (₡)</label>
+                        <input type="number" min="0" step="100" class="form-control" id="precioP" placeholder="Ej. 4500" value="4500" />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="empresa">Empresa</label>
+                        <select id="empresa" class="form-control">
+                            @if (ViewBag.Empresa != null)
+                            {
+                                <option value="@ViewBag.IdEmpresa" selected>@ViewBag.Empresa</option>
+                            }
+                            else
+                            {
+                                <option value="1" selected>Emprendimiento registrado</option>
+                            }
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group col-md-12">
-                    <label for="inputState">Empresa</label>
-                    <select id="empresa" class="form-control">
-                        @if (@ViewBag.Empresa != null)
-                        {
-                            <option value="@ViewBag.IdEmpresa" selected>@ViewBag.Empresa</option>
-                        }
-                    </select>
+
+                <div class="form-group">
+                    <label for="descript">Descripción del Producto</label>
+                    <textarea class="form-control" id="descript" rows="3" placeholder="Detalles, materiales, presentación y entrega..."></textarea>
                 </div>
-            </div>
-            <div>
-                <label for="inputAddress">Foto del Producto</label><br />
-                <input onchange="encodeImageFileAsURL(this)" name="file-input" id="foto" type="file" />
-                <br />
-                <img id="imgSalida" width="148em" height="148em" src="~/Content/Images/NoDisponible.jpg" />
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
 
-                <label for="inputPassword4">Descripción del Producto</label>
-                <input type="text" class="form-control" id="descript" placeholder="Descripción">
-            </div>
-            <div class="form-group col-md-4">
-                @*<label for="inputState">Tipo de Precio</label>
-                <select id="inputState" class="form-control">
-                       <option selected>Sistema de Precios</option>
-                       <option>...</option>
-                </select>*@
+                <div class="form-group">
+                    <label for="foto">Foto del Producto (arrastra una imagen o haz clic para seleccionar)</label>
+                    <div id="utnDropzone" class="utn-dropzone">
+                        <input onchange="encodeImageFileAsURL(this)" name="file-input" id="foto" type="file" accept="image/*" class="form-control-file mb-2" />
+                        <div class="mt-2">
+                            <img id="imgSalida" style="max-width:220px; max-height:180px; border-radius:10px; object-fit:cover;" src="~/Content/Images/NoDisponible.jpg" alt="Vista previa" />
+                        </div>
+                        <small id="imgPreviewMeta" style="display:block; margin-top:8px; color:var(--utn-muted);">Sin imagen seleccionada</small>
+                        <button type="button" class="btn btn-outline-secondary btn-sm mt-2" onclick="clearProductImagePreview()">Limpiar imagen</button>
+                    </div>
+                </div>
 
-                @*<input type="file" name="pic" accept="image/*" style="margin-left:1em;">*@
-            </div>
+                <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Guardar Producto</button>
+            </form>
         </div>
-        <button type="button" class="btn btn-primary" onclick="createP()" style="font-size:20px"><i class="far fa-save"></i></button>
-    </form>
-</div>
+    </div>
+</section>
+
 @section scripts{
     <script type="text/javascript" src="~/Scripts/Custom/datatables.min.js"></script>
     <script src="~/Scripts/Custom/httpmethods.js"></script>

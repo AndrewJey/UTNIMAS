@@ -1,76 +1,82 @@
 ﻿@{
-    ViewBag.Title = "RegistroEmpresas";
+    ViewBag.Title = "Registrar Empresas";
 }
-<h2>Registrar Empresas</h2>
-<div style="padding:0em 3em">
-    <form style="margin-top:100px">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Empresa</label>
-                <input type="text" class="form-control" id="name" placeholder="Nombre de la Empresa">
-            </div>
-            <div class="form-group col-md-4">
-                <label>Telefono</label>
-                <input type="text" class="form-control" id="tel" placeholder="Teléfono">
-            </div>
-            <div class="form-group col-md-2">
-                <label for="inputEmail4">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Email">
-            </div>
+
+<section class="container-fluid px-0">
+    <h2 class="mb-3">Registrar Empresa</h2>
+    <div class="utn-card">
+        <div class="utn-card-body">
+            <form onsubmit="createE(); return false;">
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="name">Empresa</label>
+                        <input type="text" class="form-control" id="name" placeholder="Nombre de la Empresa" required />
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="tel">Teléfono / WhatsApp</label>
+                        <input type="tel" class="form-control" id="tel" placeholder="+506 8888-8888" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" class="form-control" id="email" placeholder="contacto@empresa.cr" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="contactName">Nombre de Contacto</label>
+                        <input type="text" class="form-control" id="contactName" placeholder="Nombre de Contacto" required />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="direction">Dirección</label>
+                        <input type="text" class="form-control" id="direction" placeholder="Provincia, cantón y señas" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="production">Sector de Producción</label>
+                        <select id="production" class="form-control">
+                            <option value="Agricultura" selected>Agricultura</option>
+                            <option value="Apicultura y Pesca">Apicultura y Pesca</option>
+                            <option value="Artísticas y Entretenimiento">Artísticas y Entretenimiento</option>
+                            <option value="Actividad Inmobiliaria">Actividad Inmobiliaria</option>
+                            <option value="Alimentación y Bebidas">Alimentación y Bebidas</option>
+                            <option value="Banca y Finanzas">Banca y Finanzas</option>
+                            <option value="Comercio Exterior">Comercio Exterior</option>
+                            <option value="Comunicación">Comunicación</option>
+                            <option value="Comercio">Comercio</option>
+                            <option value="Construcción">Construcción</option>
+                            <option value="Electrónica">Electrónica</option>
+                            <option value="Enseñanza / Educación">Enseñanza / Educación</option>
+                            <option value="Electricidad">Electricidad</option>
+                            <option value="Fabricación Industrial">Fabricación Industrial</option>
+                            <option value="Ganadería">Ganadería</option>
+                            <option value="Mercadeo">Mercadeo</option>
+                            <option value="Minería y Canteras">Minería y Canteras</option>
+                            <option value="Manufactura">Manufactura</option>
+                            <option value="Medicina, Salud y Farmacéutica">Medicina, Salud y Farmacéutica</option>
+                            <option value="Hotelería">Hotelería</option>
+                            <option value="Producción Madera">Producción Madera</option>
+                            <option value="Producción Plástico">Producción Plástico</option>
+                            <option value="Productos Químicos y de Limpieza">Productos Químicos y de Limpieza</option>
+                            <option value="Silvicultura">Silvicultura</option>
+                            <option value="Servicio Técnico">Servicio Técnico</option>
+                            <option value="Servicio de Seguros">Servicio de Seguros</option>
+                            <option value="Servicios Básicos">Servicios Básicos</option>
+                            <option value="Servicios Profesionales">Servicios Profesionales</option>
+                            <option value="Servicio Doméstico">Servicio Doméstico</option>
+                            <option value="Turismo">Turismo</option>
+                            <option value="Transportes">Transportes</option>
+                            <option value="Textiles y Ropa">Textiles y Ropa</option>
+                            <option value="Recreativas">Recreativas</option>
+                            <option value="Reparación y Mantenimiento">Reparación y Mantenimiento</option>
+                            <option value="Reciclaje">Reciclaje</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Guardar Empresa</button>
+            </form>
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Nombre de Contacto</label>
-                <input type="text" class="form-control" id="contactName" placeholder="Nombre de Contacto">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="inputPassword4">Direccion</label>
-                <input type="text" class="form-control" id="direction" placeholder="Dirección">
-            </div>
-            <div class="form-group col-md-2">
-                <label for="inputState">Sector Producción</label>
-                <select id="production" class="form-control">
-                    <option selected>Agricultura</option>
-                    <option selected>Apicultura y Pesca</option>
-                    <option selected>Artísticas y Entretenimiento</option>
-                    <option selected>Actividad Inmobiliaria</option>
-                    <option selected>Alimentación y Bebidas</option>
-                    <option selected>Banca y Finanzas</option>
-                    <option selected>Comercio Exterior</option>
-                    <option selected>Comunicación</option>
-                    <option selected>Comercio</option>
-                    <option selected>Construcción</option>
-                    <option selected>Electrónica</option>
-                    <option selected>Enseñanza / Educación</option>
-                    <option selected>Electricidad</option>
-                    <option selected>Fabricación Industrial</option>
-                    <option selected>Ganadería</option>
-                    <option selected>Mercadeo</option>
-                    <option selected>Minería y Canteras</option>
-                    <option selected>Manofacturación</option>
-                    <option selected>Medicina, Salud y Farmaceútica</option>
-                    <option selected>Hotelería</option>
-                    <option selected>Producción Madera</option>
-                    <option selected>Producción Plástico</option>
-                    <option selected>Productos Químicos y de Limpieza</option>
-                    <option selected>Silvicultura</option>
-                    <option selected>Servicio Ténico</option>
-                    <option selected>Servicio de Seguros</option>
-                    <option selected>Servicios Básicos</option>
-                    <option selected>Servicios Profesionales</option>
-                    <option selected>Servicio Doméstico</option>
-                    <option selected>Turismo</option>
-                    <option selected>Transportes</option>
-                    <option selected>Textiles y Ropa</option>
-                    <option selected>Recreativas</option>
-                    <option selected>Reparación y Mantenimiento</option>
-                    <option selected>Reciclaje</option>
-                </select>
-            </div>
-        </div>
-        <button type="button" class="btn btn-primary" onclick="createE()" style="font-size:20px"><i class="far fa-save"></i></button>
-    </form>
-</div>
+    </div>
+</section>
+
 @section scripts{
     <script type="text/javascript" src="~/Scripts/Custom/datatables.min.js"></script>
     <script src="~/Scripts/Custom/httpmethods.js"></script>

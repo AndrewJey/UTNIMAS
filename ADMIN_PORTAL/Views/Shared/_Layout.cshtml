@@ -98,11 +98,16 @@
                 </footer>
             </div>
         </nav>
-        <div id="content">
-            <button type="button" onclick="sidebarActive()" id="sidebarCollapse" class="btn btn-info" style="background:#efefef; border-color:#8db2d8; background-color:white;">
-                <i style="color:#8db2d8;" id="arrow" class="fas fa-chevron-left"></i>
-            </button>
-            <br />
+        <div id="content" style="flex:1; padding: 16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px;">
+                <button type="button" onclick="sidebarActive()" id="sidebarCollapse" class="btn btn-info" aria-label="Alternar menú" style="background:var(--utn-surface-alt); border-color:var(--utn-border);">
+                    <i style="color:#8db2d8;" id="arrow" class="fas fa-chevron-left"></i>
+                </button>
+                <button type="button" class="utn-theme-btn" data-utnimas-theme-toggle onclick="utnimasToggleTheme()" aria-pressed="false">
+                    <span class="theme-icon" aria-hidden="true">🌙</span>
+                    <span class="theme-label">Modo Oscuro</span>
+                </button>
+            </div>
             @RenderBody()
         </div>
     </div>

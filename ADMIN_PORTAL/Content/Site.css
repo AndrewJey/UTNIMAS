@@ -306,3 +306,23 @@ a.article:hover {
     min-height: 100vh;
     transition: all 0.3s;
 }
+
+/* UTN-IMAS Admin Portal — Persistent Light/Dark Theme & Responsiveness */
+:root {
+    --utn-bg: #f4f7fb;
+    --utn-surface: #ffffff;
+    --utn-surface-alt: #eef3f9;
+    --utn-text: #162233;
+    --utn-border: #d8e1ec;
+}
+[data-theme="dark"] {
+    --utn-bg: #0b1220;
+    --utn-surface: #131e31;
+    --utn-surface-alt: #1a2740;
+    --utn-text: #edf2f7;
+    --utn-border: #253552;
+}
+body, #content { background-color: var(--utn-bg) !important; color: var(--utn-text) !important; transition: background-color 0.25s ease, color 0.25s ease; }
+#sidebar, .jumbotron, .table, .form-control, .modal-content { background-color: var(--utn-surface) !important; color: var(--utn-text) !important; border-color: var(--utn-border) !important; }
+.utn-theme-btn { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--utn-border); background: var(--utn-surface-alt); color: var(--utn-text); font-weight: 600; cursor: pointer; }
+@media (max-width: 768px) { #wrapper { flex-direction: column !important; } #sidebar { width: 100% !important; min-width: 100% !important; } }

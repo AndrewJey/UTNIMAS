@@ -1,42 +1,149 @@
 ﻿@model List<UTNIMAS.Models.ProductosModels>
 @{
-    int m = 0;
     ViewBag.Title = "INICIO";
-    if (Model.Count() != 0)
-    {
-        m = Model.Count() - 1;
-    }
+    var items = Model ?? new List<UTNIMAS.Models.ProductosModels>();
 }
-    <div>
-        <center><h1><a type="button" class="btn btn-info btn-lg" href="/Home/Index">INICIO</a></h1></center><br /><br />
-        <center><h2 style="color:aliceblue;"><a type="button" class="btn btnIdeasCreativas btn-lg" style="color: black; border-color: white; background-color: white;" href="/Productos/Productos">IDEAS PRODUCTIVAS</a></h2></center><br /><br />
-        <div class="card-deck">        
-           @foreach (var Element in Model)
-            {
-                <div class="col-md-4">
-                <a href="#" onclick="loadinfimg(@("'"+Element.FOTO_PRODUCTO+"'"),@("'"+Element.NOMBRE_PRODUCTO+"'"),@("'"+Element.DESCRIP_PRODUCTO+"'"),@("'"+Element.EMPRESA_ID+"'"))" data-target="#modalIMG" data-toggle="modal" class="color-gray-darker c6 td-hover-none">
-                    <div class="ba-0 ds-1">
-                        <img height="400" id="ImgVista" alt="Card image cap" class="card-img-top" src="@Element.FOTO_PRODUCTO" alt="@Element.EMPRESA_ID" />
-                        <div style="background:white" class="card-body">
-                            <h4 class="card-title color-gray-darker">@Element.NOMBRE_PRODUCTO</h4>
-                            <p class="card-text color-gray-darker">@Element.DESCRIP_PRODUCTO</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-             }   
+
+<section class="utn-carousel" data-utn-carousel tabindex="0" aria-label="Carrusel de emprendimientos y productos destacados">
+    <div class="utn-slide is-active" aria-hidden="false">
+        <img src="~/Content/Images/Markets/340436cf-5092-4e1a-aadc-e2e8c3034e85.jpg" alt="Mercados y productos locales UTN-IMAS" />
+        <div class="utn-slide-caption">
+            <span class="badge badge-success mb-2">UTN – IMAS Ideas Productivas</span>
+            <h2 class="h3 mb-2">Compra y Venta de Emprendimientos Locales</h2>
+            <p class="mb-3">Explora productos de microempresas registradas y contacta directamente a sus creadores.</p>
+            <a class="btn btn-primary btn-sm" href="/Productos/Productos">Ver Catálogo</a>
+            <a class="btn btn-light btn-sm" href="/Home/Contact">Contacto Directo</a>
         </div>
-        <br /><br />
-        <!--<img src="~/Content/Images/logo.png" aling="bottom" height="10%" width="10%" style="margin-top:500px;" />-->
-        <a href="https://www.utn.ac.cr/content/vicerrector%C3%ADa-de-extensi%C3%B3n-y-acci%C3%B3n-social-veas" target="_blank">
-            <img src="~/Content/Images/descarga.jpg" aling="bottom" height="15%" width="10%" style="position:absolute; bottom:1%;left:13%;margin-left:1em" />
-        </a>
-        <a href="https://www.imas.go.cr/" target="_blank">
-            <img src="~/Content/Images/imas-hacienda.jpg" aling="bottom" height="15%" width="10%" style="position:absolute;bottom:1%;right:12px;" />
-        </a>
     </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        document.body.classList.add("imagenFondo");
-    });
-</script>
+    <div class="utn-slide" aria-hidden="true">
+        <img src="~/Content/Images/Markets/Devaraja-Market.jpg" alt="Feria de productos frescos" />
+        <div class="utn-slide-caption">
+            <span class="badge badge-info mb-2">Comercio Justo</span>
+            <h2 class="h3 mb-2">Productos Frescos y Artesanales</h2>
+            <p class="mb-3">Apoya a familias emprendedoras de la región con compras sin intermediarios.</p>
+            <a class="btn btn-primary btn-sm" href="/Productos/Productos">Explorar Ofertas</a>
+        </div>
+    </div>
+    <div class="utn-slide" aria-hidden="true">
+        <img src="~/Content/Images/Markets/han-market-shops.jpg" alt="Tiendas de emprendimientos registrados" />
+        <div class="utn-slide-caption">
+            <span class="badge badge-warning mb-2">Portal para Empresas</span>
+            <h2 class="h3 mb-2">¿Tienes una Microempresa Registrada?</h2>
+            <p class="mb-3">Publica tus productos con vista previa de imágenes y gestiona tu catálogo en línea.</p>
+            <a class="btn btn-success btn-sm" href="/Registro/RegistroEmpresas">Registrar Empresa</a>
+            <a class="btn btn-light btn-sm" href="/Registro/RegistroProductos">Publicar Producto</a>
+        </div>
+    </div>
+    <div class="utn-slide" aria-hidden="true">
+        <img src="~/Content/Images/Markets/pagePropertiesImage.jpg" alt="Artesanía y diseño costarricense" />
+        <div class="utn-slide-caption">
+            <span class="badge badge-primary mb-2">Artesanía y Diseño</span>
+            <h2 class="h3 mb-2">Calidad Hecha en Costa Rica</h2>
+            <p class="mb-3">Descubre textiles, madera sostenible, alimentos y servicios profesionales.</p>
+            <a class="btn btn-primary btn-sm" href="/Productos/Productos">Ver Productos</a>
+        </div>
+    </div>
+    <div class="utn-slide" aria-hidden="true">
+        <img src="~/Content/Images/Markets/Strasse-17-Juni-Flea-Market-3-800x400.jpg" alt="Bazar y feria creativa" />
+        <div class="utn-slide-caption">
+            <span class="badge badge-secondary mb-2">Atención Personalizada</span>
+            <h2 class="h3 mb-2">Contacto Directo con Cada Emprendimiento</h2>
+            <p class="mb-3">Escríbenos por WhatsApp, correo o teléfono para coordinar pedidos y asesoría.</p>
+            <a class="btn btn-light btn-sm" href="/Home/Contact">Ir a Contacto</a>
+        </div>
+    </div>
+
+    <button type="button" class="utn-carousel-ctrl prev" data-carousel-prev aria-label="Diapositiva anterior">&#10094;</button>
+    <button type="button" class="utn-carousel-ctrl next" data-carousel-next aria-label="Diapositiva siguiente">&#10095;</button>
+    <div class="utn-dots" role="tablist" aria-label="Indicadores del carrusel">
+        <button type="button" class="utn-dot is-active" aria-label="Slide 1"></button>
+        <button type="button" class="utn-dot" aria-label="Slide 2"></button>
+        <button type="button" class="utn-dot" aria-label="Slide 3"></button>
+        <button type="button" class="utn-dot" aria-label="Slide 4"></button>
+        <button type="button" class="utn-dot" aria-label="Slide 5"></button>
+    </div>
+</section>
+
+<section aria-labelledby="destacados-heading">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3" style="gap:10px;">
+        <div>
+            <h2 id="destacados-heading" class="h4 mb-0">Ideas Productivas Destacadas</h2>
+            <small style="color:var(--utn-muted);">Haz clic en cualquier producto para ver su vista previa y botones de contacto</small>
+        </div>
+        <a class="btn btn-primary btn-sm" href="/Productos/Productos">Ver catálogo completo</a>
+    </div>
+
+    <div class="utn-grid">
+        @foreach (var element in items.Take(6))
+        {
+            <article class="utn-card">
+                <a href="#"
+                   data-toggle="modal"
+                   data-target="#modalIMG"
+                   data-foto="@element.FOTO_PRODUCTO"
+                   data-nombre="@element.NOMBRE_PRODUCTO"
+                   data-desc="@element.DESCRIP_PRODUCTO"
+                   data-empresa-id="@element.EMPRESA_ID"
+                   data-precio="@element.ID_PRECIO"
+                   onclick="openProductPreviewFromEl(this); return false;">
+                    <img src="@element.FOTO_PRODUCTO" alt="@element.NOMBRE_PRODUCTO" onerror="this.src='/Content/Images/NoDisponible.jpg'" />
+                </a>
+                <div class="utn-card-body">
+                    <h4>@element.NOMBRE_PRODUCTO</h4>
+                    <p>@element.DESCRIP_PRODUCTO</p>
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <strong>@(element.ID_PRECIO > 1 ? "₡ " + element.ID_PRECIO.ToString("N0") : "Consultar")</strong>
+                        <button type="button"
+                                class="btn btn-outline-primary btn-sm"
+                                data-toggle="modal"
+                                data-target="#modalIMG"
+                                data-foto="@element.FOTO_PRODUCTO"
+                                data-nombre="@element.NOMBRE_PRODUCTO"
+                                data-desc="@element.DESCRIP_PRODUCTO"
+                                data-empresa-id="@element.EMPRESA_ID"
+                                data-precio="@element.ID_PRECIO"
+                                onclick="openProductPreviewFromEl(this)">
+                            Vista previa y contacto
+                        </button>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+</section>
+
+<div aria-hidden="true" aria-labelledby="modalHomeLabel" class="modal fade" id="modalIMG" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalHomeLabel"><span id="NombreProducto">Detalle del Producto</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-3">
+                    <img id="ImgModal" style="max-width:100%; max-height:360px; border-radius:10px; object-fit:cover;" src="~/Content/Images/NoDisponible.jpg" alt="Vista previa" />
+                </div>
+                <p><strong>Precio:</strong> <span id="PrecioModal">Consultar</span></p>
+                <p id="Descripcion"></p>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm">
+                        <tbody>
+                            <tr><th>Empresa</th><td id="NombreEmpresa">—</td><th>Sector</th><td id="Sector">—</td></tr>
+                            <tr><th>Contacto</th><td id="Contacto">—</td><th>Dirección</th><td id="Direccion">—</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="utn-contact-bar">
+                    <a id="btnContactoWA" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-success btn-sm"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a id="btnContactoEmail" href="#" class="btn btn-primary btn-sm"><i class="fas fa-envelope"></i> Correo</a>
+                    <a id="btnContactoTel" href="#" class="btn btn-outline-secondary btn-sm"><i class="fas fa-phone"></i> Llamar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Custom/httpmethods.js"></script>
+    <script src="~/Scripts/Custom/Productos.js"></script>
+}

@@ -1,122 +1,138 @@
-﻿var fotobase64;
-var pathimage;
-var fileByteArray = [];
+﻿var fotobase64 = "";
+
 $(document).ready(function () {
-    $('#tableProductos').DataTable();
-    askForProducts();
-    $(function () {
-        $('#foto').change(function (e) {
-            fotobase64 = "";
-            addImage(e);
-        });
+    if ($('#tableProductos').length && $.fn.DataTable) {
+        $('#tableProductos').DataTable();
+    }
 
-        function addImage(e) {
-            var file = e.target.files[0],
-                imageType = /image.*/;
-
-            if (!file.type.match(imageType))
-                return;
-
-            var reader = new FileReader();
-            reader.onload = fileOnload;
-            reader.readAsDataURL(file);
-        }
-
-        function fileOnload(e) {
-
-            var result = e.target.result;
-            $('#imgSalida').attr("src", result);
-        }
+    $('#foto').on('change', function (e) {
+        encodeImageFileAsURL(this);
     });
+
+    var dropzone = document.getElementById('utnDropzone');
+    if (dropzone) {
+        ['dragenter', 'dragover'].forEach(function (ev) {
+            dropzone.addEventListener(ev, function (e) {
+                e.preventDefault();
+                dropzone.classList.add('is-dragover');
+            });
+        });
+        ['dragleave', 'drop'].forEach(function (ev) {
+            dropzone.addEventListener(ev, function (e) {
+                e.preventDefault();
+                dropzone.classList.remove('is-dragover');
+            });
+        });
+        dropzone.addEventListener('drop', function (e) {
+            var files = e.dataTransfer && e.dataTransfer.files;
+            if (files && files.length > 0) {
+                previewImageFile(files[0]);
+            }
+        });
+    }
 });
 
-
-function askForProducts()
-{
-    HTTP_GET("/Productos/GetProducts", null, function (response) {
-        if (reponse.data == "false")
-        {
-            /*Ruta a redirigir*/
-            window.location.href = "/Resgistro/Productos";
-        }
-    }, { Id: IdEmpresa })
-}
-
-function encodeImageFileAsURL(element) {
-    var file = element.files[0];
-    var reader = new FileReader();
-    reader.onloadend = function () {
-
-        fotobase64 = reader.result
+function previewImageFile(file) {
+    if (!file) return;
+    if (!/^image\//.test(file.type)) {
+        alert('Seleccione un archivo de imagen válido (JPG, PNG o WebP).');
+        return;
     }
+    if (file.size > 4 * 1024 * 1024) {
+        alert('La imagen excede 4 MB. Seleccione una imagen más liviana.');
+        return;
+    }
+    var reader = new FileReader();
+    reader.onload = function (ev) {
+        fotobase64 = ev.target.result;
+        $('#imgSalida').attr('src', fotobase64);
+        $('#imgPreviewMeta').text(file.name + ' (' + Math.round(file.size / 1024) + ' KB)');
+    };
     reader.readAsDataURL(file);
 }
 
-function ab2str(buf) {
-    return String.fromCharCode.apply(null, new Uint16Array(buf));
+function encodeImageFileAsURL(element) {
+    if (!element || !element.files || !element.files.length) return;
+    previewImageFile(element.files[0]);
 }
 
-function getB64Str(buffer) {
-    var binary = '';
-    var bytes = new Uint8Array(buffer);
-    var len = bytes.byteLength;
-    for (var i = 0; i < len; i++) {
-        binary += String.fromCharCode(bytes[i]);
-    }
-    return window.btoa(binary);
+function clearProductImagePreview() {
+    fotobase64 = "";
+    $('#foto').val('');
+    $('#imgSalida').attr('src', '/Content/Images/NoDisponible.jpg');
+    $('#imgPreviewMeta').text('Sin imagen seleccionada');
 }
-/*Here Starts the Magic 2.0*/
 
 function createP() {
-    var nameP = document.getElementById("nameP").value;
-    //var tipoPrecio = document.getElementById("tipoPrecio").value;
-    var descript = document.getElementById("descript").value;
-    var foto = pathimage;
-    var empresa = document.getElementById("empresa").value;
-    var Empresa =
-    {
+    var nameP = ($('#nameP').val() || '').trim();
+    var descript = ($('#descript').val() || '').trim();
+    var precio = parseInt($('#precioP').val(), 10) || 1;
+    var empresa = $('#empresa').val() || '1';
+
+    if (!nameP) {
+        alert('Ingrese el nombre del producto.');
+        return;
+    }
+
+    var payload = {
         NOMBRE_PRODUCTO: nameP,
         DESCRIP_PRODUCTO: descript,
-        ID_PRECIO: 1,
-        FOTO_PRODUCTO: fotobase64,
-        EMPRESA_ID: empresa,
+        ID_PRECIO: precio,
+        FOTO_PRODUCTO: fotobase64 || '/Content/Images/NoDisponible.jpg',
+        EMPRESA_ID: empresa
     };
-    console.log(Empresa);
-    HTTP_POST("/Productos/Create", Empresa  , function (response) {
-        console.log(response);
-        showSuccess(response, function () {
-            window.location.href = "/Home/Index";
-        });
-    })
+
+    HTTP_POST('/Productos/Create', payload, function (response) {
+        alert((response && response.Mensaje) ? response.Mensaje : 'Producto procesado.');
+        if (response && response.Success) {
+            window.location.href = '/Productos/Productos';
+        }
+    });
 }
 
-function loadinfimg(foto,nombreProductos,Descripcion,IdEmpresa ) {
-    HTTP_GET("/Productos/obtenerInfo", null, function (response) {
-        document.getElementById("NombreProducto").innerHTML = nombreProductos;
-        document.getElementById("Descripcion").innerHTML = Descripcion;
-        document.getElementById("Contacto").innerHTML = response.NOMBRE_CONTACTO;
-        document.getElementById("NombreEmpresa").innerHTML = response.NOMBRE_EMPRESA;
-        document.getElementById("Direccion").innerHTML = response.DIRECCION_EMPRESA;
-        document.getElementById("Sector").innerHTML = response.SECTOR_PRODUCCION;
-        $('#ImgModal').attr("src", foto);
-    }, { Id: IdEmpresa })
+function openProductPreviewFromEl(el) {
+    if (!el) return;
+    loadinfimg(
+        el.getAttribute('data-foto') || '/Content/Images/NoDisponible.jpg',
+        el.getAttribute('data-nombre') || '',
+        el.getAttribute('data-desc') || '',
+        el.getAttribute('data-empresa-id') || '1',
+        el.getAttribute('data-precio') || ''
+    );
 }
 
-function callEditView() {
-    var id = document.getElementById("Producto_ID").innerText;
-    console.log(id);
-    if (id) {
-        HTTP_GET("/Productos/EditarProducto", null, function (response) {
-            window.location.href = "/Productos/Index";
-        }, { Id: id })
+function loadinfimg(foto, nombre, descripcion, idEmpresa, precio) {
+    $('#ImgModal').attr('src', foto || '/Content/Images/NoDisponible.jpg');
+    $('#NombreProducto').text(nombre || 'Producto');
+    $('#Descripcion').text(descripcion || 'Sin descripción');
+    if ($('#PrecioModal').length) {
+        $('#PrecioModal').text(precio ? ('₡ ' + Number(precio).toLocaleString('es-CR')) : 'Consultar');
     }
-}
 
-function Delete() {
-    var id = document.getElementById("Producto_ID").innerText;
-    if (id) {
-        HTTP_POST("/Productos/DeleteProducto", { ID: id }, function (response) {
-            window.location.href = "/Productos/Index";
-        })
-    }
+    $.ajax({
+        url: '/Productos/ObtenerInfo',
+        type: 'GET',
+        data: { Id: idEmpresa },
+        success: function (response) {
+            if (!response || !response.Success) return;
+            $('#NombreEmpresa').text(response.NOMBRE_EMPRESA || 'Emprendimiento UTN-IMAS');
+            $('#Direccion').text(response.DIRECCION_EMPRESA || 'Costa Rica');
+            $('#Contacto').text(response.NOMBRE_CONTACTO || 'Atención Comercial');
+            $('#Sector').text(response.SECTOR_PRODUCCION || 'Comercio');
+
+            var telDigits = String(response.TELEF_CONTACTO || '').replace(/[^\d]/g, '');
+            var email = String(response.EMAIL_EMPRESA || '').trim();
+            var waText = encodeURIComponent('Hola, me interesa el producto "' + (nombre || '') + '" visto en UTN-IMAS Ideas Productivas.');
+
+            if ($('#btnContactoWA').length) {
+                $('#btnContactoWA').attr('href', telDigits ? ('https://wa.me/' + telDigits + '?text=' + waText) : '#').toggle(!!telDigits);
+            }
+            if ($('#btnContactoEmail').length) {
+                $('#btnContactoEmail').attr('href', email ? ('mailto:' + email + '?subject=' + encodeURIComponent('Consulta: ' + (nombre || ''))) : '#').toggle(!!email);
+            }
+            if ($('#btnContactoTel').length) {
+                $('#btnContactoTel').attr('href', telDigits ? ('tel:+' + telDigits) : '#').toggle(!!telDigits);
+            }
+        }
+    });
 }

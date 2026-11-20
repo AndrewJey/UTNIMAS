@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UTN – IMAS | Compra y Venta de Ideas Productivas</title>
+  <meta name="description" content="Plataforma de compra y venta UTN – IMAS Ideas Productivas con carrusel de imágenes, vista previa, temas claro/oscuro, contacto directo y portal administrativo para empresas registradas." />
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('utnimas_theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = saved === 'dark' || saved === 'light' ? saved : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="#inicio" id="brandHomeLink" class="brand" aria-label="Inicio UTN-IMAS Ideas Productivas">
+        <img src="../UTNIMAS/Content/Images/imas-logo.png" alt="Logo IMAS" />
+        <span>
+          UTN – IMAS
+          <span class="brand-sub">Ideas Productivas</span>
+        </span>
+      </a>
+
+      <nav id="mainNav" class="nav-links" aria-label="Navegación principal">
+        <button type="button" class="nav-btn is-active" data-view="inicio">Inicio</button>
+        <button type="button" class="nav-btn" data-view="catalogo">Compra / Venta</button>
+        <button type="button" class="nav-btn" data-view="empresas">Empresas</button>
+        <button type="button" class="nav-btn" data-view="admin">
+          Portal Admin
+          <span id="adminUnreadNavBadge" class="badge-count" hidden>0</span>
+        </button>
+        <button type="button" class="nav-btn" data-view="contacto">Contacto</button>
+      </nav>
+
+      <div class="topbar-actions">
+        <button type="button" id="openFavBtn" class="icon-pill" aria-label="Abrir lista de interés">
+          <span aria-hidden="true">♥</span>
+          <span class="theme-text-hide">Interés</span>
+          <span id="favCountBadge" class="badge-count">0</span>
+        </button>
+
+        <button type="button" id="themeToggleBtn" class="icon-pill" aria-label="Cambiar entre tema claro y oscuro" aria-pressed="false">
+          <span id="themeIcon" aria-hidden="true">🌙</span>
+          <span id="themeLabel" class="theme-text-hide">Oscuro</span>
+        </button>
+
+        <button type="button" id="mobileMenuBtn" class="icon-pill mobile-menu-btn" aria-label="Abrir menú de navegación" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- VISTA INICIO -->
+    <section id="view-inicio" class="view-section is-active" aria-label="Inicio y destacados">
+      <div id="heroCarousel" class="carousel" role="region" aria-roledescription="carousel" aria-label="Productos destacados UTN-IMAS" tabindex="0">
+        <div id="carouselTrack" class="carousel-track"></div>
+        <button type="button" id="carouselPrev" class="carousel-arrow prev" aria-label="Diapositiva anterior">‹</button>
+        <button type="button" id="carouselNext" class="carousel-arrow next" aria-label="Siguiente diapositiva">›</button>
+        <div id="carouselDots" class="carousel-dots" role="tablist" aria-label="Indicadores del carrusel"></div>
+      </div>
+
+      <div id="homeKpiGrid" class="kpi-grid" aria-label="Resumen de la plataforma"></div>
+
+      <div class="section-head">
+        <div>
+          <h2>Explorar por sector productivo</h2>
+          <p>Apoye emprendimientos beneficiarios del convenio UTN – IMAS con trato directo.</p>
+        </div>
+        <div class="toolbar-inline">
+          <button type="button" id="goCatalogBtn" class="btn btn-primary btn-sm">Ver catálogo completo</button>
+          <button type="button" id="goAdminFromHomeBtn" class="btn btn-ghost btn-sm">Administrar mi empresa</button>
+        </div>
+      </div>
+
+      <div id="homeSectorChips" class="chip-row" aria-label="Sectores productivos"></div>
+
+      <div class="section-head">
+        <div>
+          <h2>Productos destacados en compra y venta</h2>
+          <p>Haga clic en cualquier imagen para ampliarla o abra el detalle para contactar al vendedor.</p>
+        </div>
+      </div>
+
+      <div id="homeFeaturedGrid" class="card-grid"></div>
+    </section>
+
+    <!-- VISTA CATALOGO COMPRA/VENTA -->
+    <section id="view-catalogo" class="view-section" aria-label="Catálogo de compra y venta">
+      <div class="section-head">
+        <div>
+          <h2>Catálogo de Compra y Venta</h2>
+          <p id="catalogResultCount">Mostrando productos disponibles</p>
+        </div>
+        <div class="toolbar-inline">
+          <button type="button" id="catalogClearFilters" class="btn btn-ghost btn-sm">Limpiar filtros</button>
+          <button type="button" class="btn btn-primary btn-sm" data-jump-admin="productos">+ Publicar producto</button>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <div class="field">
+          <label for="catalogSearch">Buscar producto, empresa o descripción</label>
+          <input id="catalogSearch" type="search" class="input" placeholder="Ej. café, bolso, madera, canasta..." autocomplete="off" />
+        </div>
+        <div class="field">
+          <label for="catalogSector">Sector IMAS</label>
+          <select id="catalogSector" class="select">
+            <option value="">Todos los sectores</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="catalogEmpresa">Empresa registrada</label>
+          <select id="catalogEmpresa" class="select">
+            <option value="">Todas las empresas</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="catalogSort">Ordenar por</label>
+          <select id="catalogSort" class="select">
+            <option value="destacados">Destacados primero</option>
+            <option value="recientes">Más recientes</option>
+            <option value="precio-asc">Precio: menor a mayor</option>
+            <option value="precio-desc">Precio: mayor a menor</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="catalogGrid" class="card-grid"></div>
+    </section>
+
+    <!-- VISTA EMPRESAS REGISTRADAS -->
+    <section id="view-empresas" class="view-section" aria-label="Directorio de empresas registradas">
+      <div class="section-head">
+        <div>
+          <h2>Empresas Registradas</h2>
+          <p>Microempresas y personas emprendedoras verificadas dentro de la red UTN – IMAS.</p>
+        </div>
+        <button type="button" id="goRegisterCompanyBtn" class="btn btn-primary btn-sm">+ Registrar empresa</button>
+      </div>
+
+      <div class="filter-bar" style="grid-template-columns: minmax(220px, 2fr) minmax(180px, 1fr);">
+        <div class="field">
+          <label for="empresasSearch">Buscar empresa, contacto o ubicación</label>
+          <input id="empresasSearch" type="search" class="input" placeholder="Ej. Alajuela, Cafetalera, Sarchí..." autocomplete="off" />
+        </div>
+        <div class="field">
+          <label for="empresasSector">Filtrar por sector</label>
+          <select id="empresasSector" class="select">
+            <option value="">Todos los sectores</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="empresasGrid" class="card-grid"></div>
+    </section>
+
+    <!-- VISTA AREA ADMINISTRATIVA -->
+    <section id="view-admin" class="view-section" aria-label="Área administrativa para empresas registradas">
+      <div class="section-head">
+        <div>
+          <h2>Área Administrativa — Empresas Registradas</h2>
+          <p>Gestione empresas, publique productos con vista previa de imagen y responda consultas. Todos los cambios persisten automáticamente.</p>
+        </div>
+        <div class="toolbar-inline">
+          <button type="button" id="exportJsonBtn" class="btn btn-ghost btn-sm">⬇ Exportar respaldo JSON</button>
+          <label class="btn btn-ghost btn-sm" style="margin:0;">
+            ⬆ Importar JSON
+            <input id="importJsonInput" type="file" accept="application/json,.json" hidden />
+          </label>
+          <button type="button" id="resetDemoBtn" class="btn btn-ghost btn-sm">↺ Restaurar demo</button>
+        </div>
+      </div>
+
+      <div id="adminKpiGrid" class="kpi-grid"></div>
+
+      <div class="admin-tabs" role="tablist" aria-label="Secciones administrativas">
+        <button type="button" class="btn btn-primary btn-sm" data-admin-tab="empresas" role="tab" aria-selected="true">🏢 Empresas</button>
+        <button type="button" class="btn btn-ghost btn-sm" data-admin-tab="productos" role="tab" aria-selected="false">🛍️ Productos y Carrusel</button>
+        <button type="button" class="btn btn-ghost btn-sm" data-admin-tab="mensajes" role="tab" aria-selected="false">
+          ✉ Mensajes recibidos
+          <span id="adminUnreadTabBadge" class="badge-count" hidden>0</span>
+        </button>
+      </div>
+
+      <!-- SUB-TAB ADMIN: EMPRESAS -->
+      <div id="admin-tab-empresas" class="admin-subview is-active">
+        <div class="admin-layout">
+          <div class="panel">
+            <h3 id="empFormTitle">Registrar nueva empresa</h3>
+            <form id="empresaForm" class="form-grid" novalidate>
+              <input type="hidden" id="empId" />
+
+              <div class="field">
+                <label for="empNombre">Nombre de la empresa *</label>
+                <input id="empNombre" type="text" class="input" required placeholder="Ej. Artesanías del Valle" />
+              </div>
+
+              <div class="form-row-2">
+                <div class="field">
+                  <label for="empSector">Sector IMAS *</label>
+                  <select id="empSector" class="select" required></select>
+                </div>
+                <div class="field">
+                  <label for="empContacto">Persona de contacto *</label>
+                  <input id="empContacto" type="text" class="input" required placeholder="Ej. Ana Lucía Vega" />
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="field">
+                  <label for="empTelefono">Teléfono / WhatsApp</label>
+                  <input id="empTelefono" type="tel" class="input" placeholder="+506 8888-0000" />
+                </div>
+                <div class="field">
+                  <label for="empEmail">Correo electrónico</label>
+                  <input id="empEmail" type="email" class="input" placeholder="ventas@miempresa.cr" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="empDireccion">Dirección / Cantón</label>
+                <input id="empDireccion" type="text" class="input" placeholder="Alajuela, Costa Rica" />
+              </div>
+
+              <div class="field">
+                <label for="empDescripcion">Descripción de actividad</label>
+                <textarea id="empDescripcion" rows="2" class="textarea" placeholder="¿Qué ofrece su empresa?"></textarea>
+              </div>
+
+              <div class="field">
+                <label>Logotipo o fotografía de portada (arrastrar, subir o URL)</label>
+                <div id="empDropzone" class="dropzone">
+                  <p class="dropzone-hint">Arrastre una imagen aquí o seleccione un archivo (PNG/JPG/WebP).</p>
+                  <label class="btn btn-ghost btn-sm" style="margin:0;">
+                    Seleccionar imagen
+                    <input id="empLogoFile" type="file" accept="image/*" hidden />
+                  </label>
+                  <div id="empLogoPreviewWrap" class="preview-wrap">
+                    <img id="empLogoPreviewImg" class="preview-thumb" alt="Vista previa del logotipo" />
+                    <div class="preview-actions">
+                      <span id="empLogoMeta">Vista previa lista</span>
+                      <button type="button" id="empLogoClearBtn" class="btn btn-ghost btn-sm">Quitar</button>
+                    </div>
+                  </div>
+                </div>
+                <input id="empLogoUrl" type="url" class="input" placeholder="O pegue una URL / ruta de imagen..." />
+                <div id="empLogoPresets" class="preset-strip" aria-label="Imágenes rápidas de galería"></div>
+              </div>
+
+              <div class="toolbar-inline">
+                <button type="submit" id="empSubmitBtn" class="btn btn-primary">Guardar empresa</button>
+                <button type="button" id="empCancelEditBtn" class="btn btn-ghost" hidden>Cancelar edición</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel">
+            <h3>Empresas registradas</h3>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Portada</th>
+                    <th>Empresa</th>
+                    <th>Contacto</th>
+                    <th>Productos</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="adminEmpresasTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-TAB ADMIN: PRODUCTOS -->
+      <div id="admin-tab-productos" class="admin-subview">
+        <div class="admin-layout">
+          <div class="panel">
+            <h3 id="prodFormTitle">Publicar nuevo producto</h3>
+            <form id="productoForm" class="form-grid" novalidate>
+              <input type="hidden" id="prodId" />
+
+              <div class="field">
+                <label for="prodNombre">Nombre del producto *</label>
+                <input id="prodNombre" type="text" class="input" required placeholder="Ej. Miel Orgánica de Azahar 500ml" />
+              </div>
+
+              <div class="field">
+                <label for="prodEmpresaId">Empresa registrada *</label>
+                <select id="prodEmpresaId" class="select" required></select>
+              </div>
+
+              <div class="form-row-2">
+                <div class="field">
+                  <label for="prodPrecio">Precio (₡ colones) *</label>
+                  <input id="prodPrecio" type="number" min="0" step="100" class="input" required placeholder="6500" />
+                </div>
+                <div class="field">
+                  <label for="prodStock">Disponibilidad (unidades)</label>
+                  <input id="prodStock" type="number" min="0" step="1" class="input" value="10" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="prodCondicion">Condición / Modalidad</label>
+                <select id="prodCondicion" class="select">
+                  <option value="Nuevo">Nuevo</option>
+                  <option value="Artesanal">Artesanal</option>
+                  <option value="Fresco">Fresco</option>
+                  <option value="Bajo pedido">Bajo pedido</option>
+                  <option value="Servicio">Servicio</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="prodDescripcion">Descripción detallada</label>
+                <textarea id="prodDescripcion" rows="3" class="textarea" placeholder="Materiales, presentación, zona de entrega..."></textarea>
+              </div>
+
+              <label class="checkbox-row">
+                <input id="prodDestacado" type="checkbox" checked />
+                <span>Destacar este producto en el carrusel principal</span>
+              </label>
+
+              <div class="field">
+                <label>Fotografía del producto (vista previa inmediata + compresión local)</label>
+                <div id="prodDropzone" class="dropzone">
+                  <p class="dropzone-hint">Arrastre la foto del producto aquí o súbala desde su equipo.</p>
+                  <label class="btn btn-ghost btn-sm" style="margin:0;">
+                    Subir fotografía
+                    <input id="prodImageFile" type="file" accept="image/*" hidden />
+                  </label>
+                  <div id="prodPreviewWrap" class="preview-wrap">
+                    <img id="prodPreviewImg" class="preview-thumb" alt="Vista previa del producto" />
+                    <div class="preview-actions">
+                      <span id="prodPreviewMeta">Vista previa lista</span>
+                      <button type="button" id="prodImageClearBtn" class="btn btn-ghost btn-sm">Quitar</button>
+                    </div>
+                  </div>
+                </div>
+                <input id="prodImageUrl" type="url" class="input" placeholder="O pegue una URL / ruta de imagen..." />
+                <div id="prodImagePresets" class="preset-strip" aria-label="Galería rápida de productos"></div>
+              </div>
+
+              <div class="toolbar-inline">
+                <button type="submit" id="prodSubmitBtn" class="btn btn-primary">Publicar producto</button>
+                <button type="button" id="prodCancelEditBtn" class="btn btn-ghost" hidden>Cancelar edición</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel">
+            <h3>Productos publicados</h3>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Foto</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Carrusel</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="adminProductosTbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-TAB ADMIN: MENSAJES -->
+      <div id="admin-tab-mensajes" class="admin-subview">
+        <div class="panel">
+          <h3>Bandeja de consultas de compradores</h3>
+          <div id="adminMensajesList" class="msg-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VISTA CONTACTO -->
+    <section id="view-contacto" class="view-section" aria-label="Contacto directo UTN-IMAS">
+      <div class="section-head">
+        <div>
+          <h2>Canales de Contacto Directo</h2>
+          <p>Comuníquese con el equipo de coordinación UTN – IMAS o envíe una consulta directa a una empresa registrada.</p>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="panel">
+          <h3>Coordinación UTN – VEAS</h3>
+          <p style="color:var(--text-muted); font-size:14px;">Universidad Técnica Nacional · Vicerrectoría de Extensión y Acción Social.</p>
+          <ul class="info-list">
+            <li><strong>Sede Central:</strong> Villa Bonita, Alajuela, Costa Rica</li>
+            <li><strong>Teléfono:</strong> +506 2435-5000</li>
+            <li><strong>Correo:</strong> veas@utn.ac.cr</li>
+            <li><strong>Horario:</strong> Lunes a viernes, 8:00 a.m. – 4:30 p.m.</li>
+          </ul>
+          <div class="contact-actions">
+            <a class="btn btn-success btn-sm" href="https://wa.me/50624355000?text=Hola%20equipo%20UTN%20VEAS%2C%20tengo%20una%20consulta%20sobre%20Ideas%20Productivas." target="_blank" rel="noopener">WhatsApp UTN</a>
+            <a class="btn btn-primary btn-sm" href="mailto:veas@utn.ac.cr?subject=Consulta%20UTN-IMAS%20Ideas%20Productivas">Enviar correo</a>
+            <a class="btn btn-ghost btn-sm" href="tel:+50624355000">Llamar</a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>IMAS — Ideas Productivas</h3>
+          <p style="color:var(--text-muted); font-size:14px;">Instituto Mixto de Ayuda Social · Programa de Emprendimiento Productivo.</p>
+          <ul class="info-list">
+            <li><strong>Atención nacional:</strong> Línea gratuita 800-000-4627</li>
+            <li><strong>Correo institucional:</strong> ideasproductivas@imas.go.cr</li>
+            <li><strong>Soporte a empresas:</strong> Registro, acompañamiento y vitrina digital</li>
+          </ul>
+          <div class="contact-actions">
+            <a class="btn btn-success btn-sm" href="https://wa.me/5068000004627?text=Hola%20IMAS%2C%20deseo%20informaci%C3%B3n%20sobre%20Ideas%20Productivas." target="_blank" rel="noopener">WhatsApp IMAS</a>
+            <a class="btn btn-primary btn-sm" href="mailto:ideasproductivas@imas.go.cr?subject=Apoyo%20Ideas%20Productivas">Correo IMAS</a>
+            <a class="btn btn-ghost btn-sm" href="tel:+5068000004627">Llamar 800</a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Enviar mensaje directo</h3>
+          <form id="contactForm" class="form-grid" novalidate>
+            <div class="field">
+              <label for="contactDestinatario">Destinatario</label>
+              <select id="contactDestinatario" class="select"></select>
+            </div>
+            <div class="field">
+              <label for="contactNombre">Su nombre *</label>
+              <input id="contactNombre" type="text" class="input" required placeholder="Ej. José Pablo Méndez" />
+            </div>
+            <div class="form-row-2">
+              <div class="field">
+                <label for="contactCorreo">Correo electrónico</label>
+                <input id="contactCorreo" type="email" class="input" placeholder="usted@correo.cr" />
+              </div>
+              <div class="field">
+                <label for="contactTelefono">Teléfono / WhatsApp</label>
+                <input id="contactTelefono" type="tel" class="input" placeholder="+506 8888-8888" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="contactMensaje">Mensaje *</label>
+              <textarea id="contactMensaje" rows="3" class="textarea" required placeholder="Indique el producto de interés, cantidad o consulta..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar consulta</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logos">
+        <img src="../UTNIMAS/Content/Images/UTN.png" alt="Universidad Técnica Nacional" />
+        <img src="../UTNIMAS/Content/Images/imas-logo.png" alt="IMAS" />
+        <img src="../UTNIMAS/Content/Images/descarga.jpg" alt="VEAS UTN" />
+      </div>
+      <div>
+        <strong>UTN – IMAS Ideas Productivas</strong> · Plataforma de Compra/Venta y Gestión de Empresas · Datos persistentes localmente en su navegador.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botones flotantes de contacto rápido -->
+  <div class="floating-contact" aria-label="Accesos rápidos de contacto">
+    <a class="fab fab-wa" href="https://wa.me/50624355000?text=Hola%20UTN-IMAS%2C%20necesito%20informaci%C3%B3n%20sobre%20la%20plataforma%20de%20compra%20y%20venta." target="_blank" rel="noopener" title="Contactar por WhatsApp" aria-label="Contactar por WhatsApp">💬</a>
+    <button type="button" id="fabContactBtn" class="fab fab-mail" title="Ir a contacto" aria-label="Ir a sección de contacto">✉</button>
+  </div>
+
+  <!-- Modal Detalle de Producto y Contacto Directo -->
+  <div id="productModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="productModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="productModalTitle" style="margin:0;">Detalle del producto</h3>
+        <button type="button" id="productModalClose" class="btn btn-ghost btn-sm" aria-label="Cerrar detalle">✕ Cerrar</button>
+      </div>
+      <div id="productModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Modal Lista de Interés / Favoritos -->
+  <div id="favModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="favModalTitle">
+    <div class="modal-card" style="width:min(620px, 100%);">
+      <div class="modal-header">
+        <h3 id="favModalTitle" style="margin:0;">Lista de Interés ♥</h3>
+        <button type="button" id="favModalClose" class="btn btn-ghost btn-sm" aria-label="Cerrar lista de interés">✕ Cerrar</button>
+      </div>
+      <div id="favModalBody"></div>
+      <div id="favModalFooter" style="margin-top:16px;"></div>
+    </div>
+  </div>
+
+  <!-- Lightbox Vista Previa de Imagen Ampliada -->
+  <div id="lightboxModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Vista previa ampliada de imagen">
+    <button type="button" id="lightboxClose" class="btn btn-light btn-sm lightbox-close" aria-label="Cerrar vista previa">✕ Cerrar</button>
+    <div class="lightbox-shell">
+      <img id="lightboxImg" class="lightbox-img" alt="Vista previa ampliada" />
+      <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <script src="./store.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

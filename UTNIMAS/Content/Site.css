@@ -306,3 +306,227 @@ a.article:hover {
     min-height: 100vh;
     transition: all 0.3s;
 }
+
+/* ==========================================================
+   UTN-IMAS Ideas Productivas — Modern Theme, Carousel & UX
+   ========================================================== */
+:root {
+    --utn-bg: #f4f7fb;
+    --utn-surface: #ffffff;
+    --utn-surface-alt: #eef3f9;
+    --utn-text: #162233;
+    --utn-muted: #5a6a7e;
+    --utn-border: #d8e1ec;
+    --utn-primary: #0f5ea8;
+    --utn-primary-hover: #0a467f;
+    --utn-accent: #16a34a;
+    --utn-shadow: 0 10px 28px rgba(15, 35, 66, 0.08);
+    --utn-radius: 14px;
+}
+
+[data-theme="dark"] {
+    --utn-bg: #0b1220;
+    --utn-surface: #131e31;
+    --utn-surface-alt: #1a2740;
+    --utn-text: #edf2f7;
+    --utn-muted: #9fb0c7;
+    --utn-border: #253552;
+    --utn-primary: #3b9eff;
+    --utn-primary-hover: #64b5ff;
+    --utn-accent: #22c55e;
+    --utn-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+html { scroll-behavior: smooth; }
+
+body, #content {
+    background-color: var(--utn-bg) !important;
+    color: var(--utn-text) !important;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+#sidebar {
+    background: var(--utn-surface) !important;
+    color: var(--utn-text) !important;
+    border-right: 1px solid var(--utn-border);
+    transition: all 0.25s ease;
+}
+
+#sidebar a { color: var(--utn-text) !important; }
+#sidebar a:hover { background: var(--utn-surface-alt) !important; }
+
+.utn-topbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 18px;
+    margin-bottom: 18px;
+    background: var(--utn-surface);
+    border: 1px solid var(--utn-border);
+    border-radius: var(--utn-radius);
+    box-shadow: var(--utn-shadow);
+}
+
+.utn-topbar-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.utn-theme-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--utn-border);
+    background: var(--utn-surface-alt);
+    color: var(--utn-text);
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.18s ease, background-color 0.2s ease;
+}
+.utn-theme-btn:hover { transform: translateY(-1px); }
+
+/* Hero Carousel */
+.utn-carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--utn-radius);
+    box-shadow: var(--utn-shadow);
+    margin-bottom: 24px;
+    background: #0d1b2a;
+    min-height: 360px;
+}
+
+.utn-slide {
+    display: none;
+    position: relative;
+    min-height: 360px;
+    animation: utnFadeIn 0.45s ease;
+}
+.utn-slide.is-active { display: block; }
+
+.utn-slide img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.68);
+}
+
+.utn-slide-caption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 28px 68px;
+    background: linear-gradient(transparent, rgba(8, 16, 30, 0.88));
+    color: #fff;
+}
+
+.utn-carousel-ctrl {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: rgba(15, 23, 42, 0.65);
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 2;
+}
+.utn-carousel-ctrl.prev { left: 14px; }
+.utn-carousel-ctrl.next { right: 14px; }
+
+.utn-dots {
+    position: absolute;
+    bottom: 12px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.utn-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(255,255,255,0.45);
+    cursor: pointer;
+    transition: width 0.2s ease, background-color 0.2s ease;
+}
+.utn-dot.is-active { width: 26px; background: #fff; }
+
+/* Responsive Marketplace Cards */
+.utn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.utn-card {
+    background: var(--utn-surface);
+    border: 1px solid var(--utn-border);
+    border-radius: var(--utn-radius);
+    overflow: hidden;
+    box-shadow: var(--utn-shadow);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.utn-card:hover { transform: translateY(-4px); }
+.utn-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+.utn-card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.utn-card-body h4 { margin: 0; color: var(--utn-text); font-weight: 700; }
+.utn-card-body p { margin: 0; color: var(--utn-muted); font-size: 14px; flex: 1; }
+
+.utn-dropzone {
+    border: 2px dashed var(--utn-primary);
+    border-radius: var(--utn-radius);
+    padding: 18px;
+    text-align: center;
+    background: var(--utn-surface-alt);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.utn-dropzone.is-dragover { background: rgba(15, 94, 168, 0.14); }
+
+.utn-contact-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.modal-content {
+    background: var(--utn-surface) !important;
+    color: var(--utn-text) !important;
+    border: 1px solid var(--utn-border) !important;
+    border-radius: var(--utn-radius) !important;
+}
+
+.table, .form-control {
+    background: var(--utn-surface) !important;
+    color: var(--utn-text) !important;
+    border-color: var(--utn-border) !important;
+}
+
+@keyframes utnFadeIn {
+    from { opacity: 0.35; transform: scale(1.01); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+    #wrapper { flex-direction: column !important; }
+    #sidebar { width: 100% !important; min-width: 100% !important; max-width: 100% !important; }
+    .utn-slide img { height: 270px; }
+    .utn-slide-caption { padding: 54px 20px 36px; }
+    .utn-carousel-ctrl { top: 14px; transform: none; width: 36px; height: 36px; font-size: 16px; }
+    .utn-carousel-ctrl.prev { left: auto; right: 56px; }
+    .utn-carousel-ctrl.next { right: 14px; }
+}

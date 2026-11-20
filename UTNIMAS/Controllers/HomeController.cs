@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Web.Mvc;
 using UTNIMAS.Models;
 
@@ -10,79 +11,53 @@ namespace UTNIMAS.Controllers
     {
         public ActionResult Index()
         {
+            List<ProductosModels> lst = LoadProductsWithFallback();
+            return View(lst);
+        }
+
+        private static List<ProductosModels> LoadProductsWithFallback()
+        {
+            var lst = new List<ProductosModels>();
             try
             {
-                List<ProductosModels> lst = new List<ProductosModels>();
-                List<ProductosModels> lstrandom = new List<ProductosModels>();
-                Models.ConexionBD con = new Models.ConexionBD(); //Crea la instancia de la conexion
-                con.ConexDB(); //Conecta la BD
-                con.abrir(); //Abre la BD   
-                SqlCommand cmd2 = new SqlCommand("SELECT * FROM dbo.PRODUCTS", con.ConexDB());
-                SqlDataReader myReader = cmd2.ExecuteReader();
-                while (myReader.Read())
+                using (var con = new Models.ConexionBD())
                 {
-                    ProductosModels p = new ProductosModels
+                    con.abrir();
+                    using (var cmd = new SqlCommand("SELECT PRODUCTO_ID, NOMBRE_PRODUCTO, ID_PRECIO, DESCRIP_PRODUCTO, FOTO_PRODUCTO, EMPRESA_ID FROM dbo.PRODUCTS", con.ConexDB()))
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        PRODUCTOS_ID = 1,
-                        NOMBRE_PRODUCTO = myReader["NOMBRE_PRODUCTO"].ToString(),
-                        ID_PRECIO = 1,
-                        DESCRIP_PRODUCTO = myReader["DESCRIP_PRODUCTO"].ToString(),
-                        FOTO_PRODUCTO = myReader["FOTO_PRODUCTO"].ToString(),
-                        EMPRESA_ID = myReader["EMPRESA_ID"].ToString()
-                    };
-                    lst.Add(p);
+                        while (reader.Read())
+                        {
+                            lst.Add(new ProductosModels
+                            {
+                                PRODUCTOS_ID = reader["PRODUCTO_ID"] != DBNull.Value ? Convert.ToInt32(reader["PRODUCTO_ID"]) : 0,
+                                NOMBRE_PRODUCTO = reader["NOMBRE_PRODUCTO"]?.ToString() ?? string.Empty,
+                                ID_PRECIO = reader["ID_PRECIO"] != DBNull.Value ? Convert.ToInt32(reader["ID_PRECIO"]) : 0,
+                                DESCRIP_PRODUCTO = reader["DESCRIP_PRODUCTO"]?.ToString() ?? string.Empty,
+                                FOTO_PRODUCTO = reader["FOTO_PRODUCTO"]?.ToString() ?? "/Content/Images/NoDisponible.jpg",
+                                EMPRESA_ID = reader["EMPRESA_ID"]?.ToString() ?? "1"
+                            });
+                        }
+                    }
                 }
-
-                    Random _r = new Random();
-                    int n1 = _r.Next(0, lst.Count);
-                    int n2 = _r.Next(0, lst.Count);
-                    int n3 = _r.Next(0, lst.Count);
-                    ProductosModels pn = new ProductosModels();
-                    pn = lst[n1];
-                    lstrandom.Add(pn);
-                    pn = lst[n2];
-                    lstrandom.Add(pn);
-                    pn = lst[n3];
-                    lstrandom.Add(pn);
-
-                return View(lstrandom);
             }
-            catch (Exception ex)
+            catch
             {
-                string Mensaje = "Error con la Solicitud";
-                return Json(new { Success = false, Mensaje }, JsonRequestBehavior.AllowGet);
+                // Fallback to bundled demo catalog when SQL Server is unavailable.
             }
-            //return Redirect("/Home/Index");
-            //return View();
-            //List<ProductosModels> lst;
-            //using (UTNIMASEntities db = new UTNIMASEntities())
-            //{
-            //lst = (from d in db.PRODUCTS
-            //       join c in db.EMPRESAS on d.EMPRESA_ID equals c.EMPRESA_ID
-            //       where d.EMPRESA_ID == c.EMPRESA_ID
-            //       select new ProductosModels
-            //       {
-            //           PRODUCTOS_ID = d.PRODUCTO_ID,
-            //           NOMBRE_PRODUCTO = d.NOMBRE_PRODUCTO,
-            //           ID_PRECIO = d.ID_PRECIO,
-            //           DESCRIP_PRODUCTO = d.DESCRIP_PRODUCTO,
-            //           FOTO_PRODUCTO = d.FOTO_PRODUCTO,  //Puede que en el modelo este mal inicializada porque en la base de datos es un tipo "image"
-            //           EMPRESA_ID = c.NOMBRE_EMPRESA
-            //       }).ToList();
-            //  return View(/*lst*/);
-            //}
+
+            return lst.Count > 0 ? lst : LocalCatalogFallback.GetSampleProducts();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Plataforma UTN-IMAS Ideas Productivas para compra, venta y vitrina de emprendimientos registrados.";
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+            ViewBag.Message = "Canales oficiales de atención y enlace comercial UTN – IMAS.";
             return View();
         }
     }

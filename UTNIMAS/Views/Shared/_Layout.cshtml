@@ -85,24 +85,39 @@
                 </li>
                   }
                 <li>
-                    <a href="https://www.utn.ac.cr/" target="_blank"><img id="imgChange" class="forsyteLG" src="~/Content/Images/UTN.png" style="margin-top:25px;margin-left:15px;width:85%;" /></a>
+                    <a href="/Home/Contact">
+                        <i class="fas fa-envelope" aria-hidden="true" style="color:#8db2d8;"></i>
+                        <span class="hidetext" style="font-family: Segoe UI, Frutiger">&nbsp; CONTACTO</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.utn.ac.cr/" target="_blank" rel="noopener noreferrer"><img id="imgChange" class="forsyteLG" src="~/Content/Images/UTN.png" style="margin-top:25px;margin-left:15px;width:85%;" alt="UTN" /></a>
                 </li>
             </ul>
             <div class="container body-content" style="margin-top:2em">
                 <hr />
                 <footer>
                     <p style="font-size:11px">
-                        &copy; @DateTime.Now.Year - <a href="https://www.linkedin.com/in/andrés-j-jiménez-leandro-299087181" target="_blank">Andrés J. Jiménez Leandro</a>, <a href="https://www.utn.ac.cr/sedes/sede-regional-de-san-carlos" target="_blank">UTN Sede San Carlos</a> -
-                        <a href="https://www.imas.go.cr/" target="_blank">Instituto Mixto de Ayuda Social</a>, <a href="https://es.wikipedia.org/wiki/Costa_Rica" target="_blank"><b>Costa Rica</b></a>
+                        &copy; @DateTime.Now.Year - <a href="https://www.linkedin.com/in/andrés-j-jiménez-leandro-299087181" target="_blank" rel="noopener noreferrer">Andrés J. Jiménez Leandro</a>, <a href="https://www.utn.ac.cr/sedes/sede-regional-de-san-carlos" target="_blank" rel="noopener noreferrer">UTN Sede San Carlos</a> -
+                        <a href="https://www.imas.go.cr/" target="_blank" rel="noopener noreferrer">Instituto Mixto de Ayuda Social</a>, <a href="https://es.wikipedia.org/wiki/Costa_Rica" target="_blank" rel="noopener noreferrer"><b>Costa Rica</b></a>
                     </p>
                 </footer>
             </div>
         </nav>
-        <div id="content">
-            <button type="button" onclick="sidebarActive()" id="sidebarCollapse" class="btn btn-info" style="background:#efefef; border-color:#8db2d8; background-color:white;">
-                <i style="color:#8db2d8;" id="arrow" class="fas fa-chevron-left"></i>
-            </button>
-            <br />
+        <div id="content" style="flex:1; padding: 16px;">
+            <div class="utn-topbar">
+                <button type="button" onclick="sidebarActive()" id="sidebarCollapse" class="btn btn-info" aria-label="Alternar barra lateral" style="background:var(--utn-surface-alt); border-color:var(--utn-border); color:var(--utn-text);">
+                    <i style="color:var(--utn-primary);" id="arrow" class="fas fa-chevron-left"></i>
+                </button>
+                <div class="utn-topbar-actions">
+                    <a href="/Home/Contact" class="btn btn-outline-primary btn-sm"><i class="fas fa-headset"></i> Contacto</a>
+                    <a href="/Registro/RegistroEmpresas" class="btn btn-outline-success btn-sm"><i class="fas fa-building"></i> Registrar Empresa</a>
+                    <button type="button" class="utn-theme-btn" data-utnimas-theme-toggle onclick="utnimasToggleTheme()" aria-pressed="false">
+                        <span class="theme-icon" aria-hidden="true">🌙</span>
+                        <span class="theme-label">Modo Oscuro</span>
+                    </button>
+                </div>
+            </div>
             @RenderBody()
         </div>
     </div>
