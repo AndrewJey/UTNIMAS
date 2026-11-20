@@ -33,3 +33,11 @@ Inventario y compilaciones locales del 2026-11-15. Una compilación correcta no 
 
 `.gitignore` excluye credenciales locales, estado del editor y salidas de las herramientas detectadas. No deja de versionar archivos que ya estaban en Git. Los manifiestos, archivos de bloqueo, recursos fuente y scripts de esquema forman parte del código.
 <!-- local-development:end -->
+
+<!-- improvements-20261119:start -->
+## Mejoras y verificación — 2026-11-19 (Eliminación de SQLi en EmpresasController y conexión configurable)
+
+- Reemplazado el servidor fijo `DESKTOP-E38KCH7` en `ConexionBD.cs` por resolución configurable (`UTNIMAS_CONNECTION_STRING` -> `Web.config` -> `.\SQLEXPRESS`) e implementado `IDisposable`.
+- Eliminada la inyección SQL en `EmpresasController.Create` (ahora usa Entity Framework `db.EMPRESAS.Add`), añadidas validaciones (`TryValidateEmpresa`) y respuestas seguras `400`/`404` ante IDs inválidos o registros inexistentes.
+- Validación: compilación MSBuild (.NET Framework 4.8.1) y 8 aserciones automatizadas sobre `ConexionBD` y `EmpresasController`.
+<!-- improvements-20261119:end -->

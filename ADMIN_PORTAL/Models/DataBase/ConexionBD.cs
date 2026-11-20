@@ -1,55 +1,79 @@
 ﻿using System;
+using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
-//Conexión a la Base de Datos
+
 namespace ADMIN_PORTAL.Models
 {
-    public class ConexionBD
+    public class ConexionBD : IDisposable
     {
-        /** CONEXION ANDRES **/
-        string conexion = "Data Source=DESKTOP-E38KCH7;Initial Catalog=UTNIMAS;Integrated Security=True";
-        /** CONEXION GABRIEL**/
-        //string conexion = "Data Source=MSI;Initial Catalog=UTNIMAS;Integrated Security=True";
-        /** CONEXION RONALD**/
-        //string conexion = "Data Source=DESKTOP-LVSUABE;Initial Catalog=UTNIMAS;Integrated Security=True";
-        /** CONEXION JEYCON**/
-        //string conexion = "Data Source=DESKTOP-7CJ91HC;Initial Catalog=UTNIMAS;Integrated Security=True";
-        public SqlConnection conectarBD = new SqlConnection("server=DESKTOP-E38KCH7; database=UTNIMAS; integrated security = true");
-        //Constructor:
+        private const string DefaultConnectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=UTNIMAS;Integrated Security=True;";
+        public SqlConnection conectarBD;
+
+        public static string ResolveConnectionString()
+        {
+            string env = Environment.GetEnvironmentVariable("UTNIMAS_CONNECTION_STRING");
+            if (!string.IsNullOrWhiteSpace(env))
+            {
+                return env.Trim();
+            }
+
+            ConnectionStringSettings cfg = ConfigurationManager.ConnectionStrings["UTNIMAS"]
+                ?? ConfigurationManager.ConnectionStrings["DefaultConnection"];
+            if (cfg != null && !string.IsNullOrWhiteSpace(cfg.ConnectionString))
+            {
+                return cfg.ConnectionString.Trim();
+            }
+
+            return DefaultConnectionString;
+        }
+
         public ConexionBD()
         {
-            conectarBD.ConnectionString = conexion;
+            conectarBD = new SqlConnection(ResolveConnectionString());
         }
 
         public SqlConnection ConexDB()
         {
-            SqlConnection coon = conectarBD;
-            return coon;
+            return conectarBD;
         }
 
-        //Abrir la Conexión de la DB:
         public void abrir()
         {
             try
             {
-                conectarBD.Open();
-                Console.WriteLine("Conexión Abierta");
+                if (conectarBD != null && conectarBD.State != ConnectionState.Open)
+                {
+                    conectarBD.Open();
+                }
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error al Abrir la BD: " + e.Message);
+                Console.WriteLine("Error al abrir la BD: " + e.Message);
             }
         }
-        //Cerrar la Conexión de la DB:
+
         public void cerrar()
         {
             try
             {
-                conectarBD.Close();
-                Console.WriteLine("Conexión Cerrada");
+                if (conectarBD != null && conectarBD.State != ConnectionState.Closed)
+                {
+                    conectarBD.Close();
+                }
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error al Cerrar la BD: " + e.Message);
+                Console.WriteLine("Error al cerrar la BD: " + e.Message);
+            }
+        }
+
+        public void Dispose()
+        {
+            if (conectarBD != null)
+            {
+                conectarBD.Dispose();
+                conectarBD = null;
             }
         }
     }
